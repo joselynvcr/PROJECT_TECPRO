@@ -1,2 +1,2 @@
 # PROJECT_TECPRO
-Proyecto de tecinas de algoritmos orientados a objetos (java)
+Proyecto de técnicas de algoritmos orientados a objetos (java)
