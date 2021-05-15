@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import saborea.model.bussiness.EmpleadoBussiness;
+import saborea.model.bussiness.DTO.CredencialesBE;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -14,6 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -26,6 +31,7 @@ public class FormLogin extends JFrame implements ActionListener {
 	private JLabel lblLogIn;
 	private JButton btnIngresar;
 	private JPasswordField jpassClave;
+	
 
 	/**
 	 * Launch the application.
@@ -48,7 +54,7 @@ public class FormLogin extends JFrame implements ActionListener {
 	 */
 	public FormLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 395, 323);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,12 +79,12 @@ public class FormLogin extends JFrame implements ActionListener {
 		lblLogIn = new JLabel("LOG IN");
 		lblLogIn.setFont(new Font("Arial", Font.BOLD, 15));
 		lblLogIn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogIn.setBounds(84, 11, 126, 38);
+		lblLogIn.setBounds(52, 11, 126, 38);
 		contentPane.add(lblLogIn);
 		
 		btnIngresar = new JButton("INGRESAR");
 		btnIngresar.addActionListener(this);
-		btnIngresar.setBounds(84, 172, 109, 36);
+		btnIngresar.setBounds(123, 171, 126, 38);
 		contentPane.add(btnIngresar);
 		
 		jpassClave = new JPasswordField();
@@ -93,9 +99,31 @@ public class FormLogin extends JFrame implements ActionListener {
 	protected void do_btnIngresar_actionPerformed(ActionEvent arg0) {
 		//para los campos que vamos a ingresar los datos vamos a crear un array de caracteres 
 		//vamos a traer al campo de la contraseña 
-		char [] clave = jpassClave.getPassword();
+		//char [] clave = jpassClave.getPassword();		
+		
+		String user= txtUsuario.getText();
+		String clave=String.valueOf(jpassClave.getPassword());				
+		EmpleadoBussiness objEmpleadoB=new EmpleadoBussiness();
+		CredencialesBE Cred = objEmpleadoB.ValidarCredenciales(user,clave);			
+		
+		if(Cred!=null){
+			JOptionPane.showMessageDialog(null, "Bienvenido a SABOREA "+ Cred.getNombreEmpleado()+ "!!!","INGRESASTE",JOptionPane.INFORMATION_MESSAGE);			
+			principal p= new principal(Cred);		
+			p.setVisible(true);
+	
+			
+			
+			
+		}else{
+			JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTOS ","ERROR",JOptionPane.ERROR_MESSAGE);
+			txtUsuario.setText("");
+			jpassClave.setText("");
+			txtUsuario.grabFocus();
+		}
+		
+		
 		//creamos unva variable de tipo cadena 
-		String claveFinal= new String (clave);
+		/*String claveFinal= new String (clave);
 		if((txtUsuario.getText().equals("Diego")) && (claveFinal.equals("123"))){
 			dispose();
 			JOptionPane.showMessageDialog(null,"Bienvenidos al sistema "," INGRESASTE ", JOptionPane.INFORMATION_MESSAGE);			
@@ -109,9 +137,10 @@ public class FormLogin extends JFrame implements ActionListener {
 			txtUsuario.grabFocus();
 		}
 		
-		
+		*/
 		
 	}
+	
 	
 	
 }

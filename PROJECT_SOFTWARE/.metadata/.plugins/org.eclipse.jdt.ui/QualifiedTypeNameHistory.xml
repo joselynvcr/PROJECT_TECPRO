@@ -2,4 +2,35 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.awt.Image"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="PaqueteLog.principal"/>
+<fullyQualifiedTypeName name="java.sql.Driver"/>
+<fullyQualifiedTypeName name="conecta.ConnectionSaborea"/>
+<fullyQualifiedTypeName name="clases.Producto"/>
+<fullyQualifiedTypeName name="clases.Cliente"/>
+<fullyQualifiedTypeName name="clases.Mesa"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="clases.Boleta"/>
+<fullyQualifiedTypeName name="clases.Detalle_Boleta"/>
+<fullyQualifiedTypeName name="clases.Usuario"/>
+<fullyQualifiedTypeName name="datos.dao.ConnectionSaborea"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="saborea.model.dao.ConnectionSaborea"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="saborea.model.entities.Usuario"/>
+<fullyQualifiedTypeName name="saborea.model.dao.IDAO"/>
+<fullyQualifiedTypeName name="saborea.model.entities.Empleado"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="saborea.model.dao.EmpleadoDAO"/>
+<fullyQualifiedTypeName name="saborea.model.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="saborea.model.entities.login"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.EmpleadoBussiness"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="saborea.model.entities.Cliente"/>
+<fullyQualifiedTypeName name="saborea.model.entities.Mesa"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.CredencialesBE"/>
+<fullyQualifiedTypeName name="PaqueteLog.FormLogin"/>
 </qualifiedTypeNameHistroy>

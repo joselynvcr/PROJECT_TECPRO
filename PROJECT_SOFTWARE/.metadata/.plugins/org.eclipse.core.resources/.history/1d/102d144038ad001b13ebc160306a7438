@@ -1,0 +1,33 @@
+package classes;
+
+public class Mesa {
+
+	private int nro_mesa;
+	private Boolean disponibilidad ;
+	private int capacidad;
+	public Mesa(int nro_mesa, Boolean disponibilidad, int capacidad) {
+		this.nro_mesa = nro_mesa;
+		this.disponibilidad = disponibilidad;
+		this.capacidad = capacidad;
+	}
+	public int getNro_mesa() {
+		return nro_mesa;
+	}
+	public void setNro_mesa(int nro_mesa) {
+		this.nro_mesa = nro_mesa;
+	}
+	public Boolean getDisponibilidad() {
+		return disponibilidad;
+	}
+	public void setDisponibilidad(Boolean disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+	public int getCapacidad() {
+		return capacidad;
+	}
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+	
+	
+}

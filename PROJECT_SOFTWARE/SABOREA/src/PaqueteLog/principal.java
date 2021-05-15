@@ -8,15 +8,29 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+
+import saborea.model.bussiness.DTO.CredencialesBE;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class principal extends JFrame {
 
+	
 	private JPanel contentPane;
-	private JLabel lblBienvenidoAdministrador;
+	private JLabel lblBienvenida;	
+	private CredencialesBE cred;	
+	private JTextArea txtS;
+	public CredencialesBE getCred() {
+		return cred;
+	}
+	public void setCred(CredencialesBE cred) {
+		this.cred = cred;
+	}
 
 	/**
 	 * Launch the application.
@@ -25,33 +39,52 @@ public class principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					principal frame = new principal();
+					
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public principal() {
+	public principal(){};
+	
+	public principal(CredencialesBE cred) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 900);
+		setBounds(100, 100, 673, 462);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.RED);
 		contentPane.setBorder(new LineBorder(Color.GREEN, 4));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblBienvenidoAdministrador = new JLabel("");
-		lblBienvenidoAdministrador.setForeground(new Color(47, 79, 79));
-		lblBienvenidoAdministrador.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblBienvenidoAdministrador.setIcon(new ImageIcon("D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\T\u00C9CNICAS DE PROGRAM.ORIE. OBJ\\key.png"));
-		lblBienvenidoAdministrador.setFont(new Font("Times New Roman", Font.ITALIC, 25));
-		lblBienvenidoAdministrador.setBounds(26, 27, 800, 399);
-		contentPane.add(lblBienvenidoAdministrador);
+		
+		lblBienvenida = new JLabel("BIENVENIDO AL SISTEMA SABOREA"+ cred.getNombreEmpleado());
+		lblBienvenida.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblBienvenida.setBounds(46, 52, 387, 31);
+		contentPane.add(lblBienvenida);		
+		
+		txtS = new JTextArea();
+		txtS.setBounds(28, 139, 310, 235);
+		contentPane.add(txtS);
+		
+		
+		
+		
+		
 	}
+
+	
+	
+	
 }
