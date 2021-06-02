@@ -1,0 +1,15 @@
+package saborea.presentation.vista;
+
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+
+public class Render  extends DefaultTableCellRenderer implements TableCellRenderer{
+
+	
+	
+	
+	
+	
+	
+	
+}

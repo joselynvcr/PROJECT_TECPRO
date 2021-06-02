@@ -2,14 +2,22 @@ package saborea.model.entities;
 
 public class login {
 	
-	private Empleado Objempleado;	
+		
 	private int empleado_Id;
 	private String nom_User;
 	private String password_user;
 	private Boolean estadoUsuario_user;
+	private Empleado Objempleado;
 	//nos servirà para saber si el usuario està activo o no, el usuario estarà activo
 	//siempre en cuando el empleado siga trabajando, de lo contrario el usuario estara en modo inactivo.
 		
+	public login() {		
+		this.empleado_Id = -1;
+		this.nom_User = null;
+		this.password_user = null;
+		this.estadoUsuario_user = null;		
+		Objempleado = null;
+	}
 	public login(int empleado_Id, String nom_User, String password_user,
 			Boolean estadoUsuario_user,Empleado objempleado) {		
 		this.empleado_Id = empleado_Id;

@@ -1,0 +1,122 @@
+package saborea.model.bussiness;
+
+import java.util.ArrayList;
+
+import saborea.model.bussiness.DTO.CredencialesBE;
+import saborea.model.bussiness.DTO.VwDetallePedidoBE;
+import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
+import saborea.model.dao.Detalle_PedidoDAO;
+import saborea.model.dao.PedidoDAO;
+import saborea.model.entities.Detalle_Pedido;
+import saborea.model.entities.Pedido;
+
+public class RegistroPedidoProductoBussiness {
+	
+	
+	private PedidoDAO Objpedido;
+	private Detalle_PedidoDAO detallepedido;
+	
+	public RegistroPedidoProductoBussiness() {
+		Objpedido=new PedidoDAO();	
+		detallepedido=new Detalle_PedidoDAO();
+	}
+	
+	
+	
+	public ArrayList<VwDetallePedidoBE> findDetallePedidos(ArrayList<Pedido> listaa){
+		
+		//double totalPagar=0.00;
+		Detalle_Pedido dp= new Detalle_Pedido(-1,listaa.get(0).getCod_Pedido(),	null, -1,-1,null,-1,-1);
+		
+		ArrayList<Detalle_Pedido> listaDetalle=detallepedido.buscar(dp, true);		
+		
+		if(listaDetalle==null) return null;		
+		
+		ArrayList<VwDetallePedidoBE> listaDetallePedidosVW= new ArrayList<VwDetallePedidoBE>();
+		
+		for(int i=0;i<listaDetalle.size();i++){
+
+			listaDetallePedidosVW.add(new VwDetallePedidoBE(
+					listaDetalle.get(i).getCodProducto(), 
+					listaDetalle.get(i).getObjproducto().getNom_producto(),						
+					listaDetalle.get(i).getCantidadProductos(), 
+					listaDetalle.get(i).getPrecio(),
+					listaDetalle.get(i).getPrecio()*listaDetalle.get(i).getCantidadProductos()
+					
+						)	
+					
+					);	
+			//totalPagar+=listaDetalle.get(i).getPrecio()*listaDetalle.get(i).getCantidadProductos();
+			
+		}
+		
+		//setTotal(totalPagar);
+		
+		return listaDetallePedidosVW;
+		
+		
+	}
+	
+	
+	
+	//encontrar pedidos
+	public VwRegistroPedidoProductoBE findPedidos(CredencialesBE Cred, int mesa) {		
+		
+		double totalPagar=0.0;
+		Pedido p=new Pedido(-1,	-1,null,-1,null,null,	-1,	null,null, 	1,	null, false, false);
+		
+		ArrayList<Pedido> lista=Objpedido.buscar(p, true);
+		VwRegistroPedidoProductoBE PedidoRegistradoVW;
+		
+		ArrayList<VwDetallePedidoBE> listaDetallePedidosRegistradosVW= findDetallePedidos(lista);
+		
+		for(int i=0;i<listaDetallePedidosRegistradosVW.size();i++){
+			totalPagar+=listaDetallePedidosRegistradosVW.get(i).getSubtotal();
+		}
+		
+		System.out.println("totalPagar  : "+totalPagar);
+		
+		if(lista==null){//lista viene vacía, registro nuevo
+			return null; 
+		}else if(Cred.getEmpleadoId()==lista.get(0).getCodmozo()){//todos los permisos
+			PedidoRegistradoVW = new VwRegistroPedidoProductoBE(
+					lista.get(0).getCod_Pedido(),
+					lista.get(0).getObjmozo().getNom_Empleado(),
+					lista.get(0).getObjmozo().getApe_Empleado(),
+					lista.get(0).getCodmozo(),
+					lista.get(0).getDniCliente(),
+					mesa,
+					listaDetallePedidosRegistradosVW,
+					true,
+					totalPagar
+					);
+			return PedidoRegistradoVW;
+		}else{
+			PedidoRegistradoVW = new VwRegistroPedidoProductoBE( //si el empleado no atiende esa mesa
+					lista.get(0).getCod_Pedido(),
+					lista.get(0).getObjmozo().getNom_Empleado(),
+					lista.get(0).getObjmozo().getApe_Empleado(),
+					lista.get(0).getCodmozo(),
+					lista.get(0).getDniCliente(),
+					mesa,
+					listaDetallePedidosRegistradosVW,
+					false,
+					totalPagar
+					);
+			return PedidoRegistradoVW;
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+		
+	
+	
+	
+	
+	
+}

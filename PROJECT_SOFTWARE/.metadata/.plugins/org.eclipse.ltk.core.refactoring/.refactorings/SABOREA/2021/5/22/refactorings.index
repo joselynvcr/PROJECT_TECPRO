@@ -1,0 +1,21 @@
+1621892176670	Rename type 'Detalle_Boleta'
+1621923687100	Rename type 'Detalle_BoletaDAO'
+1621984791627	Rename type 'ListaPedidos'
+1621985711431	Rename type 'principal'
+1621992776194	Delete element
+1621992778157	Delete element
+1621992780692	Delete element
+1622161126431	Rename type 'RegistrarPedidosBE'
+1622164003933	Rename type 'RegistrarProducto'
+1622178144761	Delete element
+1622178260543	Rename package 'PaqueteLog'
+1622178292068	Rename type 'Administrador'
+1622178302211	Rename type 'Mozo'
+1622178312042	Rename type 'RegistrarPedido'
+1622178321233	Rename type 'Cajero'
+1622178330346	Rename type 'AgregarProductos'
+1622184382839	Rename type 'RegistroPedidoProductoBE'
+1622247180401	Delete element
+1622341293481	Delete element
+1622341296474	Delete element
+1622368641092	Delete element

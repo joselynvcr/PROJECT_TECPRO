@@ -1,0 +1,11 @@
+package saborea.model.bussiness;
+
+import java.util.ArrayList;
+
+import saborea.model.entities.Producto;
+
+public class ProductoBussiness {
+
+	ArrayList<Producto> listaProd=new ArrayList<>();
+	
+}

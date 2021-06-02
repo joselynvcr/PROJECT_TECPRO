@@ -1,0 +1,29 @@
+package saborea.model.bussiness.DTO;
+
+import java.sql.Timestamp;
+
+
+public class ListaPedidosBE {
+	
+	private int Idpedido;
+	private String nomApeCajero;	
+	private String nomApeMozo;	
+	private Timestamp fechaHora;
+	private String dni_Cliente;
+	private String nomApeCliente;
+	private int nroMesa;
+	private Boolean pagado;
+	private double TotalPagar;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

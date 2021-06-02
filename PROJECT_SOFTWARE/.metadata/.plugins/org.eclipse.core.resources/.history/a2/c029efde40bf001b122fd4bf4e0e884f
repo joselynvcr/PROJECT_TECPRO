@@ -1,0 +1,161 @@
+package saborea.model.entities;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
+public class Pedido {
+		
+	private int Cod_Pedido;
+	private int codmozo;
+	private Empleado Objmozo;
+	private int codCajero;
+	private Empleado Objcajero;
+	private Timestamp FechaHora;
+	//private Time hora;
+	private double TotalPagar;	
+	private int codCliente;
+	private Cliente Objcliente;
+	private int codMesa;
+	private Mesa Objmesa;
+	private Boolean pagado; //nos servirà para saber si el pedido fue cancelado o no por el comensal , lo harà la cajera
+	
+	public Pedido(){
+		this.Cod_Pedido=-1;
+		this.codmozo=-1;
+		this.Objmozo=null;
+		this.codCajero=-1;
+		this.Objcajero=null;
+		this.FechaHora=null;
+		this.TotalPagar=-1;
+		this.codCliente=-1;
+		this.Objcliente=null;
+		this.codMesa=-1;
+		this.Objmesa=null;
+		this.pagado=null;		
+	}
+
+	public Pedido(int cod_Pedido, int codmozo, Empleado objmozo, int codCajero, Empleado objcajero, Timestamp fechaHora,
+			double totalPagar, int codCliente, Cliente objcliente, int codMesa, Mesa objmesa, Boolean pagado) {
+		Cod_Pedido = cod_Pedido;
+		this.codmozo = codmozo;
+		Objmozo = objmozo;
+		this.codCajero = codCajero;
+		Objcajero = objcajero;
+		FechaHora = fechaHora;
+		TotalPagar = totalPagar;
+		this.codCliente = codCliente;
+		Objcliente = objcliente;
+		this.codMesa = codMesa;
+		Objmesa = objmesa;
+		this.pagado = pagado;
+	}
+
+	
+	
+	public int getCod_Pedido() {
+		return Cod_Pedido;
+	}
+
+	public void setCod_Pedido(int cod_Pedido) {
+		Cod_Pedido = cod_Pedido;
+	}
+
+	public int getCodmozo() {
+		return codmozo;
+	}
+
+	public void setCodmozo(int codmozo) {
+		this.codmozo = codmozo;
+	}
+
+	public Empleado getObjmozo() {
+		return Objmozo;
+	}
+
+	public void setObjmozo(Empleado objmozo) {
+		Objmozo = objmozo;
+	}
+
+	public int getCodCajero() {
+		return codCajero;
+	}
+
+	public void setCodCajero(int codCajero) {
+		this.codCajero = codCajero;
+	}
+
+	public Empleado getObjcajero() {
+		return Objcajero;
+	}
+
+	public void setObjcajero(Empleado objcajero) {
+		Objcajero = objcajero;
+	}
+
+	public Timestamp getFechaHora() {
+		return FechaHora;
+	}
+
+	public void setFechaHora(Timestamp fechaHora) {
+		FechaHora = fechaHora;
+	}
+
+	public double getTotalPagar() {
+		return TotalPagar;
+	}
+
+	public void setTotalPagar(double totalPagar) {
+		TotalPagar = totalPagar;
+	}
+
+	public int getCodCliente() {
+		return codCliente;
+	}
+
+	public void setCodCliente(int codCliente) {
+		this.codCliente = codCliente;
+	}
+
+	public Cliente getObjcliente() {
+		return Objcliente;
+	}
+
+	public void setObjcliente(Cliente objcliente) {
+		Objcliente = objcliente;
+	}
+
+	public int getCodMesa() {
+		return codMesa;
+	}
+
+	public void setCodMesa(int codMesa) {
+		this.codMesa = codMesa;
+	}
+
+	public Mesa getObjmesa() {
+		return Objmesa;
+	}
+
+	public void setObjmesa(Mesa objmesa) {
+		Objmesa = objmesa;
+	}
+
+	public Boolean getPagado() {
+		return pagado;
+	}
+
+	public void setPagado(Boolean pagado) {
+		this.pagado = pagado;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

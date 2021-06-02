@@ -1,0 +1,58 @@
+package saborea.model.dao;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import saborea.model.entities.Detalle_Pedido;
+import saborea.model.entities.login;
+
+public class Detalle_PedidoDAO implements IDAO {
+	/*private BoletaDAO _Boleta;
+	private int CantidadProductos;
+	private ProductoDAO _Productos;
+	private double precio;
+	private double total;*/
+	private Connection con=null;		
+	private ArrayList<Detalle_Pedido> lista=new ArrayList<>();
+	private Detalle_Pedido ObjDetallePedido=null;
+	
+	
+	
+	@Override
+	public ArrayList listar(boolean join) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertar(Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificar(Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(int cod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList buscar(Object objFind, boolean join) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+}

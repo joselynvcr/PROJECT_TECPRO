@@ -1,0 +1,198 @@
+package saborea.presentation.vista;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
+
+import javax.swing.JSpinner;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class PanelRegistrarProducto extends JPanel implements ActionListener {
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_4;
+	private JTextField textField;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JLabel label_7;
+	private JLabel label_8;
+	private JLabel label_9;
+	private JLabel label_10;
+	private JLabel label_11;
+	private JLabel label_12;
+	private JLabel label_13;
+	private JLabel label_14;
+	private JLabel label_15;
+	private JLabel label_16;
+	private JLabel label_17;
+	private JLabel label_18;
+	private JLabel label_19;
+	private JLabel label_20;
+	private JSpinner spinner;
+	private JSpinner spinner_1;
+	private JSpinner spinner_2;
+	private JSpinner spinner_3;
+	private JButton button;
+	private JButton button_1;
+	private JButton button_2;
+	private JButton button_3;
+	private VwRegistroPedidoProductoBE obj;
+	
+
+	/**
+	 * Create the panel.
+	 */
+	//public PanelRegistrarProducto() {}
+	public PanelRegistrarProducto(VwRegistroPedidoProductoBE obj) {
+		System.out.println("ENTRE AL PANEL REGISTRAR PRODUCTO");
+		//setLayout(null);
+		//int cantProdu=obj.getListaDetalle().size();
+		
+		label = new JLabel("ORDEN DE PEDIDO");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		label.setBounds(235, 11, 168, 20);
+		add(label);
+		
+		label_1 = new JLabel("DNI CLIENTE :");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(10, 64, 124, 14);
+		add(label_1);
+		
+		label_2 = new JLabel("CLIENTE :");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(20, 98, 124, 14);
+		add(label_2);
+		
+		label_4 = new JLabel("JAIME LANNISTER");
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_4.setBounds(168, 98, 124, 14);
+		add(label_4);
+		
+		textField = new JTextField();
+		textField.setText("74284258");
+		textField.setColumns(10);
+		textField.setBounds(158, 63, 136, 20);
+		add(textField);
+		
+		label_5 = new JLabel("N\u00BA MESA : ");
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_5.setBounds(383, 109, 76, 20);
+		add(label_5);
+		
+		label_6 = new JLabel("MOZO :");
+		label_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_6.setBounds(383, 64, 63, 14);
+		add(label_6);
+		
+		label_7 = new JLabel("STANNIS BARATHEON");
+		label_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_7.setBounds(462, 66, 152, 14);
+		add(label_7);
+		
+		label_8 = new JLabel("3");
+		label_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_8.setBounds(482, 112, 63, 14);
+		add(label_8);
+		
+		label_9 = new JLabel("DETALLE DE PEDIDO");
+		label_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		label_9.setBounds(10, 182, 201, 20);
+		add(label_9);
+		
+		label_10 = new JLabel("NOMBRE ");
+		label_10.setBounds(20, 213, 110, 20);
+		add(label_10);
+		
+		label_11 = new JLabel("PIZZA HAWAIANA ");
+		label_11.setBounds(10, 244, 110, 20);
+		add(label_11);
+		
+		label_12 = new JLabel("PIZZA MOZARELLA");
+		label_12.setBounds(10, 273, 110, 20);
+		add(label_12);
+		
+		label_13 = new JLabel("PIZZA PEPPERONI");
+		label_13.setBounds(10, 302, 110, 20);
+		add(label_13);
+		
+		label_14 = new JLabel("PIZZA CUATRO QUESOS");
+		label_14.setBounds(7, 333, 137, 20);
+		add(label_14);
+		
+		label_15 = new JLabel("30");
+		label_15.setBounds(178, 306, 30, 20);
+		add(label_15);
+		
+		label_16 = new JLabel("30");
+		label_16.setBounds(178, 333, 30, 20);
+		add(label_16);
+		
+		label_17 = new JLabel("30");
+		label_17.setBounds(178, 276, 30, 20);
+		add(label_17);
+		
+		label_18 = new JLabel("30");
+		label_18.setBounds(178, 248, 30, 20);
+		add(label_18);
+		
+		label_19 = new JLabel("PRECIO");
+		label_19.setBounds(164, 213, 110, 20);
+		add(label_19);
+		
+		label_20 = new JLabel("CANTIDAD");
+		label_20.setBounds(324, 213, 60, 20);
+		add(label_20);
+		
+		spinner = new JSpinner();
+		spinner.setBounds(334, 244, 50, 20);
+		add(spinner);
+		
+		spinner_1 = new JSpinner();
+		spinner_1.setBounds(334, 273, 50, 20);
+		add(spinner_1);
+		
+		spinner_2 = new JSpinner();
+		spinner_2.setBounds(334, 303, 50, 20);
+		add(spinner_2);
+		
+		spinner_3 = new JSpinner();
+		spinner_3.setBounds(334, 330, 50, 20);
+		add(spinner_3);
+		
+		button = new JButton("AGREGAR PRODUCTOS");
+		button.addActionListener(this);
+		button.setBounds(507, 176, 168, 44);
+		add(button);
+		
+		button_1 = new JButton("SAVE");
+		button_1.setBounds(446, 510, 87, 38);
+		add(button_1);
+		
+		button_2 = new JButton("ENVIAR ORDEN");
+		button_2.setBounds(567, 510, 120, 38);
+		add(button_2);
+		
+		button_3 = new JButton("BACK");
+		button_3.setBounds(37, 532, 87, 29);
+		add(button_3);
+
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == button) {
+			do_button_actionPerformed(arg0);
+		}
+	}
+	//BUTTON AGREGAR PRODUCTO
+	protected void do_button_actionPerformed(ActionEvent arg0) {
+		
+		
+		
+	}
+}

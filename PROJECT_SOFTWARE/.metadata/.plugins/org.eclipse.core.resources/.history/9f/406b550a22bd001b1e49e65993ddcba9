@@ -1,0 +1,16 @@
+package saborea.model.dao;
+
+public class Detalle_PedidoDAO {
+
+	/*private BoletaDAO _Boleta;
+	private int CantidadProductos;
+	private ProductoDAO _Productos;
+	private double precio;
+	private double total;*/
+	
+	
+	
+	
+	
+	
+}

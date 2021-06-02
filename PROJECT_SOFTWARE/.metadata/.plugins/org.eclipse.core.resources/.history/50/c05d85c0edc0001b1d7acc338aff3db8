@@ -1,0 +1,39 @@
+package saborea.presentation.vista;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
+
+import javax.swing.JSpinner;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.JToolBar;
+import javax.swing.JToggleButton;
+
+public class PanelRegistrarProducto extends JPanel implements ActionListener {
+	private VwRegistroPedidoProductoBE obj;
+	
+
+	/**
+	 * Create the panel.
+	 */
+	//public PanelRegistrarProducto() {}
+	public PanelRegistrarProducto(VwRegistroPedidoProductoBE obj) {
+		setBackground(Color.CYAN);
+		setLayout(null);
+		System.out.println("ENTRE AL PANEL REGISTRAR PRODUCTO");
+		
+		
+		
+
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		
+	}
+}

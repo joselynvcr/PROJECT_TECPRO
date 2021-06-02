@@ -1,0 +1,457 @@
+package saborea.model.dao;
+
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import saborea.model.entities.Cliente;
+import saborea.model.entities.Empleado;
+import saborea.model.entities.Mesa;
+import saborea.model.entities.Pedido;
+import saborea.model.entities.login;
+
+
+public class PedidoDAO implements IDAO{			
+	
+	private Connection con= null;
+	private ArrayList<Pedido> lista= new ArrayList<>();
+	private Pedido ObjPedido=null;
+
+	PreparedStatement ps;
+	
+	public PedidoDAO(){
+		con= new ConnectionSaborea().getConnection();
+		
+	}
+
+	@Override
+	public ArrayList listar(boolean join) {
+		
+		try {
+			//vamos a definir una sentencia SQL , sentencia SQL
+			String SSQL= "SELECT * FROM pedido p join empleado e on e.empleado_Id=p.cempleadoc_Id"
+					+ "	join empleado e2 on e2.empleado_Id=p.mempleado_Id join cliente c"
+					+ "on c.cliente_Id=p.cliente_Id	join mesa m	on m.mesa_Id=p.mesa_Id ";		
+			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
+			ps=con.prepareStatement(SSQL);
+			//dentro de rs ya tengo todos los registros de mi tabla, necesito recorrer para cargar dentro de un objeto y posteriormente cargar cada objeto dentro de una lista
+			//y por ultimo enviar un arraylist de todos los registros de la tabla 
+			//ResulSet=conjunto de resultados, contiene los resultados de una consulta SQL
+			ResultSet rs= ps.executeQuery();
+			//mientras haya un registro todavia en resultset
+			while(rs.next()){	
+				
+				if (!join){
+					ObjPedido=new Pedido( 	
+					rs.getInt("pedido_Id"),
+					rs.getInt("mempleado_Id"),
+					null,
+					rs.getInt("cempleado_Id"),
+					null,
+					rs.getTimestamp("FechaHora"),
+					rs.getDouble("TotalPagar"),
+					rs.getInt("cliente_Id"),
+					null,
+					rs.getInt("mesa_Id"),
+					null,
+					rs.getBoolean("pagado")
+					
+					);
+					
+				}else{
+					new Pedido( 											
+							rs.getInt("pedido_Id"),
+							rs.getInt("mempleado_Id"),
+							new Empleado(
+									rs.getInt("empleado_Id"),
+									rs.getInt("num_DNI"),
+									rs.getString("nom_empleado"),
+									rs.getString("ape_empleado"),
+									rs.getInt("num_Telf"),
+									rs.getString("EstadoCivil"),
+									rs.getString("gender_empleado"),
+									rs.getDouble("sueldoBase_empleado"),							
+									rs.getInt("numHijos_empleado"),
+									rs.getString("empleado_tipoCargo"),
+									rs.getInt("idJefe"),
+									null
+								),
+							rs.getInt("cempleado_Id"),
+							new Empleado(
+									rs.getInt("empleado_Id"),
+									rs.getInt("num_DNI"),
+									rs.getString("nom_empleado"),
+									rs.getString("ape_empleado"),
+									rs.getInt("num_Telf"),
+									rs.getString("EstadoCivil"),
+									rs.getString("gender_empleado"),
+									rs.getDouble("sueldoBase_empleado"),							
+									rs.getInt("numHijos_empleado"),
+									rs.getString("empleado_tipoCargo"),
+									rs.getInt("idJefe"),
+									null
+								),
+							rs.getTimestamp("FechaHora"),
+							rs.getDouble("TotalPagar"),
+							rs.getInt("cliente_Id"),
+							new Cliente(
+									rs.getInt("cliente_Id"),
+									rs.getInt("num_dni"),
+									rs.getString("nom_Cliente"),
+									rs.getString("ape_Cliente")		
+									),
+							rs.getInt("mesa_Id"),
+							new Mesa( 											
+									rs.getInt("mesa_Id"),
+									rs.getBoolean("disponibilidad"),
+									rs.getInt("Capacidad_Mesa")
+									),
+							rs.getBoolean("pagado")
+														
+					);
+			
+				}
+				//necesito agregar este objeto a mi lista
+				lista.add(ObjPedido);
+				
+			}
+			return lista;
+			
+		} catch (SQLException e) {
+			//si hay un error en SSQL o en la conexiòn nos darà aviso
+			JOptionPane.showMessageDialog(null,e.getMessage());
+			//e.printStackTrace();			
+		}		
+		return null;
+	}
+
+	@Override
+	public void insertar(Object obj) {
+		//tengo que hacer un tipo de cambio de base  "add. cast to usuario " que significa que forzosamente object se interprete como usuario y se cargue dentro de nuestro objeto que 
+		//realmente es de tipo Usuario	
+		
+		
+		try {
+			ObjPedido=(Pedido) obj;  
+			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
+			String SSQL="INSERT INTO pedido(pedido_Id,mempleado,cempleadoc_Id,"
+					+ " fechaHora,totalPagar_Pedido,cliente_Id,mesa_Id,pagado) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			ps=con.prepareStatement(SSQL);
+			ps.setInt(1, ObjPedido.getCod_Pedido());
+			ps.setInt(2, ObjPedido.getCodmozo());
+			ps.setInt(3, ObjPedido.getCodCajero());
+			ps.setTimestamp(4, ObjPedido.getFechaHora());
+			ps.setDouble(5, ObjPedido.getTotalPagar());
+			ps.setInt(6, ObjPedido.getCodCliente());
+			ps.setInt(7, ObjPedido.getCodMesa());
+			ps.setBoolean(8, ObjPedido.getPagado());
+			
+			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}	
+		
+	}
+
+	@Override
+	public void modificar(Object obj) {
+		ObjPedido=(Pedido) obj;
+		//mempleado_Id=?,cempleadoc_Id=?,fechaHora=?,totalPagar_PObjedido=?WHERE pedido_Id=? ";
+		try {
+			
+			String SSQL="UPDATE pedido SET ";
+			String condition=null;			
+			int fObjmozo=ObjPedido.getCodmozo();
+			int Objcajero=ObjPedido.getCodCajero();
+			Timestamp fFechaHora=ObjPedido.getFechaHora();
+			double fTotalPagar=ObjPedido.getTotalPagar();
+			int fObjcliente=ObjPedido.getCodCliente();
+			int fObjmesa=ObjPedido.getCodMesa();
+			Boolean fPagado=ObjPedido.getPagado();
+			
+			
+		if(fObjmozo!=-1){			
+				condition=" "+condition+"mempleado_Id='"+fObjmozo+"'";			
+		}
+		if(Objcajero!=-1){
+			if(condition!=null){
+				condition="," +condition+"cempleadoc_Id='"+Objcajero+"'";
+			}else{
+				condition=" " +condition+"cempleadoc_Id='"+Objcajero+"'";
+			}
+			
+		}
+		if(fFechaHora!=null){
+			if(condition!=null){
+				condition=" , "+condition+"fechaHora='"+fFechaHora+"'";
+			}else{
+				condition=" "+condition+"fechaHora='"+fFechaHora+"'";
+			}
+			
+		}
+		if(fTotalPagar!=-1){
+			if(condition!=null){
+				condition=" , "+condition+"totalPagar_Pedido='"+fTotalPagar+"'";
+			}else{
+				condition=" "+condition+"totalPagar_Pedido='"+fTotalPagar+"'";
+			}
+			
+		}
+		if(fObjcliente!=-1){
+			if(condition!=null){
+				condition=" , "+condition+"cliente_Id='"+fObjcliente+"'";
+			}else{
+				condition=" "+condition+"cliente_Id='"+fObjcliente+"'";
+			}
+			
+		}
+		if(fObjmesa!=-1){
+			if(condition!=null){
+				condition=" , "+condition+"mesa_Id='"+fObjmesa+"'";
+			}else{
+				condition=" "+condition+"mesa_Id='"+fObjmesa+"'";
+			}
+			
+		}
+		if(fPagado!=null){
+			if(condition!=null){
+				condition=" ,"+condition+"pagado='"+fPagado+"'";
+			}else{
+				condition=" "+condition+"pagado='"+fPagado+"'";
+			}
+			
+		}
+			
+			
+		SSQL=SSQL+condition+"where pedido_Id="+ ObjPedido.getCod_Pedido();
+			ps=con.prepareStatement(SSQL);	
+			
+			/*ps.setInt(1, ObjPedido.getCodmozo());
+			ps.setInt(2, ObjPedido.getObjcajero().getIdEmpleado());
+			ps.setTimestamp(3, ObjPedido.getFechaHora());
+			ps.setDouble(4, ObjPedido.getTotalPagar());
+			ps.setInt(5, ObjPedido.getObjcliente().getCod_cliente());
+			ps.setInt(6, ObjPedido.getObjmesa().getNro_mesa());
+			ps.setBoolean(7, ObjPedido.getPagado());
+			ps.setInt(8,ObjPedido.getCod_Pedido());*/
+			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public void eliminar(int cod) {
+		
+		try {			
+			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
+			String SSQL="DELETE FROM pedido WHERE usuario_Id=? ";
+			ps=con.prepareStatement(SSQL);
+			ps.setInt(1, cod);
+			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			//de esta manera vamos a mapear nuestro error, por si ocurre
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}		
+		
+	}
+
+	
+
+	@Override
+	public ArrayList<Pedido> buscar(Object objFind, boolean join) {
+		
+		ObjPedido=(Pedido) objFind;
+		try {
+			//vamos a definir una sentencia SQL , sentencia SQL
+			String SSQL= "select * from pedido ";
+			String condition=" ";
+			int fCod_Pedido=ObjPedido.getCod_Pedido();
+			int fObjmozo=ObjPedido.getCodmozo();
+			int Objcajero=ObjPedido.getCodCajero();
+			Timestamp fFechaHora=ObjPedido.getFechaHora();
+			double fTotalPagar=ObjPedido.getTotalPagar();
+			int fObjcliente=ObjPedido.getCodCliente();
+			int fObjmesa=ObjPedido.getCodMesa();
+			Boolean fPagado=ObjPedido.getPagado();
+			
+			String ands=null;
+			if(fCod_Pedido!=-1){
+					condition=" "+condition+"pedido_Id='"+fCod_Pedido+"'";
+					ands="and";
+			}
+			if(fObjmozo!=-1){
+				if(ands!=null){
+					condition="and "+condition+"mempleado_Id='"+fObjmozo+"'";
+				}else{
+					condition=" "+condition+"mempleado_Id='"+fObjmozo+"'";
+				}
+			}
+			if(Objcajero!=-1){
+				if(ands!=null){
+					condition="and " +condition+"cempleadoc_Id='"+Objcajero+"'";
+				}else{
+					condition=" " +condition+"cempleadoc_Id='"+Objcajero+"'";
+				}
+				
+			}
+			if(fFechaHora!=null){
+				if(ands!=null){
+					condition=" and "+condition+"fechaHora='"+fFechaHora+"'";
+				}else{
+					condition=" "+condition+"fechaHora='"+fFechaHora+"'";
+				}
+				
+			}
+			if(fTotalPagar!=-1){
+				if(ands!=null){
+					condition=" and "+condition+"totalPagar_Pedido='"+fTotalPagar+"'";
+				}else{
+					condition=" "+condition+"totalPagar_Pedido='"+fTotalPagar+"'";
+				}
+				
+			}
+			if(fObjcliente!=-1){
+				if(ands!=null){
+					condition=" and "+condition+"cliente_Id='"+fObjcliente+"'";
+				}else{
+					condition=" "+condition+"cliente_Id='"+fObjcliente+"'";
+				}
+				
+			}
+			if(fObjmesa!=-1){
+				if(ands!=null){
+					condition=" and "+condition+"mesa_Id='"+fObjmesa+"'";
+				}else{
+					condition=" "+condition+"mesa_Id='"+fObjmesa+"'";
+				}
+				
+			}
+			if(fPagado!=null){
+				if(ands!=null){
+					condition=" and "+condition+"pagado='"+fPagado+"'";
+				}else{
+					condition=" "+condition+"pagado='"+fPagado+"'";
+				}
+				
+			}
+			
+			SSQL=SSQL+"where "+condition;
+			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
+			ps=con.prepareStatement(SSQL);					
+			//dentro de rs ya tengo todos los registros de mi tabla, necesito recorrer para cargar dentro de un objeto y posteriormente cargar cada objeto dentro de una lista
+			//y por ultimo enviar un arraylist de todos los registros de la tabla 
+			ResultSet rs= ps.executeQuery();
+			if(rs==null)
+				return null;					
+			//mientras haya un registro todavia en resultset
+			while(rs.next()){							
+				if (!join){
+					ObjPedido=new Pedido( 	
+					rs.getInt("pedido_Id"),
+					rs.getInt("mempleado_Id"),
+					null,
+					rs.getInt("cempleado_Id"),
+					null,
+					rs.getTimestamp("FechaHora"),
+					rs.getDouble("TotalPagar"),
+					rs.getInt("cliente_Id"),
+					null,
+					rs.getInt("mesa_Id"),
+					null,
+					rs.getBoolean("pagado")
+					
+					);
+					
+				}else{
+					new Pedido( 											
+							rs.getInt("pedido_Id"),
+							rs.getInt("mempleado_Id"),
+							new Empleado(
+									rs.getInt("empleado_Id"),
+									rs.getInt("num_DNI"),
+									rs.getString("nom_empleado"),
+									rs.getString("ape_empleado"),
+									rs.getInt("num_Telf"),
+									rs.getString("EstadoCivil"),
+									rs.getString("gender_empleado"),
+									rs.getDouble("sueldoBase_empleado"),							
+									rs.getInt("numHijos_empleado"),
+									rs.getString("empleado_tipoCargo"),
+									rs.getInt("idJefe"),
+									null
+								),
+							rs.getInt("cempleado_Id"),
+							new Empleado(
+									rs.getInt("empleado_Id"),
+									rs.getInt("num_DNI"),
+									rs.getString("nom_empleado"),
+									rs.getString("ape_empleado"),
+									rs.getInt("num_Telf"),
+									rs.getString("EstadoCivil"),
+									rs.getString("gender_empleado"),
+									rs.getDouble("sueldoBase_empleado"),							
+									rs.getInt("numHijos_empleado"),
+									rs.getString("empleado_tipoCargo"),
+									rs.getInt("idJefe"),
+									null
+								),
+							rs.getTimestamp("FechaHora"),
+							rs.getDouble("TotalPagar"),
+							rs.getInt("cliente_Id"),
+							new Cliente(
+									rs.getInt("cliente_Id"),
+									rs.getInt("num_dni"),
+									rs.getString("nom_Cliente"),
+									rs.getString("ape_Cliente")		
+									),
+							rs.getInt("mesa_Id"),
+							new Mesa( 											
+									rs.getInt("mesa_Id"),
+									rs.getBoolean("disponibilidad"),
+									rs.getInt("Capacidad_Mesa")
+									),
+							rs.getBoolean("pagado")
+														
+					);
+				}
+				
+				//necesito agregar este objeto a mi lista
+				lista.add(ObjPedido);
+				
+			}					
+			return lista;
+			
+		} catch (SQLException e) {
+			//si hay un error en SSQL o en la conexiòn nos darà aviso
+			JOptionPane.showMessageDialog(null,e.getMessage());
+			//e.printStackTrace();			
+		}
+			
+		return null;
+	
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}

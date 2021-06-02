@@ -1,0 +1,14 @@
+package saborea.model.bussiness.DTO;
+
+public class VwDetallePedidoBE {
+	
+	private int codProducto;
+	private String nombreProducto;	
+	private int cantidad;
+	private String precio;
+	
+	
+	
+	
+
+}

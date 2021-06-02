@@ -1,0 +1,13 @@
+package saborea.model.bussiness.DTO;
+
+import java.util.ArrayList;
+
+public class VwRegistroPedidoProductoBE {
+
+	private int codmozo;	
+	private int codCajero;		
+	private String dniCliente;	
+	private int codMesa;	
+	private ArrayList<DetallePedidoBE> listaDetalle;
+	
+}

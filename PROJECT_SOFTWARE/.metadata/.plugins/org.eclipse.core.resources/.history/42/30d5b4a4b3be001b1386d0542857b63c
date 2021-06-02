@@ -1,0 +1,15 @@
+package saborea.model.bussiness;
+
+import java.util.ArrayList;
+
+import saborea.model.dao.ProductoDAO;
+import saborea.model.entities.Producto;
+
+public class ProductoBussiness {
+	
+	private ProductoDAO ObjProducto;
+	
+
+	ArrayList<Producto> listaProd=new ArrayList<>();
+	
+}

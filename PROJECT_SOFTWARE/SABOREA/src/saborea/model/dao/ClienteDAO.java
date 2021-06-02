@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import saborea.model.entities.Cliente;
-import saborea.model.entities.Empleado;
-import saborea.model.entities.login;
 
 public class ClienteDAO implements IDAO {
 
@@ -21,7 +19,7 @@ public class ClienteDAO implements IDAO {
 	
 	
 	@Override
-	public ArrayList listar(boolean join) {
+	public ArrayList<Cliente> listar(boolean join) {
 		
 		try {
 			//vamos a definir una sentencia SQL , sentencia SQL
@@ -33,9 +31,8 @@ public class ClienteDAO implements IDAO {
 			ResultSet rs= ps.executeQuery();
 			//mientras haya un registro todavia en resultset
 			while(rs.next()){				
-				ObjCliente=new Cliente(
-						rs.getInt("cliente_Id"),
-						rs.getInt("num_dni"),
+				ObjCliente=new Cliente(						
+						rs.getString("num_dni"),
 						rs.getString("nom_Cliente"),
 						rs.getString("ape_Cliente")						
 						);
@@ -58,12 +55,12 @@ public class ClienteDAO implements IDAO {
 		try {
 			ObjCliente=(Cliente) obj; //() es en donde vamos a poner los campos, en realidad no necesitamos poner el ID PORQUE SE GENERA AUTOMATICAMENTE, SE CREA ASI MISMO 
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
-			String SSQL="INSERT INTO login (cliente_Id,num_dni,nom_Cliente,ape_Cliente) VALUES (?, ?, ?, ?)";
+			String SSQL="INSERT INTO login (num_dni,nom_Cliente,ape_Cliente) VALUES (?, ?, ?, ?)";
 			ps=con.prepareStatement(SSQL);
-			ps.setInt(1, ObjCliente.getCod_cliente());
-			ps.setInt(2, ObjCliente.getNum_dni_cliente());
-			ps.setString(3, ObjCliente.getNom_cliente());
-			ps.setString(4, ObjCliente.getApe_cliente());			
+			
+			ps.setString(1, ObjCliente.getNum_dni());
+			ps.setString(2, ObjCliente.getNom_cliente());
+			ps.setString(3, ObjCliente.getApe_cliente());			
 			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -78,12 +75,12 @@ public class ClienteDAO implements IDAO {
 		try {
 			ObjCliente=(Cliente) obj; //() es en donde vamos a poner los campos, en realidad no necesitamos poner el ID PORQUE SE GENERA AUTOMATICAMENTE, SE CREA ASI MISMO 
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
-			String SSQL="UPDATE login SET num_dni=?,nom_Cliente=?,ape_Cliente=? WHERE cliente_Id=? ";
+			String SSQL="UPDATE login SET nom_Cliente=?,ape_Cliente=? WHERE dniCliente=? ";
 			ps=con.prepareStatement(SSQL);
-			ps.setInt(1, ObjCliente.getNum_dni_cliente());
-			ps.setString(2, ObjCliente.getNom_cliente());
-			ps.setString(3, ObjCliente.getApe_cliente());
-			ps.setInt(4, ObjCliente.getCod_cliente());
+			
+			ps.setString(1, ObjCliente.getNom_cliente());
+			ps.setString(2, ObjCliente.getApe_cliente());
+			ps.setString(3, ObjCliente.getNum_dni());
 			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -94,7 +91,7 @@ public class ClienteDAO implements IDAO {
 	}
 
 	@Override
-	public void eliminar(int cod) {
+	public void eliminar(int cod,int Cod2) {
 		try {			
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
 			String SSQL="DELETE FROM Cliente WHERE cliente_Id=? ";
@@ -109,27 +106,59 @@ public class ClienteDAO implements IDAO {
 		
 		
 		
-	}
+	}	
 
 	@Override
-	public ArrayList buscar(String condition, boolean join) {
+	public ArrayList<Cliente> buscar(Object objFind, boolean join) {
+		ObjCliente=(Cliente) objFind;
 		try {		
-			String SSQL= "SELECT * FROM cliente"+condition;			
+			String SSQL= "SELECT * FROM cliente";	
+			
+			String condition=" ";
+			
+			String fNum_dni_cliente=ObjCliente.getNum_dni();
+			String fNom_cliente=ObjCliente.getNom_cliente();
+			String fApe_cliente=ObjCliente.getApe_cliente();
+			String ands=null;
+			if(fNum_dni_cliente!=null){
+					condition=" "+condition+"dniCliente='"+fNum_dni_cliente+"'";
+					ands="and";
+			}			
+			if(fNom_cliente!=null){
+				if(ands!=null){
+					condition=" " +condition+"and"+"nom_Cliente='"+fNom_cliente+"'";
+				}else{
+					condition=" " +condition+"nom_Cliente='"+fNom_cliente+"'";
+					ands="and";
+				}
+				
+			}
+			if(fApe_cliente!=null){
+				if(ands!=null){
+					condition=" "+condition+"and"+"ape_Cliente='"+fApe_cliente+"'";
+				}else{
+					condition=" "+condition+"ape_Cliente='"+fApe_cliente+"'";
+				}
+				
+			}
+			
+			SSQL=SSQL+"where "+condition;
+			
 			ps=con.prepareStatement(SSQL);		
 			ResultSet rs= ps.executeQuery();			
 			while(rs.next()){				
-					ObjCliente=new Cliente( 											
-							rs.getInt("cliente_Id"),
-							rs.getInt("num_dni"),
+					ObjCliente=new Cliente( 
+							rs.getString("num_dni"),
 							rs.getString("nom_Cliente"),
 							rs.getString("ape_Cliente")			
 													
 					);
+					lista.add(ObjCliente);	
 				}	
 				
 				//necesito agregar este objeto a mi lista
-				lista.add(ObjCliente);				
-			
+							
+			if(lista.size()<1) lista=null;		
 			return lista;
 			
 		} catch (SQLException e) {
@@ -139,7 +168,6 @@ public class ClienteDAO implements IDAO {
 		}
 		
 		return null;	
-	
 	}
 	
 	

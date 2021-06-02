@@ -1,0 +1,96 @@
+package saborea.presentation.vista;
+
+import javax.swing.JButton;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
+
+public class TablaAgregarProductos {
+	
+public void seeTable(JTable tabla, VwRegistroPedidoProductoBE obj){
+		
+		
+		tabla.setDefaultRenderer(Object.class, new RenderAgregarProdutos());
+		
+		JSpinner JSpinn= new JSpinner();
+		JSpinn.setName("CANT");
+		
+		
+		
+		DefaultTableModel model= new DefaultTableModel(){
+			
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+		};		
+		
+		model.addColumn("NOMBRE");
+		model.addColumn("PRECIO");
+		model.addColumn("CANTIDAD");	
+		
+		tabla.setModel(model);
+		
+		tabla.setRowHeight(30);
+		
+		if(obj!=null){
+			//LLENAR MI TABLA
+			model.setRowCount(0);			
+			for(int i=0;i<obj.getListaDetalle().size();i++){
+				Object [] fila = {
+						obj.getListaDetalle().get(i).getNombreProducto(),
+						obj.getListaDetalle().get(i).getPrecio(),
+						obj.getListaDetalle().get(i).getCantidad(),						
+						JSpinn,
+						
+				};
+				
+				model.addRow(fila);				
+			}
+			
+			tabla.setModel(model);			
+		}else{
+			
+			ClearTable(tabla,obj);
+			
+		}
+		
+		
+	}
+	
+	
+	
+	public void ClearTable(JTable tabla, VwRegistroPedidoProductoBE obj){
+		
+		tabla.setDefaultRenderer(Object.class, new Rendimensionar());
+		DefaultTableModel model= new DefaultTableModel(){
+			
+			public boolean isCellEditable(int row, int column) {
+//				if(column==2){
+//					return true;
+//				}else{
+//					return false;
+//				}
+				return false;
+			}
+			
+		};		
+		
+		model.addColumn("NOMBRE");
+		model.addColumn("PRECIO");
+		model.addColumn("CANTIDAD");		
+		
+		tabla.setModel(model);
+		
+		tabla.setRowHeight(30);
+		
+		model.getDataVector().removeAllElements();
+		tabla.updateUI();
+		
+	}
+	
+	
+
+}

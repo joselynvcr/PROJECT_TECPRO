@@ -45,8 +45,7 @@ public class LoginDAO implements IDAO{
 			//ResulSet=conjunto de resultados, contiene los resultados de una consulta SQL
 			ResultSet rs= ps.executeQuery();
 			//mientras haya un registro todavia en resultset
-			while(rs.next()){
-				
+			while(rs.next()){				
 				//FALSE
 				if (!objsEmpleado){
 					
@@ -57,6 +56,7 @@ public class LoginDAO implements IDAO{
 							rs.getBoolean("estado"),
 							null							
 					);
+						
 				}
 				else {
 					//TRUE
@@ -75,15 +75,16 @@ public class LoginDAO implements IDAO{
 								rs.getString("gender_empleado"),
 								rs.getDouble("sueldoBase_empleado"),							
 								rs.getInt("numHijos_empleado"),
-								rs.getString("empleado_tipoCargo")
-							)
-					);					
-				}
-				
+								rs.getString("empleado_tipoCargo"),
+								rs.getInt("idJefe"),
+								null
+								)							
+							);			
 				//necesito agregar este objeto a mi lista
+								
+				}
 				lista.add(Objlogin);
-				
-			}
+		}	
 			return lista;
 			
 		} catch (SQLException e) {
@@ -101,7 +102,7 @@ public class LoginDAO implements IDAO{
 				
 				
 				try {
-					Objlogin=(login) obj; //() es en donde vamos a poner los campos, en realidad no necesitamos poner el ID PORQUE SE GENERA AUTOMATICAMENTE, SE CREA ASI MISMO 
+					Objlogin=(login) obj; 
 					//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
 					String SSQL="INSERT INTO login (empleado_Id,nom_User,Password,estado) VALUES (?, ?, ?, ?)";
 					ps=con.prepareStatement(SSQL);
@@ -113,10 +114,7 @@ public class LoginDAO implements IDAO{
 					ps.executeUpdate();
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-		
-		
-		
+				}	
 	}
 	@Override
 	public void modificar(Object obj) {
@@ -140,7 +138,7 @@ public class LoginDAO implements IDAO{
 		
 	}
 	@Override
-	public void eliminar(int cod) {
+	public void eliminar(int cod,int Cod2) {
 		try {			
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
 			String SSQL="DELETE FROM login WHERE usuario_Id=? ";
@@ -153,82 +151,116 @@ public class LoginDAO implements IDAO{
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}		
 	}
+	
 	@Override
-	public ArrayList<login> buscar(String condition,boolean objsEmpleado) {
-		//tratamiento de las excepciones
-				try {
-					//vamos a definir una sentencia SQL , sentencia SQL
-					String SSQL= "select * from login l join empleado e on e.empleado_Id=l.empleado_id "+ condition;		
-					//Va a preparar nuestra sentencia SSQL segura para su ejecución 
-					ps=con.prepareStatement(SSQL);					
-					//dentro de rs ya tengo todos los registros de mi tabla, necesito recorrer para cargar dentro de un objeto y posteriormente cargar cada objeto dentro de una lista
-					//y por ultimo enviar un arraylist de todos los registros de la tabla 
-					ResultSet rs= ps.executeQuery();
-					if(rs==null)
-						return null;					
-					//mientras haya un registro todavia en resultset
-					while(rs.next()){							
-						if (!objsEmpleado){
-							Objlogin=new login( 											
-									rs.getInt("empleado_Id"),
-									rs.getString("nom_User"), 
-									rs.getString("Password"), 
-									rs.getBoolean("estado"),
-									null							
-							);
-						}
-						else {
-							Objlogin=new login( 											
-									rs.getInt("empleado_Id"),
-									rs.getString("nom_User"), 
-									rs.getString("Password"), 
-									rs.getBoolean("estado"), 
-									new Empleado(
-										rs.getInt("empleado_Id"),
-										rs.getInt("num_DNI"),
-										rs.getString("nom_empleado"),
-										rs.getString("ape_empleado"),
-										rs.getInt("num_Telf"),
-										rs.getString("EstadoCivil"),
-										rs.getString("gender_empleado"),
-										rs.getDouble("sueldoBase_empleado"),							
-										rs.getInt("numHijos_empleado"),
-										rs.getString("empleado_tipoCargo")
-									)
-							);					
-						}
-						
-						//necesito agregar este objeto a mi lista
-						lista.add(Objlogin);
-						
-					}					
-					return lista;
-					
-				} catch (SQLException e) {
-					//si hay un error en SSQL o en la conexiòn nos darà aviso
-					JOptionPane.showMessageDialog(null,e.getMessage());
-					//e.printStackTrace();			
+	public ArrayList<login> buscar(Object objFind, boolean objsEmpleado) {
+		
+		Objlogin=(login) objFind;		
+		//lista=null;
+		try {
+			//vamos a definir una sentencia SQL , sentencia SQL
+			String SSQL= "select * from login l join empleado e on l.empleado_Id=e.empleado_Id";
+			String condition=" ";
+			int fEmpleado_Id=Objlogin.getEmpleado_Id();
+			String fNom_User=Objlogin.getNom_User();
+			String fPassword_user=Objlogin.getPassword_user();
+			Boolean fEstadoUsuario_user=Objlogin.getEstadoUsuario_user();
+			String ands=null;
+			if(fEmpleado_Id!=-1){
+					condition=" "+condition+"empleado_Id='"+fEmpleado_Id+"'";
+					ands="and";
+			}
+			if(fEstadoUsuario_user!=null){
+				if(ands!=null){
+					condition=condition+" and "+"estado='"+fEstadoUsuario_user+"'";
+				}else{
+					condition=" "+condition+"estado='"+fEstadoUsuario_user+"'";
+					ands="and";
+				}
+			}
+			if(fNom_User!=null){
+				if(ands!=null){
+					condition= condition+" and "+"nom_User='"+fNom_User+"'";
+				}else{
+					condition=" " +condition+"nom_User='"+fNom_User+"'";
+					ands="and";
 				}
 				
-				return null;					
-		
-	}
-	
+			}
+			if(fPassword_user!=null){				
+				if(ands!=null){				
+					condition=condition+" and "+"Password='"+fPassword_user+"'";
+				}else{
+					condition=" "+condition+"Password='"+fPassword_user+"'";
+				}
+				
+			}
+			
+			SSQL=SSQL+" where "+condition;
+			//System.out.println("BUSCAR LOGIN:" +SSQL);
+			
+			//SSQL="select * from login l join empleado e on l.empleado_Id=e.empleado_Id where   nom_User='WASHI' and Password='321'";
+			
+			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
+			ps=con.prepareStatement(SSQL);					
+			//dentro de rs ya tengo todos los registros de mi tabla, necesito recorrer para cargar dentro de un objeto y posteriormente cargar cada objeto dentro de una lista
+			//y por ultimo enviar un arraylist de todos los registros de la tabla 
+			ResultSet rs= ps.executeQuery();
 
+			
+			
+			//mientras haya un registro todavia en resultset
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			while(rs.next()) {	
+				
+				if (!objsEmpleado){
+					//FALSE
+					Objlogin=new login( 											
+							rs.getInt("empleado_Id"),
+							rs.getString("nom_User"), 
+							rs.getString("Password"), 
+							rs.getBoolean("estado"),
+							null							
+					);
+				}else {					
+					//TRUE
+					Objlogin=new login( 											
+							rs.getInt("empleado_Id"),
+							rs.getString("nom_User"), 
+							rs.getString("Password"), 
+							rs.getBoolean("estado"), 
+							new Empleado(
+									rs.getInt("empleado_Id"),
+									rs.getInt("num_DNI"),
+									rs.getString("nom_empleado"),
+									rs.getString("ape_empleado"),
+									rs.getInt("num_Telf"),
+									rs.getString("EstadoCivil"),
+									rs.getString("gender_empleado"),
+									rs.getDouble("sueldoBase_empleado"),							
+									rs.getInt("numHijos_empleado"),
+									rs.getString("empleado_tipoCargo"),
+									rs.getInt("idJefe"),
+									null
+							)
+					);					
+				}
+				
+				//necesito agregar este objeto a mi lista				
+				lista.add(Objlogin);
+				
+			}	
+			
+			if(lista.size()<1) lista=null;			
+			return lista;
+			
+		} catch (SQLException e) {
+			//si hay un error en SSQL o en la conexiòn nos darà aviso
+			JOptionPane.showMessageDialog(null,e.getMessage());
+			//e.printStackTrace();			
+		}
+			
+		return null;
+	}
 	
 }

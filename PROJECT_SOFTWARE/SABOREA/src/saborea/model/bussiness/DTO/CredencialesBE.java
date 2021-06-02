@@ -1,17 +1,23 @@
 package saborea.model.bussiness.DTO;
 
-//CREDENCIADES BUSSINESS ENTITIE //CREDENCIALES DE ENTIDAD DE NEGOCIO
+//CREDENCIADES BUSSINESS ENTITIE //CREDENCIALES DE ENTIDAD DE NEGOCIO//DTO= DATA TRANSFERECE OBJECT = PARA TRANSFERIR INFORMACIÒN A LA VISTA MEDIANTE OBJETOS
 public class CredencialesBE {
+	
 	private int EmpleadoId;
 	private String Username;
 	private String NombreEmpleado;
 	private String ApellidoEmpleado;
-	public CredencialesBE(int empleadoId, String username, String nombreEmpleado, String apellidoEmpleado) {
+	private String TipoCargo;
+	
+	public CredencialesBE(int empleadoId, String username, String nombreEmpleado, String apellidoEmpleado,
+			String tipoCargo) {
 		EmpleadoId = empleadoId;
 		Username = username;
 		NombreEmpleado = nombreEmpleado;
 		ApellidoEmpleado = apellidoEmpleado;
+		TipoCargo = tipoCargo;
 	}
+	
 	public int getEmpleadoId() {
 		return EmpleadoId;
 	}
@@ -36,6 +42,14 @@ public class CredencialesBE {
 	public void setApellidoEmpleado(String apellidoEmpleado) {
 		ApellidoEmpleado = apellidoEmpleado;
 	}
+	public String getTipoCargo() {
+		return TipoCargo;
+	}
+	public void setTipoCargo(String tipoCargo) {
+		TipoCargo = tipoCargo;
+	}
+	
+	
 	
 
 }

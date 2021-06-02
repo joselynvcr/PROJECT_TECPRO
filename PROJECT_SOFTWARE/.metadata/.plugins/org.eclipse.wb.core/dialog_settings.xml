@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.editor.actions.errors.ErrorsDialog">
+		<item value="618" key="x"/>
+		<item value="684" key="width"/>
+		<item value="197" key="y"/>
+		<item value="646" key="height"/>
+	</section>
 	<section name="org.eclipse.wb.internal.core.nls.ui.NlsDialog">
 		<item value="480" key="x"/>
 		<item value="960" key="width"/>
