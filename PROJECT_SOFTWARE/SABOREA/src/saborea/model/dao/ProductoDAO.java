@@ -162,6 +162,7 @@ public class ProductoDAO implements IDAO{
 	@Override
 	public ArrayList<Producto> buscar (Object ObjFind, boolean objsProducto) {
 		
+		lista= new ArrayList<>();
 		ObjProd=(Producto) ObjFind;
 		
 		try {		
@@ -175,28 +176,29 @@ public class ProductoDAO implements IDAO{
 			String ands=null;
 			
 			if(fCod_produto!=-1){
-				condition=" "+condition+"producto_Id='"+fCod_produto+"'";
+				condition=" "+condition+" producto_Id='"+fCod_produto+"'";
 				ands="and";
 			}
 		if(fNom_producto!=null){
 			if(ands!=null){
-				condition=" "+condition+"and"+"nom_Producto='"+fNom_producto+"'";
+				condition=" "+condition+"and "+" nom_Producto='"+fNom_producto+"'";
 			}else{
 				condition=" "+condition+"nom_Producto='"+fNom_producto+"'";
-				}
+				ands="and";
 			}
-		if(fPrecio_producto!=0){
+		}
+		if(fPrecio_producto!=-1){
 			if(ands!=null){
-				condition=" " +condition+"and"+"precio_Producto='"+fPrecio_producto+"'";
+				condition=" " +condition+"and "+" precio_Producto='"+fPrecio_producto+"'";
 			}else{
 				condition=" " +condition+"precio_Producto='"+fPrecio_producto+"'";
 				ands="and";
 			}
 			
 		}
-		if(fStock_producto!=0){
+		if(fStock_producto!=-1){
 			if(ands!=null){
-				condition=" "+condition+"and"+"stock_Producto='"+fStock_producto+"'";
+				condition=" "+condition+"and "+" stock_Producto='"+fStock_producto+"'";
 			}else{
 				condition=" "+condition+"stock_Producto='"+fStock_producto+"'";
 				ands="and";
@@ -205,14 +207,15 @@ public class ProductoDAO implements IDAO{
 		}
 		if(fDesc_producto!=null){
 			if(ands!=null){
-				condition=" "+condition+"and"+"category='"+fDesc_producto+"'";
+				condition=" "+condition+"and "+" category='"+fDesc_producto+"'";
 			}else{
-				condition=" "+condition+"category='"+fDesc_producto+"'";
+				condition=" "+condition+" category='"+fDesc_producto+"'";
 			}
 			
 		}
 		
-		SSQL=SSQL+"where "+condition;			
+		SSQL=SSQL+"where "+condition;	
+		System.out.println("SSQL : " + SSQL);
 			ps=con.prepareStatement(SSQL);		
 			ResultSet rs= ps.executeQuery();			
 			while(rs.next()){				

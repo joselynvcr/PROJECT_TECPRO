@@ -21,8 +21,6 @@ private String url="jdbc:sqlserver://DESKTOP-1CPJ7G8\\SQLEXPRESS:1433;"+db+user+
 
 //el driver para poder acceder de forma directa a la BD es
 private String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-
-
 	public Connection getConnection(){
 	
 	try {

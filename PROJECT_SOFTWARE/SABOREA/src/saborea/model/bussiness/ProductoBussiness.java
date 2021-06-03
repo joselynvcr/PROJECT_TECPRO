@@ -58,7 +58,32 @@ public class ProductoBussiness {
 //		}
 //		
 //		
-//	}
+//	}	
+	
+	public ArrayList<ListaProductosBE> FiltroProductosPorCategory( Producto ObjFind){
+		
+		ArrayList<Producto> lista=ObjProducto.buscar(ObjFind, false);
+		
+		ArrayList<ListaProductosBE> listaBE= new ArrayList<>();
+		
+		if(lista==null)	return null;
+		
+		for(int i=0;i<lista.size();i++){
+			listaBE.add(new ListaProductosBE(
+					lista.get(i).getCod_produto(), 
+					lista.get(i).getNom_producto(),
+					lista.get(i).getPrecio_producto(),
+					lista.get(i).getStock_producto(), 
+					lista.get(i).getCategory()
+					)
+					
+					);
+			
+		}
+		
+		return listaBE;			
+		
+	}
 	
 	public void ModificarRegistroProducto(Producto prodActual){
 		//el objeto que le estoy enviando debe contener al cod y al stock que deseo modificar		

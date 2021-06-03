@@ -172,14 +172,14 @@ public class Detalle_PedidoDAO implements IDAO {
 	public void eliminar(int cod,int cod2 ) {
 		try {			
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
-			String SSQL="DELETE FROM detalle_pedido WHERE pedido_Id=? producto_Id=?";			
+			String SSQL="DELETE FROM detalle_pedido WHERE pedido_Id=? and producto_Id=?";			
 			
 			ps=con.prepareStatement(SSQL);
 			
 			ps.setInt(1, cod);
 			ps.setInt(2, cod2);
 			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
-			
+			System.out.println("SSQL ELIMINAR DETALLE "+SSQL);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			//de esta manera vamos a mapear nuestro error, por si ocurre

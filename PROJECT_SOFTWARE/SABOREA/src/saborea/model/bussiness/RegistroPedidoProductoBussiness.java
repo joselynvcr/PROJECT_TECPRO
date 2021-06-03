@@ -127,7 +127,7 @@ public class RegistroPedidoProductoBussiness {
 	
 	
 	public void  SavePedidotoBD(VwRegistroPedidoProductoBE Obj)  {	
-		
+		double totalPagar=0.0;
 		System.out.println("size objeto recien entrando : "+Obj.getListaDetalle().size());
 		System.out.println("PEDIDO_ID : "+Obj.getPedidoId());
 		
@@ -153,13 +153,15 @@ public class RegistroPedidoProductoBussiness {
 			
 			ArrayList<Detalle_Pedido> details=new ArrayList<>() ;
 			ArrayList<Detalle_Pedido> details2=new ArrayList<>() ;
+			ArrayList<Detalle_Pedido> details3=new ArrayList<>() ;
 			System.out.println("Obj.getListaDetalle().size() : "+Obj.getListaDetalle().size());
 			
 			for(int i=0;i<Obj.getListaDetalle().size();i++) {
 				
 				//quiero encontrar al producto una sola vez y si no esta el producto en el pedido, ingresarlo 
 				details=detallepedido.buscar(new Detalle_Pedido(Obj.getPedidoId(), null, -1, Obj.getListaDetalle().get(i).getCodProducto(), null, -1, -1), false);				
-				details2=detallepedido.buscar(new Detalle_Pedido(Obj.getPedidoId(), null,  Obj.getListaDetalle().get(i).getCantidad(), Obj.getListaDetalle().get(i).getCodProducto(), null, -1, -1), false);		
+				details2=detallepedido.buscar(new Detalle_Pedido(Obj.getPedidoId(), null,  Obj.getListaDetalle().get(i).getCantidad(), Obj.getListaDetalle().get(i).getCodProducto(), null, -1, -1), false);	
+				details3=detallepedido.buscar(new Detalle_Pedido(Obj.getPedidoId(), null,  -1, -1, null, -1, -1), false);
 				if(details==null){//no encontró un registro igual
 					Detalle_Pedido Dp=new Detalle_Pedido (						
 							Obj.getPedidoId(),
@@ -191,9 +193,40 @@ public class RegistroPedidoProductoBussiness {
 					detallepedido.modificar(Dp);
 				}		
 				
+				
+				
 			}
+			
+			
 		
 			
+			//buscare la lista grande de base de datos  en el obj actualizado
+			int band=-0;
+			for(int i=0;i<details3.size();i++){
+				band=0;
+				for(int x=0;x<Obj.getListaDetalle().size();x++){					
+					if(details3.get(i).getCodProducto()==Obj.getListaDetalle().get(x).getCodProducto()){					
+							 band=1;
+					}
+				}
+				
+				if(band==0){
+					System.out.println("ELIMINAR : "+ Obj.getPedidoId()+" _" +details3.get(i).getCodProducto());
+					detallepedido.eliminar(Obj.getPedidoId(), details3.get(i).getCodProducto());
+				}
+				
+			}	
+			
+			for(int i=0;i<Obj.getListaDetalle().size();i++){
+				totalPagar+=Obj.getListaDetalle().get(i).getSubtotal();
+				}
+			Obj.setTotal(totalPagar);
+			
+			System.out.println("TOTAL PAGAR: " + totalPagar);
+			Objpedido.modificar(new Pedido (
+			    	Obj.getPedidoId(),-1,null,-1,null,null,totalPagar,null,null, -1,null,false,false
+			    	));
+				
 			JOptionPane.showMessageDialog(null, "CAMBIOS GUARDADOS SATISFACTORIAMENTE","INFORMATION",JOptionPane.INFORMATION_MESSAGE);	
 			
 		} else {	

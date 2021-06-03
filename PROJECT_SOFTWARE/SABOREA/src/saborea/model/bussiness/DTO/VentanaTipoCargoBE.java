@@ -2,10 +2,10 @@ package saborea.model.bussiness.DTO;
 
 import javax.swing.JOptionPane;
 
-import saborea.presentation.vista.FormAdministrador;
-import saborea.presentation.vista.FormCajero;
-import saborea.presentation.vista.FormLogin;
-import saborea.presentation.vista.FormMozo;
+import saborea.presentation.FormAdministrador;
+import saborea.presentation.FormCajero;
+import saborea.presentation.FormLogin;
+import saborea.presentation.FormMozo;
 
 public class VentanaTipoCargoBE {	
 
@@ -15,6 +15,7 @@ public class VentanaTipoCargoBE {
 //	public VentanaTipoCargoBE(String tipoCargo) {
 //		TipoCargo = tipoCargo;
 //	}	
+	
 	
 	public void TipoVentana(CredencialesBE Cred){		
 		
@@ -37,6 +38,7 @@ public class VentanaTipoCargoBE {
 		}	
 	
 	}
+	
 	
 	
 }

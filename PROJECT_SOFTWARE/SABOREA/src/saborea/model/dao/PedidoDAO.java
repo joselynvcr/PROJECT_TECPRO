@@ -168,7 +168,7 @@ public class PedidoDAO implements IDAO{
 		try {
 			
 			String SSQL="UPDATE pedido SET ";
-			String condition=null;			
+			String condition=" " ;			
 			int fObjmozo=ObjPedido.getCodmozo();
 			int Objcajero=ObjPedido.getCodCajero();
 			Timestamp fFechaHora=ObjPedido.getFechaHora();
@@ -176,64 +176,72 @@ public class PedidoDAO implements IDAO{
 			String fObjcliente=ObjPedido.getDniCliente();
 			int fObjmesa=ObjPedido.getCodMesa();
 			Boolean fPagado=ObjPedido.getPagado();
+			String coma=null;
 			
 		//SSQL=Funcion("update","pedido",new ArrayList<String>{"mempleado_Id","cempleadoc_Id"},ObjPedido);
 				
 		if(fObjmozo!=-1){			
-				condition=" "+condition+"mempleado_Id='"+fObjmozo+"'";			
+				condition=" "+condition+" mempleado_Id='"+fObjmozo+"'";		
+				coma="and";
 		}
 		if(Objcajero!=-1){
-			if(condition!=null){
-				condition=" " +condition+","+"cempleadoc_Id='"+Objcajero+"'";
+			if(coma!=null){
+				condition=" " +condition+","+" cempleadoc_Id='"+Objcajero+"'";
 			}else{
-				condition=" " +condition+"cempleadoc_Id='"+Objcajero+"'";
+				condition=" " +condition+" cempleadoc_Id='"+Objcajero+"'";
+				coma="and";
 			}
 			
 		}
 		if(fFechaHora!=null){
-			if(condition!=null){
-				condition="  "+condition+","+"fechaHora='"+fFechaHora+"'";
+			if(coma!=null){
+				condition="  "+condition+","+" fechaHora='"+fFechaHora+"'";
 			}else{
-				condition=" "+condition+"fechaHora='"+fFechaHora+"'";
+				condition=" "+condition+" fechaHora='"+fFechaHora+"'";
+				coma="and";
 			}
 			
 		}
 		if(fTotalPagar!=-1){
-			if(condition!=null){
-				condition="  "+condition+","+"totalPagar_Pedido='"+fTotalPagar+"'";
+			if(coma!=null){
+				condition="  "+condition+","+" totalPagar_Pedido='"+fTotalPagar+"'";
 			}else{
-				condition=" "+condition+"totalPagar_Pedido='"+fTotalPagar+"'";
+				condition=" "+condition+" totalPagar_Pedido='"+fTotalPagar+"'";
+				coma="and";
 			}
 			
 		}
 		if(fObjcliente!=null){
-			if(condition!=null){
-				condition="  "+condition+","+"dniCliente='"+fObjcliente+"'";
+			if(coma!=null){
+				condition="  "+condition+","+" dniCliente='"+fObjcliente+"'";
 			}else{
-				condition=" "+condition+"dniCliente='"+fObjcliente+"'";
+				condition=" "+condition+" dniCliente='"+fObjcliente+"'";
+				coma="and";
 			}
 			
 		}
 		if(fObjmesa!=-1){
-			if(condition!=null){
-				condition="  "+condition+","+"mesa_Id='"+fObjmesa+"'";
+			if(coma!=null){
+				condition="  "+condition+","+" mesa_Id='"+fObjmesa+"'";
 			}else{
-				condition=" "+condition+"mesa_Id='"+fObjmesa+"'";
+				condition=" "+condition+" mesa_Id='"+fObjmesa+"'";
+				coma="and";
 			}
 			
 		}
 		if(fPagado!=null){
-			if(condition!=null){
-				condition=" "+condition+","+"pagado='"+fPagado+"'";
+			if(coma!=null){
+				condition=" "+condition+","+" pagado='"+fPagado+"'";
 			}else{
-				condition=" "+condition+"pagado='"+fPagado+"'";
+				condition=" "+condition+" pagado='"+fPagado+"'";
+				
 			}
 			
 		}
 			
 			
-		SSQL=SSQL+condition+"where pedido_Id="+ ObjPedido.getCod_Pedido();
-		
+		SSQL=SSQL+condition+" where pedido_Id="+ ObjPedido.getCod_Pedido();
+		System.out.println("SSQL SSQLmodificar : " + SSQL);
 			ps=con.prepareStatement(SSQL);			
 			
 			ps.executeUpdate();
