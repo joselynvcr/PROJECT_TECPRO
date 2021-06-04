@@ -23,6 +23,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.Cursor;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 public class FormLogin extends JFrame implements ActionListener {
 
@@ -32,8 +37,8 @@ public class FormLogin extends JFrame implements ActionListener {
 	private JTextField txtUsuario;
 	private JLabel lblLogIn;
 	private JButton btnIngresar;
-	private JPasswordField jpassClave;
 	 private Container contenedor;
+	 private JPasswordField passwordField;
 	 
 
 	/**
@@ -57,7 +62,19 @@ public class FormLogin extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	
+	public void addPlaceHolderStyle(JTextField textField){
+		Font font= textField.getFont();
+		font=font.deriveFont(Font.ITALIC);
+		textField.setFont(font);
+		textField.setForeground(Color.gray);
+		
+	}
+	public void removePlaceholderStyle(JTextField textField){
+		Font font= textField.getFont();
+		font=font.deriveFont(Font.PLAIN|Font.BOLD);
+		textField.setFont(font);
+		textField.setForeground(Color.black);
+	}
 	public FormLogin() {
 		frameInit();
 			
@@ -68,7 +85,7 @@ public class FormLogin extends JFrame implements ActionListener {
 		 //tamaño de la ventana
 		 setSize(400,200);
 		 //pone la ventana en el Centro de la pantalla
-		 setLocationRelativeTo(null);	
+		setLocationRelativeTo(null);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 454, 382);
 		contentPane = new JPanel();
@@ -79,18 +96,16 @@ public class FormLogin extends JFrame implements ActionListener {
 		
 		lblNewLabel = new JLabel("Usuario : ");
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel.setBounds(28, 76, 70, 14);
+		lblNewLabel.setBounds(28, 87, 70, 14);
 		contentPane.add(lblNewLabel);
 		
 		lblPassword = new JLabel("Password : ");
 		lblPassword.setFont(new Font("Arial", Font.BOLD, 12));
-		lblPassword.setBounds(28, 122, 70, 14);
+		lblPassword.setBounds(28, 126, 70, 14);
 		contentPane.add(lblPassword);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(115, 73, 134, 20);
-		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
+		//txtUsuario.addKeyListener(this);
 		
 		lblLogIn = new JLabel("LOG IN");
 		lblLogIn.setFont(new Font("Arial", Font.BOLD, 15));
@@ -102,10 +117,20 @@ public class FormLogin extends JFrame implements ActionListener {
 		btnIngresar.addActionListener(this);
 		btnIngresar.setBounds(123, 171, 126, 38);
 		contentPane.add(btnIngresar);
+		txtUsuario.setFocusTraversalKeysEnabled(false);
+		txtUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+		txtUsuario.setBackground(Color.PINK);
+		txtUsuario.setBorder(null);
+		txtUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtUsuario.setBounds(94, 85, 144, 20);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
-		jpassClave = new JPasswordField();
-		jpassClave.setBounds(119, 120, 130, 20);
-		contentPane.add(jpassClave);
+		passwordField = new JPasswordField();
+		passwordField.setBackground(Color.PINK);
+		passwordField.setBorder(null);
+		passwordField.setBounds(104, 120, 155, 20);
+		contentPane.add(passwordField);
 		setLocationRelativeTo(null);
 		
 		
@@ -130,15 +155,17 @@ public class FormLogin extends JFrame implements ActionListener {
 		//char [] clave = jpassClave.getPassword();		
 		
 //		String user= txtUsuario.getText();
-//		String clave=String.valueOf(jpassClave.getPassword());				
+//		String clave=String.valueOf(passwordField.getPassword());				
 		EmpleadoBussiness objEmpleadoB=new EmpleadoBussiness();		
-		CredencialesBE Cred = objEmpleadoB.ValidarCredenciales(new String("WASHI"),new String("321"));				
-		
+		CredencialesBE Cred = objEmpleadoB.ValidarCredenciales(new String("ARCADE"),new String("744"));				
+		//new String("WASHI"),new String("321") mozo
+		//new String("ARCADE"),new String("744") admin
+		//new String("WASHI"),new String("321") cajero
 		if(Cred==null) {					
 			JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTOS ","ERROR",JOptionPane.ERROR_MESSAGE);			
 			txtUsuario.setText("");
-			jpassClave.setText("");
-			txtUsuario.grabFocus();
+			passwordField.setText("");
+			//txtUsuario.grabFocus();
 		}else{			
 			VentanaTipoCargoBE vtc=new VentanaTipoCargoBE();			
 			vtc.TipoVentana(Cred);	
@@ -150,7 +177,46 @@ public class FormLogin extends JFrame implements ActionListener {
 		
 		
 	}
-	
-	
-	
+//	public void mouseClicked(MouseEvent arg0) {
+//	}
+//	public void mouseEntered(MouseEvent arg0) {
+//	}
+//	public void mouseExited(MouseEvent arg0) {
+//	}
+//	public void mousePressed(MouseEvent arg0) {
+//		if (arg0.getSource() == lblNewLabel_2) {
+//			do_lblNewLabel_2_mousePressed(arg0);
+//		}
+//		if (arg0.getSource() == lblNewLabel_1) {
+//			do_lblNewLabel_1_mousePressed(arg0);
+//		}
+//	}
+//	public void mouseReleased(MouseEvent arg0) {
+//	}
+//	
+//	protected void do_lblNewLabel_1_mousePressed(MouseEvent arg0) {
+//		passwordField.setVisible(true);
+//		lblNewLabel_1.setVisible(false);
+//		
+//	}
+//	protected void do_lblNewLabel_2_mousePressed(MouseEvent arg0) {
+//		txtUsuario.setVisible(true);
+//		lblNewLabel_2.setVisible(false);
+//	}
+//	public void keyPressed(KeyEvent arg0) {		
+//	}
+//	public void keyReleased(KeyEvent arg0) {
+//	}
+//	public void keyTyped(KeyEvent arg0) {
+//		if (arg0.getSource() == txtUsuario) {
+//			do_txtUsuario_keyTyped(arg0);
+//		}
+//	}
+//	protected void do_txtUsuario_keyTyped(KeyEvent arg0) {
+//		txtUsuario.setVisible(false);
+//		if(txtUsuario.getText().isEmpty()){
+//			txtUsuario.setVisible(true);
+//		}
+//		
+//	}
 }

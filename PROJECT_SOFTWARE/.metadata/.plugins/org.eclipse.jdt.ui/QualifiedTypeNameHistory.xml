@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="PaqueteLog.Mozo"/>
-<fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicTreeUI.TreeExpansionHandler"/>
-<fullyQualifiedTypeName name="saborea.model.entities.Cliente"/>
-<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.VentanaTipoCargoBE"/>
-<fullyQualifiedTypeName name="saborea.model.dao.ProductoDAO"/>
-<fullyQualifiedTypeName name="PaqueteLog.FormLogin"/>
-<fullyQualifiedTypeName name="javax.print.attribute.standard.DateTimeAtCompleted"/>
-<fullyQualifiedTypeName name="java.security.Timestamp"/>
-<fullyQualifiedTypeName name="java.sql.Timestamp"/>
-<fullyQualifiedTypeName name="saborea.model.bussiness.PedidosBussiness"/>
-<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.ListaPedidosBE"/>
-<fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.FormLogin"/>
 <fullyQualifiedTypeName name="java.awt.Container"/>
 <fullyQualifiedTypeName name="saborea.model.dao.PedidoDAO"/>
@@ -27,13 +15,9 @@
 <fullyQualifiedTypeName name="saborea.presentation.vista.Rendimensionar"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.RenderAgregarProdutos"/>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
-<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.ListaProductosBE"/>
 <fullyQualifiedTypeName name="javax.swing.JSpinner"/>
 <fullyQualifiedTypeName name="javax.swing.table.TableCellRenderer"/>
 <fullyQualifiedTypeName name="javax.swing.table.TableCellEditor"/>
-<fullyQualifiedTypeName name="javax.swing.JTextField"/>
-<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.FormAgregarProductos"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.JDialogAgregarProducto"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -50,14 +34,30 @@
 <fullyQualifiedTypeName name="saborea.presentation.vista.VENTANA_MODIFICAR"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.RegistroPedidoProductoBussiness"/>
 <fullyQualifiedTypeName name="saborea.model.entities.Detalle_Pedido"/>
-<fullyQualifiedTypeName name="saborea.model.bussiness.ProductoBussiness"/>
-<fullyQualifiedTypeName name="saborea.model.entities.Producto"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.TablaAgregarProductos"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.CredencialesBE"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.GetDataJTableORDENPEDIDO"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.VwDetallePedidoBE"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.VW_WARNING_ELIMINAR"/>
 <fullyQualifiedTypeName name="saborea.model.entities.Pedido"/>
+<fullyQualifiedTypeName name="saborea.model.entities.Producto"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.ProductoBussiness"/>
+<fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
+<fullyQualifiedTypeName name="javax.swing.RowFilter"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.ListaProductosBE"/>
+<fullyQualifiedTypeName name="javax.swing.table.TableModel"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+<fullyQualifiedTypeName name="javax.swing.table.TableRowSorter"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="rsbuttom.RSButtonMetro"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="saborea.presentation.RSButtonMetro"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.EmpleadoBussiness"/>
+<fullyQualifiedTypeName name="saborea.model.bussiness.DTO.ListaEmpleadosBE"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="saborea.presentation.FormLogin"/>
 </qualifiedTypeNameHistroy>

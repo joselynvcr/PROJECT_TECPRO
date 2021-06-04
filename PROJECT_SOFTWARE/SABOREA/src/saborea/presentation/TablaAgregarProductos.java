@@ -15,18 +15,12 @@ import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
 
 public final class TablaAgregarProductos {
 	
-public static void seeTable(JTable tabla, ArrayList<ListaProductosBE> listaProductos){
+public static DefaultTableModel seeTable(JTable tabla, ArrayList<ListaProductosBE> listaProductos,TableRowSorter<DefaultTableModel> sorter){
 		
 		System.out.println("listaProductos"+ listaProductos.size());
 		tabla.setDefaultRenderer(Object.class, new RenderAgregarProdutos());
 		
-//		JTextField txt= new JTextField();
-//		txt.setName("CANT");
-//		txt.setText("0");
-//		
-		
-//		JButton btnADD= new JButton("ADD");
-//		btnADD.setName("ADICIONAR");
+
 		
 		DefaultTableModel model= new DefaultTableModel(){
 			
@@ -41,13 +35,13 @@ public static void seeTable(JTable tabla, ArrayList<ListaProductosBE> listaProdu
 		model.addColumn("NOMBRE");
 		model.addColumn("PRECIO");
 		model.addColumn("STOCK");
-		model.addColumn("CATEGORÍA");
+		model.addColumn("CATEGORY");
 //		model.addColumn("CANTIDAD");
 //		model.addColumn("AGREGAR");
 		
 		tabla.setModel(model);
 		
-		tabla.setRowHeight(30);
+		tabla.setRowHeight(20);
 		
 		model.setRowCount(0);
 		if(listaProductos!=null){
@@ -70,6 +64,11 @@ public static void seeTable(JTable tabla, ArrayList<ListaProductosBE> listaProdu
 			tabla.setModel(model);			
 		}
 		
+		tabla.setAutoCreateRowSorter(true);
+		sorter= new TableRowSorter<>(model);
+		tabla.setRowSorter(sorter);
+		
+		return model;
 		
 }
 	

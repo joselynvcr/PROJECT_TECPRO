@@ -2,18 +2,21 @@ package saborea.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Color;
+
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 import javax.swing.table.TableRowSorter;
 
 import saborea.model.bussiness.ProductoBussiness;
-import saborea.model.bussiness.RegistroPedidoProductoBussiness;
+
 import saborea.model.bussiness.DTO.ListaProductosBE;
 import saborea.model.bussiness.DTO.VwDetallePedidoBE;
 import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
@@ -32,11 +35,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
+
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.SwingConstants;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
-public class JDialogAgregarProducto extends javax.swing.JDialog implements ActionListener, KeyListener, ItemListener {
+
+public class JDialogAgregarProducto extends javax.swing.JDialog implements ActionListener, KeyListener, ItemListener, FocusListener, WindowFocusListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JScrollPane scrollPane;
@@ -49,18 +59,18 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 	ArrayList<ListaProductosBE> _listaProductosBE;
 	private VwRegistroPedidoProductoBE objeto;	
 	DefaultTableModel m =new DefaultTableModel();
-	private JButton btnNewButton;
-	private JButton btnBebidas;
-	private JButton btnPastas;
-	private JButton btnPizzas;
+	DefaultTableModel model =new DefaultTableModel();
 	private JLabel lblBuscar;
-	private JTextField txtFiltro;
-	TableRowSorter<DefaultTableModel> trs= new TableRowSorter<DefaultTableModel>(m);
+	private JTextField txtFiltro;	
+	TableRowSorter<DefaultTableModel> sorter;
 	private JComboBox comboBoxFilterCategory;
 	private JLabel lblBuscarPorCategora;
-	
+	//private TextPrompt placeholder;
+	//private TablaAgregarProductos TAP;
+	//new TableRowSorter<DefaultTableModel>(m)
 	//VwRegistroPedidoProductoBE ObjVRPP1;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -79,11 +89,67 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 	 * @param b 
 	 * @param formRegistrarPedido 
 	 */
+	public void addPlaceHolderStyle(JTextField textField){
+		Font font= textField.getFont();
+		font=font.deriveFont(Font.ITALIC);
+		textField.setFont(font);
+		textField.setForeground(Color.gray);
+		
+	}
+	public void removePlaceholderStyle(JTextField textField){
+		Font font= textField.getFont();
+		font=font.deriveFont(Font.PLAIN|Font.BOLD);
+		textField.setFont(font);
+		textField.setForeground(Color.black);
+	}
+//	public void CreateTable(){
+//		 model= new DefaultTableModel(){
+//				
+//				public boolean isCellEditable(int row, int column) {
+//					//if(column==4)return true;
+//					return false;
+//				}
+//				
+//			};		
+//			
+//			model.addColumn("ID PRODUCTO");
+//			model.addColumn("NOMBRE");
+//			model.addColumn("PRECIO");
+//			model.addColumn("STOCK");
+//			model.addColumn("CATEGORY");
+//			
+//			TABLAAGREGARPRODUCTOS.setRowHeight(30);
+//			TABLAAGREGARPRODUCTOS.setModel(model);
+//			if(_listaProductosBE!=null){
+//			for(int i=0;i<_listaProductosBE.size();i++){
+//				Object [] fila = {
+//						_listaProductosBE.get(i).getId(),
+//						_listaProductosBE.get(i).getNombre(),
+//						_listaProductosBE.get(i).getPrecio(),		
+//						_listaProductosBE.get(i).getStock(),
+//						_listaProductosBE.get(i).getCategory(),	
+//						
+//						
+//				};
+//				
+//				model.addRow(fila);				
+//			}
+//			TABLAAGREGARPRODUCTOS.setModel(model);
+//		}
+//		
+//			TABLAAGREGARPRODUCTOS.setAutoCreateRowSorter(true);
+//			sorter= new TableRowSorter<>(model);
+//			TABLAAGREGARPRODUCTOS.setRowSorter(sorter);
+//		
+//	}
 	public JDialogAgregarProducto(java.awt.Frame parent, boolean modal,ArrayList<ListaProductosBE> listaProductosBE,JTable tabla, VwRegistroPedidoProductoBE obj) {
 		super(parent,modal);
+		addWindowFocusListener(this);
+			
 		_listaProductosBE=listaProductosBE;
 		table=tabla;		
 		objeto=obj;
+	
 		 setTitle("VENTANA AGREGAR PRODUCTOS");
 		setBounds(100, 100, 883, 675);
 		getContentPane().setLayout(new BorderLayout());
@@ -92,67 +158,56 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 		contentPanel.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 137, 644, 414);
+		scrollPane.setBounds(10, 124, 726, 427);
 		contentPanel.add(scrollPane);
 		
 		TABLAAGREGARPRODUCTOS = new JTable();
 		scrollPane.setViewportView(TABLAAGREGARPRODUCTOS);
+		//CreateTable();
+				
+		model=TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBE,sorter);
 		
-		btnBack = new JButton("BACK");
+		
+		btnBack = new JButton("VOLVER");
 		btnBack.addActionListener(this);
-		btnBack.setBounds(10, 583, 89, 23);
+		btnBack.setBounds(20, 572, 101, 44);
 		contentPanel.add(btnBack);
 		
-		btnAgregar = new JButton("AGREGAR");
+		btnAgregar = new JButton("AGREGAR PRODUCTO ");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(730, 583, 89, 23);
+		btnAgregar.setBounds(677, 572, 164, 44);
 		contentPanel.add(btnAgregar);
 		
 		txtCant = new JTextField();
+		txtCant.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCant.setText("1");
 		txtCant.setBounds(561, 580, 65, 29);
 		contentPanel.add(txtCant);
 		txtCant.setColumns(10);
 		
 		lblCantidad = new JLabel("cantidad :");
-		lblCantidad.setBounds(465, 587, 86, 14);
+		lblCantidad.setBounds(455, 587, 86, 14);
 		contentPanel.add(lblCantidad);
-		
-		TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBE);
-		
-		btnNewButton = new JButton("POSTRES");
-		btnNewButton.addActionListener(this);
-		btnNewButton.setBounds(704, 188, 115, 35);
-		contentPanel.add(btnNewButton);
-		
-		btnBebidas = new JButton("BEBIDAS");
-		btnBebidas.addActionListener(this);
-		btnBebidas.setBounds(704, 234, 115, 35);
-		contentPanel.add(btnBebidas);
-		
-		btnPastas = new JButton("PASTAS");
-		btnPastas.addActionListener(this);
-		btnPastas.setBounds(704, 280, 115, 35);
-		contentPanel.add(btnPastas);
-		
-		btnPizzas = new JButton("PIZZAS");
-		btnPizzas.addActionListener(this);
-		btnPizzas.setBounds(704, 326, 115, 35);
-		contentPanel.add(btnPizzas);
 		
 		lblBuscar = new JLabel("BUSCAR POR NOMBRE :");
 		lblBuscar.setBounds(84, 23, 133, 23);
 		contentPanel.add(lblBuscar);
 		
-		txtFiltro = new JTextField();
+		txtFiltro = new JTextField("Ingresar el nombre de un producto");
+		txtFiltro.addFocusListener(this);
 		txtFiltro.addKeyListener(this);
 		txtFiltro.setBounds(227, 24, 313, 20);
 		contentPanel.add(txtFiltro);
+//		TextPrompt placeholder = new TextPrompt("Apellido Paterno", txtFiltro);
+//		placeholder.changeAlpha(0.75f);
+//		placeholder.changeStyle(Font.ITALIC);
+		addPlaceHolderStyle(txtFiltro);
 		txtFiltro.setColumns(10);
+		
 		
 		comboBoxFilterCategory = new JComboBox();
 		comboBoxFilterCategory.addItemListener(this);
-		comboBoxFilterCategory.setModel(new DefaultComboBoxModel(new String[] {"", "POSTRES", "BEBIDAS", "PASTAS", "PIZZAS"}));
+		comboBoxFilterCategory.setModel(new DefaultComboBoxModel(new String[] {" ", "POSTRES", "BEBIDAS", "PASTAS", "PIZZAS"}));
 		comboBoxFilterCategory.setBounds(227, 69, 179, 20);
 		contentPanel.add(comboBoxFilterCategory);
 		
@@ -360,18 +415,18 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				trs.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), 1));
+				sorter.setRowFilter(RowFilter.regexFilter("(?i)"+txtFiltro.getText(), 1));
 			}			
 			
 		});
 		
-		m=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
+		model=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
 		
-		trs= new TableRowSorter<>(m);
+		sorter= new TableRowSorter<>(model);
 		
-		TABLAAGREGARPRODUCTOS.setRowSorter(trs);
+		TABLAAGREGARPRODUCTOS.setRowSorter(sorter);
 		
-		TABLAAGREGARPRODUCTOS.updateUI();
+		//TABLAAGREGARPRODUCTOS.updateUI();
 		
 		
 		//TablaAgregarProductos.setRowSorter(TABLAAGREGARPRODUCTOS,trs);
@@ -385,37 +440,75 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 		}
 	}
 	
-	protected void do_comboBox_itemStateChanged(ItemEvent arg0) {
-		m=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
+	protected void do_comboBox_itemStateChanged(ItemEvent arg0)  {		
+		//m=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
+		
+		System.out.println("entre al combo box  ");
+		
 		String query= comboBoxFilterCategory.getSelectedItem().toString();
 		
-		TableRowSorter<DefaultTableModel> TR= new	TableRowSorter<DefaultTableModel> ((DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel());
-		
-		TABLAAGREGARPRODUCTOS.setRowSorter(TR);
-		
-//		txtFiltro.addKeyListener(new KeyAdapter() {
-//			
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				trs.setRowFilter(RowFilter.regexFilter("(?i)"+query, 4));
-//				
-//			}			
-//			
-//		});
-//		
-//		trs= new TableRowSorter<>(m);
-//		
-//		TABLAAGREGARPRODUCTOS.setRowSorter(trs);
-//		
-//		TABLAAGREGARPRODUCTOS.updateUI();
+		System.out.println("query : "+query);
 		
 		//m=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
 		
-		if(query==" "){
-			TR.setRowFilter(RowFilter.regexFilter(comboBoxFilterCategory.getSelectedItem().toString()));
+		//tr= new TableRowSorter<>(m);
+		
+		//m2=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
+		TableRowSorter<DefaultTableModel> sorter= new TableRowSorter<DefaultTableModel> (model);
+		
+		TABLAAGREGARPRODUCTOS.setRowSorter(sorter);
+//		
+		if(query!=" "){
+			sorter.setRowFilter(RowFilter.regexFilter(query));
 		}else{
-			TABLAAGREGARPRODUCTOS.setRowSorter(TR);
+			TABLAAGREGARPRODUCTOS.setRowSorter(sorter);
 		}
 		
+//		String query= comboBoxFilterCategory.getSelectedItem().toString();
+//		System.out.println("filter postres");
+//		Producto produc= new Producto(-1, null,-1,-1,query);
+//		ProductoBussiness PB = new ProductoBussiness();
+//		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
+//		if(listaProductosBEE==null){
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA POSTRES","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//		}else{
+//			_listaProductosBE=listaProductosBEE;
+//			TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBEE);
+//		}
+//		
+		
+		
+		
+	}
+	
+	
+	public void focusGained(FocusEvent arg0) {
+		if (arg0.getSource() == txtFiltro) {
+			do_txtFiltro_focusGained(arg0);
+		}
+	}
+	public void focusLost(FocusEvent arg0) {
+		if(txtFiltro.getText().length()==0){
+			addPlaceHolderStyle(txtFiltro);
+			txtFiltro.setText("Ingresar el nombre de un producto");
+		}
+	}
+	protected void do_txtFiltro_focusGained(FocusEvent arg0) {
+		if(txtFiltro.getText().equals("Ingresar el nombre de un producto")){
+			txtFiltro.setText(null);
+			txtFiltro.requestFocus();
+			
+			removePlaceholderStyle(txtFiltro);
+		}
+	}
+	public void windowGainedFocus(WindowEvent arg0) {
+		if (arg0.getSource() == this) {
+			do_this_windowGainedFocus(arg0);
+		}
+	}
+	public void windowLostFocus(WindowEvent arg0) {
+	}
+	protected void do_this_windowGainedFocus(WindowEvent arg0) {
+		this.requestFocusInWindow();
 	}
 }

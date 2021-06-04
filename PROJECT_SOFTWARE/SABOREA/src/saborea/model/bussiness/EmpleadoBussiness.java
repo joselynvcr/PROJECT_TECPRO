@@ -2,7 +2,7 @@ package saborea.model.bussiness; //CAPA DE NEGOCIOS, TODA LA LÒGICA DE NEGOCIO V
 
 import java.util.ArrayList;
 import saborea.model.bussiness.DTO.CredencialesBE;
-
+import saborea.model.bussiness.DTO.ListaEmpleadosBE;
 import saborea.model.dao.LoginDAO;
 import saborea.model.entities.login;
 
@@ -60,8 +60,37 @@ public class EmpleadoBussiness {
 		
 	}
 	
-	
+	public ArrayList<ListaEmpleadosBE> ListarEmpleados(){
+		
+		 ArrayList<login> lista=objLogin.listar(true);
+		
+		 ArrayList<ListaEmpleadosBE> listaBE=new ArrayList<ListaEmpleadosBE>();
+		for(int i=0;i<lista.size();i++){
+			listaBE.add(new ListaEmpleadosBE(
+					lista.get(i).getEmpleado_Id(),
+					lista.get(i).getObjempleado().getNum_DNI_empleado(),
+					lista.get(i).getObjempleado().getNom_Empleado(),
+					lista.get(i).getObjempleado().getApe_Empleado(),
+					lista.get(i).getObjempleado().getNum_Telf_empleado(),
+					lista.get(i).getObjempleado().getEstadoCivil_empleado(),
+					lista.get(i).getObjempleado().getGender_empleado(),
+					lista.get(i).getObjempleado().getSueldo_base_empleado(),
+					lista.get(i).getObjempleado().getNum_hijos_empleado(),
+					lista.get(i).getObjempleado().getTipoCargo_empleado(),
+					lista.get(i).getObjempleado().getIdJefe()
+					)
+					); 
+		}
+		return listaBE;
+	}
 	
 	
 	
 }
+	
+	
+	
+	
+	
+	
+

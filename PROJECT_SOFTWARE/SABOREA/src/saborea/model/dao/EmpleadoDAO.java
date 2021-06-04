@@ -42,7 +42,7 @@ public class EmpleadoDAO implements IDAO{
 						rs.getString("nom_empleado"),
 						rs.getString("ape_empleado"),
 						rs.getInt("num_Telf"),
-						rs.getString("casado"),
+						rs.getString("EstadoCivil"),
 						rs.getString("gender_empleado"),
 						rs.getDouble("sueldoBase_empleado"),							
 						rs.getInt("numHijos_empleado"),
