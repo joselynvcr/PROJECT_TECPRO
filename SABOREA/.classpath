@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-16.0.1">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/commons-collections4-4.4.wso2v1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/gson-2.8.7.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/jackson-core-2.12.3.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/jackson-databind-2.12.3.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/poi-ooxml-3.17.0.wso2v1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/poi-ooxml-full-5.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/Nueva carpeta (3)/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/sql/mssql-jdbc-9.2.1.jre8.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/sql/mssql-jdbc-9.2.1.jre11.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTOS DE PROGRAMACION/JAVA-WORKSPACE/LIBRERIAS JAVA/sql/mssql-jdbc-9.2.1.jre15.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
