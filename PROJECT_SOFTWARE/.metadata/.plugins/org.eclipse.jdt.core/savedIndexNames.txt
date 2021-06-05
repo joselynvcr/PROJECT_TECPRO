@@ -1,7 +1,0 @@
-INDEX VERSION 1.127+D:\UPN-CICLOS-ARCHIVOS\V CICLO_SISTEMAS_poo-electricidad-base de datos\PROJECT_TECPRO\PROJECT_SOFTWARE\.metadata\.plugins\org.eclipse.jdt.core
-3007013081.index
-1005163793.index
-3463001041.index
-302950034.index
-2425618270.index
-322500166.index
