@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="saborea.presentation.vista.FormLogin"/>
 <fullyQualifiedTypeName name="java.awt.Container"/>
 <fullyQualifiedTypeName name="saborea.model.dao.PedidoDAO"/>
 <fullyQualifiedTypeName name="saborea.model.dao.Detalle_PedidoDAO"/>
@@ -30,7 +29,6 @@
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.RegistroPedidoBE"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.DTO.DetallePedidoBE"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="saborea.presentation.vista.VENTANA_MODIFICAR"/>
 <fullyQualifiedTypeName name="saborea.model.bussiness.RegistroPedidoProductoBussiness"/>
 <fullyQualifiedTypeName name="saborea.model.entities.Detalle_Pedido"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="saborea.presentation.FormLogin"/>
+<fullyQualifiedTypeName name="saborea.presentation.JRegistrarEmpleado"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

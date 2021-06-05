@@ -13,9 +13,9 @@
 		<item value="381" key="height"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.combo.ComboBoxModelDialog">
-		<item value="722" key="x"/>
+		<item value="1185" key="x"/>
 		<item value="476" key="width"/>
-		<item value="337" key="y"/>
+		<item value="456" key="y"/>
 		<item value="365" key="height"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.icon.ImagePropertyEditor$ImageDialog">
@@ -25,9 +25,15 @@
 		<item value="559" key="height"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.icon.IconPropertyEditor$ImageDialog">
-		<item value="539" key="x"/>
+		<item value="624" key="x"/>
 		<item value="881" key="width"/>
-		<item value="390" key="y"/>
-		<item value="580" key="height"/>
+		<item value="340" key="y"/>
+		<item value="582" key="height"/>
+	</section>
+	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.spinner.SpinnerModelDialog">
+		<item value="697" key="x"/>
+		<item value="525" key="width"/>
+		<item value="289" key="y"/>
+		<item value="462" key="height"/>
 	</section>
 </section>
