@@ -58,7 +58,6 @@ public class FormAdministrador extends JFrame implements ActionListener {
 	private JButton btnLISTAR_EMPLEADOS;
 	private JPanel MENUpanel;
 	private JButton btnRegistrarEmpleado;
-	private JButton btnDescargarReporte;
 	private JButton btnCerrarSesin;
 	TableRowSorter<DefaultTableModel> sorter;
 	private JLabel lblNewLabel_2;
@@ -104,15 +103,6 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		MAINpanelADMIN.setLayout(null);
 		MAINpanelADMIN.add(lblNewLabel_1_nombreAndApe);
 		MAINpanelADMIN.add(lblNewLabel_cargo);
-		
-		btnDescargarReporte.setIcon(new ImageIcon("D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\business_application_download_downloaddatabase_thedatabase_2320.png"));
-		btnDescargarReporte.setOpaque(false);
-		btnDescargarReporte.setForeground(Color.BLACK);
-		btnDescargarReporte.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnDescargarReporte.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
-		btnDescargarReporte.setBackground(Color.WHITE);
-		btnDescargarReporte.setBounds(1, 357, 277, 49);
-		MAINpanelADMIN.add(btnDescargarReporte);
 		btnCerrarSesin = new JButton("CERRAR SESI\u00D3N");
 		btnCerrarSesin.addActionListener(this);
 		btnCerrarSesin.setIcon(new ImageIcon(
@@ -128,11 +118,10 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(78, 62, 134, 128);
 		MAINpanelADMIN.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon(
-				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\user-icon.png"));
+		lblNewLabel.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/user-icon.png")));
 
 		btnLISTAR_EMPLEADOS = new JButton("LISTAR EMPLEADOS");
-		btnLISTAR_EMPLEADOS.setBounds(17, 303, 261, 69);
+		btnLISTAR_EMPLEADOS.setBounds(1, 306, 277, 69);
 		MAINpanelADMIN.add(btnLISTAR_EMPLEADOS);
 		btnLISTAR_EMPLEADOS.addActionListener(this);
 		btnLISTAR_EMPLEADOS.setOpaque(false);
@@ -149,7 +138,7 @@ public class FormAdministrador extends JFrame implements ActionListener {
 
 		btnRegistrarEmpleado = new JButton("REGISTRAR EMPLEADO");
 		btnRegistrarEmpleado.addActionListener(this);
-		btnRegistrarEmpleado.setBounds(17, 378, 261, 69);
+		btnRegistrarEmpleado.setBounds(1, 386, 277, 69);
 		MAINpanelADMIN.add(btnRegistrarEmpleado);
 		btnRegistrarEmpleado.setIcon(new ImageIcon(
 				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\business_application_addmale_useradd_insert_add_user_client_2312.png"));
@@ -158,22 +147,21 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		btnRegistrarEmpleado.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnRegistrarEmpleado.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnRegistrarEmpleado.setBackground(Color.WHITE);
-
-		btnDescargarReporte = new JButton("DESCARGAR REPORTE");
+		
+		JButton btnDescargarReporte = new JButton("DESCARGAR REPORTE");
 		btnDescargarReporte.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				Tabla.Exportar(TABLA_EMPLEADOS);
 			}
-		});		
-		btnDescargarReporte.setBounds(17, 458, 261, 69);
-		MAINpanelADMIN.add(btnDescargarReporte);
-		btnDescargarReporte.setIcon(new ImageIcon(
-				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\business_application_download_downloaddatabase_thedatabase_2320.png"));
+		});
 		btnDescargarReporte.setOpaque(false);
 		btnDescargarReporte.setForeground(Color.BLACK);
 		btnDescargarReporte.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDescargarReporte.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnDescargarReporte.setBackground(Color.WHITE);
+		btnDescargarReporte.setBounds(1, 467, 277, 69);
+		MAINpanelADMIN.add(btnDescargarReporte);
 
 		FuntionalPanel = new JPanel();
 		FuntionalPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -203,8 +191,7 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		scrollPane.setViewportView(TABLA_EMPLEADOS);
 
 		lblNewLabel_3 = new JLabel("BUSCAR :");
-		lblNewLabel_3.setIcon(new ImageIcon(
-				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\search_locate_find_icon-icons.com_67287.png"));
+		lblNewLabel_3.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/search_locate_find_icon-icons.com_67287.png")));
 		lblNewLabel_3.setBounds(173, 33, 142, 72);
 		panelwithJtable.add(lblNewLabel_3);
 

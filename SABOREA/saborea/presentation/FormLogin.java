@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 import saborea.model.bussiness.EmpleadoBussiness;
 import saborea.model.bussiness.DTO.CredencialesBE;
-import saborea.model.bussiness.DTO.Prueba;
+//import saborea.model.bussiness.DTO.PersonaDataBE;
 import saborea.model.bussiness.DTO.VentanaTipoCargoBE;
 
 import javax.swing.JLabel;
@@ -35,8 +35,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
+
 
 public class FormLogin extends JFrame implements ActionListener {
 
@@ -152,26 +151,6 @@ public class FormLogin extends JFrame implements ActionListener {
 	}
 	
 	protected void do_btnIngresar_actionPerformed(ActionEvent arg0) {
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder()
-			      .uri(URI.create("https://dniruc.apisperu.com/api/v1/dni/75445407?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVybmVzdG8uc20uOTVAaG90bWFpbC5jb20ifQ.E3XN1bWBUPi4ZZIYCZ_5MKlSkNsb-BD7-H8QKN89jDM"))
-			      .build();
-		
-		String resString;
-		try {
-			resString = client.sendAsync(request, BodyHandlers.ofString()).get().body();
-			Gson g=new Gson();
-			Prueba obj=g.fromJson(resString,Prueba.class);
-			System.out.println(obj.getDni());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	
-	
 		
 //		JTextField txtUsuario = new JTextField();
 //		txtUsuario.setBounds(200, 73, 134, 20);
