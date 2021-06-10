@@ -44,6 +44,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 
 public class JDAgregarProducto extends javax.swing.JDialog implements ActionListener, KeyListener, ItemListener, FocusListener, WindowFocusListener {
@@ -65,6 +67,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 	TableRowSorter<DefaultTableModel> sorter;
 	private JComboBox comboBoxFilterCategory;
 	private JLabel lblBuscarPorCategora;
+	private JPanel panel;
 	//private TextPrompt placeholder;
 	//private TablaAgregarProductos TAP;
 	//new TableRowSorter<DefaultTableModel>(m)
@@ -144,6 +147,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //	}
 	public JDAgregarProducto(java.awt.Frame parent, boolean modal,ArrayList<VwListaProductosBE> listaProductosBE,JTable tabla, VwRegistroPedidoProductoBE obj) {
 		super(parent,modal);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JDialogAgregarProducto.class.getResource("/img/Logo_Solitario_opt (3).png")));
 		addWindowFocusListener(this);
 			
 		_listaProductosBE=listaProductosBE;
@@ -153,12 +157,13 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 		setTitle("VENTANA AGREGAR PRODUCTOS");
 		setBounds(100, 100, 883, 675);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(250, 250, 210));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 124, 726, 427);
+		scrollPane.setBounds(43, 121, 726, 427);
 		contentPanel.add(scrollPane);
 		
 		TABLAAGREGARPRODUCTOS = new JTable();
@@ -169,51 +174,68 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 		
 		
 		btnBack = new JButton("VOLVER");
+		btnBack.setBorder(null);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBack.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnBack.setIcon(new ImageIcon(JDialogAgregarProducto.class.getResource("/img/icon_volver.png")));
 		btnBack.addActionListener(this);
-		btnBack.setBounds(20, 572, 101, 44);
+		btnBack.setBounds(10, 554, 101, 82);
 		contentPanel.add(btnBack);
 		
 		btnAgregar = new JButton("AGREGAR PRODUCTO ");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(677, 572, 164, 44);
+		btnAgregar.setBounds(641, 572, 164, 44);
 		contentPanel.add(btnAgregar);
 		
 		txtCant = new JTextField();
 		txtCant.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCant.setText("1");
-		txtCant.setBounds(561, 580, 65, 29);
+		txtCant.setBounds(405, 582, 65, 29);
 		contentPanel.add(txtCant);
 		txtCant.setColumns(10);
 		
-		lblCantidad = new JLabel("cantidad :");
-		lblCantidad.setBounds(455, 587, 86, 14);
+		lblCantidad = new JLabel("CANTIDAD :");
+		lblCantidad.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblCantidad.setBounds(305, 587, 101, 14);
 		contentPanel.add(lblCantidad);
 		
-		lblBuscar = new JLabel("BUSCAR POR NOMBRE :");
-		lblBuscar.setBounds(84, 23, 133, 23);
-		contentPanel.add(lblBuscar);
-		
-		txtFiltro = new JTextField("Ingresar el nombre de un producto");
-		txtFiltro.addFocusListener(this);
-		txtFiltro.addKeyListener(this);
-		txtFiltro.setBounds(227, 24, 313, 20);
-		contentPanel.add(txtFiltro);
-//		TextPrompt placeholder = new TextPrompt("Apellido Paterno", txtFiltro);
-//		placeholder.changeAlpha(0.75f);
-//		placeholder.changeStyle(Font.ITALIC);
-		addPlaceHolderStyle(txtFiltro);
-		txtFiltro.setColumns(10);
+		panel = new JPanel();
+		panel.setBackground(new Color(210, 105, 30));
+		panel.setBounds(0, 11, 815, 89);
+		contentPanel.add(panel);
+		panel.setLayout(null);
 		
 		
 		comboBoxFilterCategory = new JComboBox();
+		comboBoxFilterCategory.setBackground(new Color(255, 255, 255));
+		comboBoxFilterCategory.setBounds(335, 57, 313, 23);
+		panel.add(comboBoxFilterCategory);
 		comboBoxFilterCategory.addItemListener(this);
 		comboBoxFilterCategory.setModel(new DefaultComboBoxModel(new String[] {" ", "POSTRES", "BEBIDAS", "PASTAS", "PIZZAS"}));
-		comboBoxFilterCategory.setBounds(227, 69, 179, 20);
-		contentPanel.add(comboBoxFilterCategory);
 		
 		lblBuscarPorCategora = new JLabel("BUSCAR POR CATEGOR\u00CDA:");
-		lblBuscarPorCategora.setBounds(84, 68, 133, 23);
-		contentPanel.add(lblBuscarPorCategora);
+		lblBuscarPorCategora.setBounds(146, 56, 179, 23);
+		panel.add(lblBuscarPorCategora);
+		lblBuscarPorCategora.setForeground(new Color(255, 255, 255));
+		lblBuscarPorCategora.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		
+		lblBuscar = new JLabel("BUSCAR POR NOMBRE :");
+		lblBuscar.setBounds(146, 11, 179, 23);
+		panel.add(lblBuscar);
+		lblBuscar.setForeground(new Color(255, 255, 255));
+		lblBuscar.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		
+		txtFiltro = new JTextField("Ingresar el nombre de un producto");
+		txtFiltro.setBounds(335, 12, 313, 23);
+		panel.add(txtFiltro);
+		txtFiltro.addFocusListener(this);
+		txtFiltro.addKeyListener(this);
+		//		TextPrompt placeholder = new TextPrompt("Apellido Paterno", txtFiltro);
+		//		placeholder.changeAlpha(0.75f);
+		//		placeholder.changeStyle(Font.ITALIC);
+				addPlaceHolderStyle(txtFiltro);
+				txtFiltro.setColumns(10);
 		
 		setLocationRelativeTo(null);
 		
@@ -260,7 +282,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 			String var=null;
 			//int cant;
 			 if(fsel==-1){
-				 JOptionPane.showMessageDialog(null, "no seleccionó ningún producto","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+				 JOptionPane.showMessageDialog(null, "no seleccionï¿½ ningï¿½n producto","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
 			 }
 			 m=(DefaultTableModel) TABLAAGREGARPRODUCTOS.getModel();
 			//System.out.println(TableProductos.getValueAt(fsel, 3));
@@ -271,7 +293,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 			stock=TABLAAGREGARPRODUCTOS.getValueAt(fsel, 3).toString();
 			cantidad= txtCant.getText();
 			
-			//Realizando los cálculos
+			//Realizando los cï¿½lculos
 			x=(Double.parseDouble(precio)* Integer.parseInt(cantidad));
 			subtotal=String.valueOf(x);
 			
@@ -298,7 +320,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 			
 			if(var==null){	
 				if(Integer.parseInt(txtCant.getText()) <= 0 || Integer.parseInt(txtCant.getText())>(int)TABLAAGREGARPRODUCTOS.getValueAt(fsel, 3)){
-					JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida ","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ingrese una cantidad vï¿½lida ","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
 				}else{
 				VwDetallePedidoBE dp=new VwDetallePedidoBE(
 						Integer.parseInt(id),
@@ -343,7 +365,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //		ProductoBussiness PB = new ProductoBussiness();
 //		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
 //		if(listaProductosBEE==null){
-//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA POSTRES","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORï¿½A POSTRES","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
 //		}else{
 //			_listaProductosBE=listaProductosBEE;
 //			TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBEE);
@@ -357,7 +379,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //		ProductoBussiness PB = new ProductoBussiness();
 //		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
 //		if(listaProductosBEE==null){
-//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA BEBIDAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORï¿½A BEBIDAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
 //		}else{
 //			_listaProductosBE=listaProductosBEE;
 //			TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBEE);
@@ -371,7 +393,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //		ProductoBussiness PB = new ProductoBussiness();
 //		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
 //		if(listaProductosBEE==null){
-//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA PASTAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORï¿½A PASTAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
 //		}else{
 //			_listaProductosBE=listaProductosBEE;
 //			TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBEE);
@@ -384,7 +406,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //		ProductoBussiness PB = new ProductoBussiness();
 //		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
 //		if(listaProductosBEE==null){
-//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA PIZZAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORï¿½A PIZZAS","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
 //		}else{
 //			_listaProductosBE=listaProductosBEE;
 //			
@@ -470,7 +492,7 @@ public class JDAgregarProducto extends javax.swing.JDialog implements ActionList
 //		ProductoBussiness PB = new ProductoBussiness();
 //		ArrayList<ListaProductosBE> listaProductosBEE=PB.FiltroProductosPorCategory(produc);
 //		if(listaProductosBEE==null){
-//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORÍA POSTRES","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "NO HAY DATA PARA LA CATEGORï¿½A POSTRES","INFORMATION",JOptionPane.INFORMATION_MESSAGE);
 //		}else{
 //			_listaProductosBE=listaProductosBEE;
 //			TablaAgregarProductos.seeTable(TABLAAGREGARPRODUCTOS, listaProductosBEE);

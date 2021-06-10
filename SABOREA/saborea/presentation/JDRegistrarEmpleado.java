@@ -37,13 +37,14 @@ import java.awt.event.MouseListener;
 import java.net.http.HttpRequest;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
+import javax.swing.border.MatteBorder;
+import java.awt.Toolkit;
 
 public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyListener, MouseListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JButton BackButton;
 	private JLabel lblNewLabel;
-	private JLabel lblApellidos;
 	private JLabel lblEstadoCivil;
 	private JLabel lblEmpleado;
 	private JLabel lblNewLabel_1;
@@ -91,6 +92,8 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 	private JSeparator separator_6;
 	private JSeparator separator_7;
 	private JButton btnSearchData;
+	private JLabel lblNombre;
+	private JLabel lblApellido;
 
 	/**
 	 * Launch the application.
@@ -110,6 +113,8 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 	 */
 	public JDRegistrarEmpleado(java.awt.Frame parent,boolean modal) {
 		super(parent,modal);
+	public JRegistrarEmpleado() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JRegistrarEmpleado.class.getResource("/img/Logo_Solitario_opt (3).png")));
 		setBounds(100, 100, 823, 728);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(240, 248, 255));
@@ -125,28 +130,29 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			okButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			okButton.addActionListener(this);
 			okButton.setBorder(null);
-			okButton.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/ic_cloud_done_128_28300.png")));
-			okButton.setBounds(611, 553, 186, 114);
+			okButton.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/icon_guardar.png")));
+			okButton.setBounds(688, 564, 105, 114);
 			contentPanel.add(okButton);
 			okButton.setActionCommand("OK");
 			getRootPane().setDefaultButton(okButton);
 		}
 		{
 			BackButton = new JButton("");
+			BackButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 			BackButton.addMouseListener(this);
 			BackButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 			BackButton.setHorizontalTextPosition(SwingConstants.CENTER);
 			BackButton.setBackground(new Color(240, 248, 255));
 			BackButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			BackButton.setBorder(null);
-			BackButton.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/1486485553-ago-arrow-arrow-left-back-previous-direction-left_81160 (1).png")));
+			BackButton.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/icon_volver.png")));
 			BackButton.addActionListener(this);
-			BackButton.setBounds(10, 577, 111, 101);
+			BackButton.setBounds(23, 577, 77, 101);
 			contentPanel.add(BackButton);
 			BackButton.setActionCommand("Cancel");
 		}
 		{
-			lblNewLabel = new JLabel("NOMBRE : ");
+			/*lblNewLabel = new JLabel("NOMBRE : ");
 			lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 13));
 			lblNewLabel.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/3592853-align-employee-general-human-human-list-list-member_107786.png")));
 			lblNewLabel.setBounds(21, 244, 140, 44);
@@ -158,6 +164,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			lblApellidos.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/3592853-align-employee-general-human-human-list-list-member_107786.png")));
 			lblApellidos.setBounds(21, 309, 140, 46);
 			contentPanel.add(lblApellidos);
+			contentPanel.add(lblNewLabel);*/
 		}
 		{
 			lblEstadoCivil = new JLabel("ESTADO CIVIL :");
@@ -174,17 +181,18 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			contentPanel.add(lblSueldo);
 		}
 		{
-			lblGnero = new JLabel("G\u00C8NERO :");
+			lblGnero = new JLabel("G\u00C9NERO :");
+			lblGnero.setHorizontalAlignment(SwingConstants.LEFT);
 			lblGnero.setFont(new Font("Century Gothic", Font.BOLD, 13));
-			lblGnero.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/gender_male_female_icon_138539.png")));
-			lblGnero.setBounds(21, 366, 126, 46);
+			lblGnero.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/gender_male_female_icon_138539.png")));
+			lblGnero.setBounds(10, 363, 118, 46);
 			contentPanel.add(lblGnero);
 		}
 		{
-			lblNumHijos = new JLabel("NUM HIJOS :");
-			lblNumHijos.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/3289560-babies-baby-family-kid-people-person_107104.png")));
+			lblNumHijos = new JLabel("N\u00B0 HIJOS :");
+			lblNumHijos.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/3289560-babies-baby-family-kid-people-person_107104.png")));
 			lblNumHijos.setFont(new Font("Century Gothic", Font.BOLD, 13));
-			lblNumHijos.setBounds(21, 423, 149, 44);
+			lblNumHijos.setBounds(10, 428, 129, 44);
 			contentPanel.add(lblNumHijos);
 		}
 		{
@@ -196,7 +204,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		}
 
 		{
-			lblContrasea = new JLabel("CONTRASE\u00D1A  :");
+			lblContrasea = new JLabel("CONTRASE\u00D1A :");
 			lblContrasea.setFont(new Font("Century Gothic", Font.BOLD, 13));
 			lblContrasea.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/iconfinder-lock-4341303_120563.png")));
 			lblContrasea.setBounds(394, 246, 158, 64);
@@ -209,7 +217,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			txtDNI.setFont(new Font("Tahoma", Font.BOLD, 12));
 			txtDNI.setBackground(new Color(240, 248, 255));
 			txtDNI.addKeyListener(this);
-			txtDNI.setBounds(157, 212, 167, 20);
+			txtDNI.setBounds(138, 210, 177, 20);
 			contentPanel.add(txtDNI);
 			txtDNI.setColumns(10);
 		}
@@ -221,7 +229,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			txtNombre.setFont(new Font("Tahoma", Font.BOLD, 12));
 			txtNombre.setBackground(new Color(240, 248, 255));
 			txtNombre.setColumns(10);
-			txtNombre.setBounds(157, 259, 167, 20);
+			txtNombre.setBounds(138, 262, 186, 20);
 			contentPanel.add(txtNombre);
 		}
 		{
@@ -231,7 +239,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			txtApellido.setFont(new Font("Tahoma", Font.BOLD, 12));
 			txtApellido.setBackground(new Color(240, 248, 255));
 			txtApellido.setColumns(10);
-			txtApellido.setBounds(157, 328, 167, 20);
+			txtApellido.setBounds(138, 318, 186, 20);
 			contentPanel.add(txtApellido);
 		}
 		{
@@ -256,15 +264,16 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		}
 		{
 			panel = new JPanel();
-			panel.setBackground(new Color(0, 128, 128));
+			panel.setBackground(new Color(0, 139, 139));
 			panel.setBounds(0, 66, 955, 57);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
 				lblNewLabel_1 = new JLabel("REGISTRAR  EMPLEADO");
-				lblNewLabel_1.setBounds(22, 27, 307, 19);
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(22, 20, 308, 19);
 				panel.add(lblNewLabel_1);
-				lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+				lblNewLabel_1.setFont(new Font("Microsoft YaHei", Font.BOLD, 23));
 			}
 		}
 		{
@@ -274,7 +283,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			txtUsername.setFont(new Font("Tahoma", Font.BOLD, 13));
 			txtUsername.setBackground(new Color(240, 248, 255));
 			txtUsername.setColumns(10);
-			txtUsername.setBounds(544, 212, 168, 20);
+			txtUsername.setBounds(544, 212, 177, 20);
 			txtUsername.setEnabled(false);
 			contentPanel.add(txtUsername);
 		}
@@ -286,18 +295,18 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			txtPassword.setBackground(new Color(240, 248, 255));
 			txtPassword.addKeyListener(this);
 			txtPassword.setColumns(10);
-			txtPassword.setBounds(562, 269, 150, 20);
+			txtPassword.setBounds(554, 262, 167, 23);
 			contentPanel.add(txtPassword);
 		}
 		{
-			txtSUELDO = new JTextField();
-			txtSUELDO.setBorder(null);
-			txtSUELDO.setForeground(new Color(0, 128, 128));
-			txtSUELDO.setFont(new Font("Tahoma", Font.BOLD, 12));
-			txtSUELDO.setBackground(new Color(240, 248, 255));
-			txtSUELDO.setColumns(10);
-			txtSUELDO.setBounds(562, 383, 150, 20);
-			contentPanel.add(txtSUELDO);
+			textField_SUELDO = new JTextField();
+			textField_SUELDO.setBorder(null);
+			textField_SUELDO.setForeground(new Color(0, 128, 128));
+			textField_SUELDO.setFont(new Font("Tahoma", Font.BOLD, 12));
+			textField_SUELDO.setBackground(new Color(240, 248, 255));
+			textField_SUELDO.setColumns(10);
+			textField_SUELDO.setBounds(544, 383, 177, 20);
+			contentPanel.add(textField_SUELDO);
 		}
 
 		separator = new JSeparator();
@@ -308,32 +317,35 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		contentPanel.add(separator);
 		{
 			lblDni = new JLabel("DNI :");
-			lblDni.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Icon_Business_Set_00011_A_icon-icons.com_59842.png")));
+			lblDni.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/id-card.png")));
 			lblDni.setFont(new Font("Century Gothic", Font.BOLD, 13));
-			lblDni.setBounds(21, 189, 89, 44);
+			lblDni.setBounds(16, 186, 105, 57);
 			contentPanel.add(lblDni);
 		}
 
 		comboBox_ESTADOCIVIL = new JComboBox();
+		comboBox_ESTADOCIVIL.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
 		comboBox_ESTADOCIVIL.setModel(
 				new DefaultComboBoxModel(new String[] { "SOLTERO(@)", "VIUDO(@)", "CASADO(@)", "DIVORCIADO(@)" }));
-		comboBox_ESTADOCIVIL.setBounds(562, 439, 150, 20);
+		comboBox_ESTADOCIVIL.setBounds(554, 435, 167, 32);
 		contentPanel.add(comboBox_ESTADOCIVIL);
 
 		comboBox_CARGO = new JComboBox();
+		comboBox_CARGO.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
 		comboBox_CARGO.setModel(new DefaultComboBoxModel(new String[] { "MOZO", "CAJERO", "" }));
-		comboBox_CARGO.setBounds(565, 318, 147, 20);
+		comboBox_CARGO.setBounds(554, 319, 167, 31);
 		contentPanel.add(comboBox_CARGO);
 
 		comboBox_GENDER = new JComboBox();
+		comboBox_GENDER.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
 		comboBox_GENDER.setModel(new DefaultComboBoxModel(new String[] { "MASCULINO", "FEMENINO" }));
-		comboBox_GENDER.setBounds(157, 378, 167, 20);
+		comboBox_GENDER.setBounds(138, 372, 186, 31);
 		contentPanel.add(comboBox_GENDER);
 
 		spinner_NUMHIJOS = new JSpinner();
 		spinner_NUMHIJOS.setBackground(new Color(0, 128, 128));
 		spinner_NUMHIJOS.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner_NUMHIJOS.setBounds(264, 435, 44, 31);
+		spinner_NUMHIJOS.setBounds(138, 437, 186, 31);
 		contentPanel.add(spinner_NUMHIJOS);
 
 		btnLimpiar = new JButton("");
@@ -343,16 +355,16 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		btnLimpiar.setBackground(new Color(240, 248, 255));
 		btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimpiar.addActionListener(this);
-		btnLimpiar.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Clear_37294.png")));
+		btnLimpiar.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/icon_limpieza_pantalla.png")));
 		btnLimpiar.setBorder(null);
 		btnLimpiar.setActionCommand("OK");
-		btnLimpiar.setBounds(454, 566, 129, 101);
+		btnLimpiar.setBounds(574, 564, 82, 114);
 		contentPanel.add(btnLimpiar);
 
 		JpanelCheck1 = new JPanel();
 		JpanelCheck1.setBackground(new Color(240, 248, 255));
 		JpanelCheck1.setVisible(false);
-		JpanelCheck1.setBounds(334, 217, 32, 256);
+		JpanelCheck1.setBounds(334, 199, 32, 272);
 		contentPanel.add(JpanelCheck1);
 		JpanelCheck1.setLayout(null);
 
@@ -362,60 +374,64 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		lblNewLabel_2.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
 
 		label = new JLabel("");
-		label.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label.setBounds(0, 39, 32, 30);
+		label.setHorizontalAlignment(SwingConstants.LEFT);
+		label.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label.setBounds(0, 51, 32, 30);
 		JpanelCheck1.add(label);
 
 		label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_1.setBounds(0, 99, 32, 30);
+		label_1.setHorizontalAlignment(SwingConstants.LEFT);
+		label_1.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_1.setBounds(0, 113, 32, 30);
 		JpanelCheck1.add(label_1);
 
 		label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_2.setBounds(0, 157, 32, 30);
+		label_2.setHorizontalAlignment(SwingConstants.LEFT);
+		label_2.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_2.setBounds(0, 171, 32, 30);
 		JpanelCheck1.add(label_2);
 
 		label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_3.setBounds(0, 226, 32, 30);
+		label_3.setHorizontalAlignment(SwingConstants.LEFT);
+		label_3.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_3.setBounds(0, 230, 32, 42);
 		JpanelCheck1.add(label_3);
 
 		Jpanelcheck2 = new JPanel();
 		Jpanelcheck2.setBackground(new Color(240, 248, 255));
 		Jpanelcheck2.setVisible(false);
-		Jpanelcheck2.setBounds(742, 212, 32, 318);
+		Jpanelcheck2.setBounds(731, 198, 32, 332);
 		contentPanel.add(Jpanelcheck2);
 		Jpanelcheck2.setLayout(null);
 
 		label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_4.setBounds(0, 0, 32, 30);
+		label_4.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_4.setBounds(0, 9, 32, 30);
 		Jpanelcheck2.add(label_4);
 
 		label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_5.setBounds(0, 53, 32, 30);
+		label_5.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_5.setBounds(0, 59, 32, 30);
 		Jpanelcheck2.add(label_5);
 
 		label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_6.setBounds(0, 105, 32, 30);
+		label_6.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_6.setBounds(0, 121, 32, 30);
 		Jpanelcheck2.add(label_6);
 
 		label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_7.setBounds(0, 174, 32, 30);
+		label_7.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_7.setBounds(0, 173, 32, 30);
 		Jpanelcheck2.add(label_7);
 
 		label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-		label_8.setBounds(0, 225, 32, 30);
+		label_8.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+		label_8.setBounds(0, 237, 32, 30);
 		Jpanelcheck2.add(label_8);
 		{
 			label_9 = new JLabel("");
-			label_9.setIcon(new ImageIcon(JDRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
-			label_9.setBounds(0, 277, 32, 30);
+			label_9.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/Tick_Mark_Circle_icon-icons.com_69145.png")));
+			label_9.setBounds(0, 291, 32, 30);
 			Jpanelcheck2.add(label_9);
 		}
 
@@ -433,37 +449,37 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		separator_1 = new JSeparator();
 		separator_1.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_1.setBackground(new Color(0, 128, 128));
-		separator_1.setBounds(137, 232, 186, 2);
+		separator_1.setBounds(138, 230, 177, 2);
 		contentPanel.add(separator_1);
 
 		separator_2 = new JSeparator();
 		separator_2.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_2.setBackground(new Color(0, 128, 128));
-		separator_2.setBounds(138, 286, 186, 2);
+		separator_2.setBounds(138, 282, 186, 2);
 		contentPanel.add(separator_2);
 
 		separator_3 = new JSeparator();
 		separator_3.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_3.setBackground(new Color(0, 128, 128));
-		separator_3.setBounds(150, 353, 174, 2);
+		separator_3.setBounds(138, 338, 186, 2);
 		contentPanel.add(separator_3);
 
 		separator_4 = new JSeparator();
 		separator_4.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_4.setBackground(new Color(0, 128, 128));
-		separator_4.setBounds(544, 244, 186, 2);
+		separator_4.setBounds(544, 233, 177, 2);
 		contentPanel.add(separator_4);
 
 		separator_5 = new JSeparator();
 		separator_5.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_5.setBackground(new Color(0, 128, 128));
-		separator_5.setBounds(553, 300, 167, 2);
+		separator_5.setBounds(554, 285, 167, 2);
 		contentPanel.add(separator_5);
 
 		separator_6 = new JSeparator();
 		separator_6.setBorder(new LineBorder(new Color(0, 128, 128), 2));
 		separator_6.setBackground(new Color(0, 128, 128));
-		separator_6.setBounds(545, 410, 167, 2);
+		separator_6.setBounds(545, 403, 176, 2);
 		contentPanel.add(separator_6);
 
 		separator_7 = new JSeparator();
@@ -484,6 +500,30 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		btnSearchData.setBounds(324, 179, 56, 53);
 		contentPanel.add(btnSearchData);
 		
+		lblNombre = new JLabel("NOMBRE :");
+		lblNombre.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblNombre.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/icon_letra_N.png")));
+		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNombre.setBounds(10, 246, 129, 51);
+		contentPanel.add(lblNombre);
+		
+		lblApellido = new JLabel("APELLIDO :");
+		lblApellido.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblApellido.setIcon(new ImageIcon(JRegistrarEmpleado.class.getResource("/img/icon_letra_A_Blanco.png")));
+		lblApellido.setHorizontalAlignment(SwingConstants.LEFT);
+		lblApellido.setBounds(10, 304, 129, 51);
+		contentPanel.add(lblApellido);
+		btnSearchData.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				if (txtDNI.getText().length() > 0) {
+					btnSearchData.setEnabled(true);
+				} else {
+					btnSearchData.setEnabled(false);
+				}
+			}
+		});
 		// txtUsername.setText(txtNombre + "" + txtApellido);
 
 		setLocationRelativeTo(null);
@@ -515,7 +555,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		if (txtDNI.getText().length() < 8 || txtNombre.getText().length() == 0 || txtApellido.getText().length() == 0
 				|| txtPassword.getText().length() < 9 || Integer.parseInt(txtSUELDO.getText()) < 930
 				|| txtTelf.getText().length() < 9 ) {
-			JOptionPane.showMessageDialog(null, "CAMPOS INVÁLIDOS, VERIFIQUE LOS CAMPOS", "WARNING",
+			JOptionPane.showMessageDialog(null, "CAMPOS INVï¿½LIDOS, VERIFIQUE LOS CAMPOS", "WARNING",
 					JOptionPane.WARNING_MESSAGE);		
 			
 				
@@ -552,7 +592,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 			
 			EmpleadoBussiness eb= new EmpleadoBussiness();
 			eb.RegistrarEmpleado(obj);
-			JOptionPane.showMessageDialog(null, "REGISTRADO SATISFACOTRIAMENTE", "INFORMACIÓN",
+			JOptionPane.showMessageDialog(null, "REGISTRADO SATISFACOTRIAMENTE", "INFORMACIï¿½N",
 					JOptionPane.INFORMATION_MESSAGE);	
 			
 			}else {
@@ -614,7 +654,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 	protected void do_txtDNI_keyTyped(KeyEvent arg0) {
 		
 		if (txtDNI.getText().length() >= 8) {	
-			//solo te deja escribir 8 nùmeros 
+			//solo te deja escribir 8 nï¿½meros 
 			arg0.consume();
 		}
 	}
@@ -718,7 +758,7 @@ public class JDRegistrarEmpleado extends JDialog implements ActionListener, KeyL
 		if(dniConsulta.length()<8) {
 			txtUsername.setEnabled(false);
 			//txtUsername.setEditable(true);		
-			JOptionPane.showMessageDialog(null, "EL DNI NO ES VÁLIDO","ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "EL DNI NO ES Vï¿½LIDO","ERROR", JOptionPane.ERROR_MESSAGE);
 		}else {		
 			
 			txtUsername.setEnabled(true);

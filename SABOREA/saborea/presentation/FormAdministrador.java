@@ -136,7 +136,7 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 		// Asigna un titulo a la barra de titulo
 		setTitle("VENTANA ADMINISTRADOR");
 		// tama�o de la ventana
-		// setSize(400,200);
+		 setSize(400,200);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 1400, 750);
@@ -146,6 +146,13 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/Nuevo proyecto.png")));
+		lblNewLabel_4.setBackground(new Color(205, 92, 92));
+		lblNewLabel_4.setBounds(289, 92, 875, 647);
+		contentPane.add(lblNewLabel_4);
 
 		MAINpanelADMIN = new JPanel();
 		MAINpanelADMIN.setBorder(new LineBorder(new Color(0, 128, 128), 1, true));
@@ -154,10 +161,13 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 		contentPane.add(MAINpanelADMIN);
 
 		lblNewLabel_1_nombreAndApe = new JLabel(cred.getNombreEmpleado() + " " + cred.getApellidoEmpleado());
-		lblNewLabel_1_nombreAndApe.setBounds(78, 201, 123, 23);
+		lblNewLabel_1_nombreAndApe.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblNewLabel_1_nombreAndApe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_nombreAndApe.setBounds(10, 188, 259, 23);
 
 		lblNewLabel_cargo = new JLabel(cred.getTipoCargo().toUpperCase());
-		lblNewLabel_cargo.setBounds(78, 235, 123, 33);
+		lblNewLabel_cargo.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblNewLabel_cargo.setBounds(10, 222, 259, 33);
 		lblNewLabel_cargo.setHorizontalAlignment(SwingConstants.CENTER);
 		MAINpanelADMIN.setLayout(null);
 		MAINpanelADMIN.add(lblNewLabel_1_nombreAndApe);
@@ -170,16 +180,18 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 		btnCerrarSesin.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCerrarSesin.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnCerrarSesin.setBackground(Color.WHITE);
-		btnCerrarSesin.setBounds(1, 609, 277, 49);
+		btnCerrarSesin.setBounds(1, 578, 277, 69);
 		MAINpanelADMIN.add(btnCerrarSesin);
 
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(78, 62, 134, 128);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(10, 11, 259, 166);
 		MAINpanelADMIN.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/user-icon.png")));
+		lblNewLabel.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/icon_Administrador.png")));
 
 		btnLISTAR_EMPLEADOS = new JButton("LISTAR EMPLEADOS");
-		btnLISTAR_EMPLEADOS.setBounds(1, 306, 277, 69);
+		btnLISTAR_EMPLEADOS.setBounds(1, 338, 277, 69);
 		MAINpanelADMIN.add(btnLISTAR_EMPLEADOS);
 		btnLISTAR_EMPLEADOS.addActionListener(this);
 		btnLISTAR_EMPLEADOS.setOpaque(false);
@@ -214,6 +226,20 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 		btnLISTAR_PEDIDOS.setBackground(Color.WHITE);
 		btnLISTAR_PEDIDOS.setBounds(1, 386, 277, 69);
 		MAINpanelADMIN.add(btnLISTAR_PEDIDOS);
+		JButton btnDescargarReporte = new JButton("DESCARGAR REPORTE");
+		btnDescargarReporte.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				Tabla.Exportar(TABLA_EMPLEADOS);
+			}
+		});
+		btnDescargarReporte.setOpaque(false);
+		btnDescargarReporte.setForeground(Color.BLACK);
+		btnDescargarReporte.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnDescargarReporte.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
+		btnDescargarReporte.setBackground(Color.WHITE);
+		btnDescargarReporte.setBounds(1, 418, 277, 69);
+		MAINpanelADMIN.add(btnDescargarReporte);
 
 		FuntionalPanel = new JPanel();
 		FuntionalPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -288,7 +314,7 @@ public class FormAdministrador extends JFrame implements ActionListener, KeyList
 				model= TablaEmpleados.seeTable(TABLA_EMPLEADOS,_listaEmpleadosBE,sorter);
 
 		MENUpanel = new JPanel();
-		MENUpanel.setBackground(new Color(0, 128, 128));
+		MENUpanel.setBackground(new Color(32, 178, 170));
 		MENUpanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		MENUpanel.setBounds(0, 0, 1400, 92);
 		contentPane.add(MENUpanel);
