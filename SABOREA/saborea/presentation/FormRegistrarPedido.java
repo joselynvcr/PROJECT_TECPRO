@@ -38,6 +38,11 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
 
 
 public class FormRegistrarPedido extends JFrame implements ActionListener, MouseListener {
@@ -62,7 +67,6 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 	private JButton btnSave;
 	private JButton btnEnviarOrdenA;
 	private JButton btnBack;
-	private JLabel lblOrdenDePedido;
 	private JLabel lblDetalleDePedido;
 	private JLabel lblDniCliente;
 	private JLabel lblCliente;
@@ -77,6 +81,12 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 	private JLabel lblTotalPagar;
 	private CredencialesBE Cred;
 	DefaultTableModel m;
+	private JLabel lblNomCliente;
+	private JLabel lblNomMozo;
+	private JLabel lblNumMesa;
+	private JPanel panel;
+	private JLabel lblOrdenDePedido;
+	private JLabel lblNewLabel_1;
 	 
 	//private JLabel lblTotalPagar;
 //	static double TotalPagar;
@@ -151,7 +161,8 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 		
 	}
 	
-	public FormRegistrarPedido(VwRegistroPedidoProductoBE obj,CredencialesBE Creden) {	
+	public FormRegistrarPedido(VwRegistroPedidoProductoBE obj,CredencialesBE Creden) {
+		setUndecorated(true);
 		
 		objeto=obj;
 		Cred= Creden;
@@ -165,19 +176,25 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 		        //Asigna un titulo a la barra de titulo
 		 setTitle("VENTANA ORDEN DE PEDIDO");
 		//tamaño de la ventana
-		setSize(900,800);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 300, 980, 980);	
+		setBounds(300, 300, 950, 751);	
 		
 		
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/lista (1).png")));
+		lblNewLabel_1.setBounds(387, 0, 141, 133);
+		contentPane.add(lblNewLabel_1);
+		
 		scrollPane = new JScrollPane();
 		//scrollPane.addMouseListener(this);
-		scrollPane.setBounds(25, 352, 914, 393);
+		scrollPane.setBounds(10, 237, 914, 382);
 		contentPane.add(scrollPane);
 		
 		TABLAORDENPEDIDO = new JTable();
@@ -194,61 +211,131 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 				
 		
 		btnSave = new JButton("SAVE");
+		btnSave.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnSave.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnSave.setIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/icon_guardar.png")));
+		btnSave.setContentAreaFilled(false);
+		btnSave.setBorder(null);
+		btnSave.setFont(new Font("Microsoft YaHei", Font.BOLD, 12));
 		btnSave.addActionListener(this);
-		btnSave.setBounds(620, 893, 89, 23);
+		btnSave.setBounds(581, 645, 141, 95);
 		contentPane.add(btnSave);
 		
 		btnEnviarOrdenA = new JButton("ENVIAR ORDEN A CAJA");
-		btnEnviarOrdenA.setBounds(766, 893, 173, 23);
+		btnEnviarOrdenA.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnEnviarOrdenA.setBorder(null);
+		btnEnviarOrdenA.setContentAreaFilled(false);
+		btnEnviarOrdenA.setVerticalAlignment(SwingConstants.TOP);
+		btnEnviarOrdenA.setIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/correo-electronico (2).png")));
+		btnEnviarOrdenA.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnEnviarOrdenA.setFont(new Font("Microsoft YaHei", Font.BOLD, 12));
+		btnEnviarOrdenA.setBounds(747, 645, 177, 95);
 		contentPane.add(btnEnviarOrdenA);
 		
-		btnBack = new JButton("BACK");
+		btnBack = new JButton("");
+		btnBack.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnBack.setBorder(null);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setRolloverIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/icon_volver (1).png")));
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnBack.setText("VOLVER");
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnBack.setText("");
+			}
+		});
+		btnBack.setVerticalAlignment(SwingConstants.TOP);
+		btnBack.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBack.setIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/icon_volver.png")));
+		btnBack.setFont(new Font("Microsoft YaHei", Font.BOLD, 12));
 		btnBack.addActionListener(this);
-		btnBack.setBounds(10, 893, 89, 23);
+		btnBack.setBounds(0, 650, 97, 75);
 		contentPane.add(btnBack);
 		
-		lblOrdenDePedido = new JLabel("ORDEN DE PEDIDO");
-		lblOrdenDePedido.setBounds(31, 11, 230, 14);
-		contentPane.add(lblOrdenDePedido);
-		
 		lblDetalleDePedido = new JLabel("DETALLE DE PEDIDO");
-		lblDetalleDePedido.setBounds(10, 307, 109, 14);
+		lblDetalleDePedido.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblDetalleDePedido.setBounds(10, 205, 173, 14);
 		contentPane.add(lblDetalleDePedido);
 				
 		
 		btnAgregarProducto = new JButton("AGREGAR PRODUCTO");
+		btnAgregarProducto.setIcon(new ImageIcon(FormRegistrarPedido.class.getResource("/img/1904677-add-addition-calculate-charge-create-new-plus_122527.png")));
+		btnAgregarProducto.setFont(new Font("Microsoft YaHei", Font.BOLD, 12));
 		btnAgregarProducto.addActionListener(this);
-		btnAgregarProducto.setBounds(774, 307, 165, 23);
+		btnAgregarProducto.setBounds(704, 193, 220, 33);
 		contentPane.add(btnAgregarProducto);
 		
 		lblDniCliente = new JLabel("DNI CLIENTE :");
-		lblDniCliente.setBounds(31, 56, 69, 14);
+		lblDniCliente.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblDniCliente.setBounds(33, 99, 115, 14);
 		contentPane.add(lblDniCliente);
 		
-		lblCliente = new JLabel("CLIENTE:");
-		lblCliente.setBounds(31, 92, 89, 14);
+		lblCliente = new JLabel("CLIENTE :");
+		lblCliente.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblCliente.setBounds(33, 144, 89, 14);
 		contentPane.add(lblCliente);
 		
 		lblMozo = new JLabel("MOZO :");
-		lblMozo.setBounds(490, 56, 69, 14);
+		lblMozo.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblMozo.setBounds(589, 92, 72, 14);
 		contentPane.add(lblMozo);
 		
 		lblNMesa = new JLabel("N\u00B0 MESA :");
-		lblNMesa.setBounds(490, 92, 69, 14);
+		lblNMesa.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblNMesa.setBounds(592, 142, 83, 14);
 		contentPane.add(lblNMesa);
 		
 		txtClienteDNI_pedido = new JTextField();
-		txtClienteDNI_pedido.setBounds(118, 53, 109, 20);
+		txtClienteDNI_pedido.setFont(new Font("Microsoft YaHei", Font.PLAIN, 12));
+		txtClienteDNI_pedido.setBounds(143, 98, 123, 20);
 		contentPane.add(txtClienteDNI_pedido);
 		txtClienteDNI_pedido.setColumns(10);
 		
 		lblNewLabel = new JLabel("TOTAL PAGAR : S/ ");
-		lblNewLabel.setBounds(488, 774, 123, 14);
+		lblNewLabel.setFont(new Font("Microsoft YaHei", Font.BOLD, 13));
+		lblNewLabel.setBounds(387, 619, 141, 14);
 		contentPane.add(lblNewLabel);
 		
 		lblTotalPagar = new JLabel("");
-		lblTotalPagar.setBounds(606, 774, 123, 14);
+		lblTotalPagar.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		lblTotalPagar.setFont(new Font("Microsoft YaHei", Font.PLAIN, 11));
+		lblTotalPagar.setBounds(529, 619, 123, 14);
 		contentPane.add(lblTotalPagar);
+		
+		lblNomCliente = new JLabel("");
+		lblNomCliente.setFont(new Font("Microsoft YaHei", Font.PLAIN, 13));
+		lblNomCliente.setBounds(143, 144, 220, 16);
+		contentPane.add(lblNomCliente);
+		
+		lblNomMozo = new JLabel("");
+		lblNomMozo.setFont(new Font("Microsoft YaHei", Font.PLAIN, 13));
+		lblNomMozo.setBounds(685, 69, 220, 16);
+		contentPane.add(lblNomMozo);
+		
+		lblNumMesa = new JLabel("");
+		lblNumMesa.setFont(new Font("Microsoft YaHei", Font.PLAIN, 13));
+		lblNumMesa.setBounds(685, 114, 220, 16);
+		contentPane.add(lblNumMesa);
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(210, 105, 30));
+		panel.setBorder(null);
+		panel.setBounds(-22, 21, 950, 46);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		lblOrdenDePedido = new JLabel("ORDEN DE PEDIDO");
+		lblOrdenDePedido.setForeground(new Color(255, 255, 255));
+		lblOrdenDePedido.setBounds(113, 0, 651, 46);
+		lblOrdenDePedido.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblOrdenDePedido.setHorizontalAlignment(SwingConstants.LEFT);
+		lblOrdenDePedido.setFont(new Font("Microsoft YaHei", Font.BOLD, 23));
+		lblOrdenDePedido.setBorder(null);
+		lblOrdenDePedido.setBackground(Color.WHITE);
+		panel.add(lblOrdenDePedido);
 		
 				
 		
@@ -267,15 +354,15 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 			
 			//nombre cliente api reniec
 			LblnomCliente = new JLabel("gaaa");
-			LblnomCliente.setBounds(118, 92, 123, 14);
+			LblnomCliente.setBounds(143,144, 123, 14);
 			contentPane.add(LblnomCliente);
 			
 			lblNommozo = new JLabel(obj.getNombreMozo()+" "+obj.getApellidoMozo());
-			lblNommozo.setBounds(558, 56, 123, 14);
+			lblNommozo.setBounds(685, 92, 220, 16);
 			contentPane.add(lblNommozo);
 			
 			lblIDMESA = new JLabel(""+obj.getCodMesa());
-			lblIDMESA.setBounds(558, 92, 123, 14);
+			lblIDMESA.setBounds(685, 142, 123, 14);
 			contentPane.add(lblIDMESA);			
 			
 			
@@ -293,15 +380,15 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 			
 			//nombre cliente api reniec
 			LblnomCliente = new JLabel("gaaa");
-			LblnomCliente.setBounds(118, 92, 123, 14);
+			LblnomCliente.setBounds(118, 92, 220, 16);
 			contentPane.add(LblnomCliente);
 			
 			lblNommozo = new JLabel(obj.getNombreMozo()+" "+obj.getApellidoMozo());
-			lblNommozo.setBounds(558, 56, 123, 14);
+			lblNommozo.setBounds(685, 92, 220, 16);
 			contentPane.add(lblNommozo);
 			
 			lblIDMESA = new JLabel(""+obj.getCodMesa());
-			lblIDMESA.setBounds(558, 92, 123, 14);
+			lblIDMESA.setBounds(685, 142, 123, 14);
 			contentPane.add(lblIDMESA);		
 			
 			TABLAORDENPEDIDO.setEnabled(false);	

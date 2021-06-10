@@ -15,9 +15,10 @@ public class ConnectionSaborea {
 private String db="databaseName=SABOREA;";
 //ruta de acceso para nuestra base de datos
 //jdbc =java, database connection, proovedor de base de datos,nuestro servidor, puerto por el cual vamos a trabajar y es por default=1433 + NombredeBASE DE DATOS;
-private String user="user=userSQL;";
-private String password="password=123";
-private String url="jdbc:sqlserver://DESKTOP-1CPJ7G8\\SQLEXPRESS:1433;"+db+user+password;
+private String user="user=sa;";
+private String password="password=sa";
+private String url="jdbc:sqlserver://localhost:1433;"+db+user+password;
+//"jdbc:sqlserver://localhost:1433;databaseName=SABOREA;integratedSecurity=true;";
 
 //el driver para poder acceder de forma directa a la BD es
 private String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";

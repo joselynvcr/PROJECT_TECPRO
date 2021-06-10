@@ -35,6 +35,10 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
+import javax.swing.border.MatteBorder;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
 
 
 public class FormLogin extends JFrame implements ActionListener {
@@ -47,6 +51,9 @@ public class FormLogin extends JFrame implements ActionListener {
 	private JButton btnIngresar;
 	 private Container contenedor;
 	 private JPasswordField passwordField;
+	 private JLabel lblNewLabel_1;
+	 private JLabel lblUsuarioSombra;
+	 private JLabel lblPasswordSombra;
 	 
 
 	/**
@@ -84,61 +91,115 @@ public class FormLogin extends JFrame implements ActionListener {
 		textField.setForeground(Color.black);
 	}
 	public FormLogin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FormLogin.class.getResource("/img/Logo_Solitario_opt (3).png")));
 		frameInit();
 			
 		contenedor=getContentPane();
 		contenedor.setLayout(null);
 		  //Asigna un titulo a la barra de titulo
-		 setTitle("LOGIN");
-		 //tama�o de la ventana
-		 setSize(400,200);
+		 setTitle("SABOREA");
 		 //pone la ventana en el Centro de la pantalla
 		setLocationRelativeTo(null);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 454, 382);
+		setBounds(100, 100, 649, 390);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.PINK);
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel = new JLabel("Usuario : ");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel.setBounds(28, 87, 70, 14);
-		contentPane.add(lblNewLabel);
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 242, 361);
+		panel.setBackground(new Color(0, 139, 139));
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		lblPassword = new JLabel("Password : ");
-		lblPassword.setFont(new Font("Arial", Font.BOLD, 12));
-		lblPassword.setBounds(28, 126, 70, 14);
-		contentPane.add(lblPassword);
+		lblUsuarioSombra = new JLabel("Ingrese usuario");
+		lblUsuarioSombra.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		lblUsuarioSombra.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblUsuarioSombra.setVisible(false);
+				txtUsuario.setVisible(true);
+				//Para que el cursor vaya hacia el lugar que se desea
+				txtUsuario.requestFocus();
+			}
+		});
+		lblUsuarioSombra.setForeground(new Color(211, 211, 211));
+		lblUsuarioSombra.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblUsuarioSombra.setBounds(20, 156, 197, 19);
+		panel.add(lblUsuarioSombra);
 		
-		txtUsuario = new JTextField();
-		//txtUsuario.addKeyListener(this);
-		
-		lblLogIn = new JLabel("LOG IN");
-		lblLogIn.setFont(new Font("Arial", Font.BOLD, 15));
-		lblLogIn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogIn.setBounds(52, 11, 126, 38);
-		contentPane.add(lblLogIn);
-		
-		btnIngresar = new JButton("INGRESAR");
-		btnIngresar.addActionListener(this);
-		btnIngresar.setBounds(123, 171, 126, 38);
-		contentPane.add(btnIngresar);
-		txtUsuario.setFocusTraversalKeysEnabled(false);
-		txtUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		txtUsuario.setBackground(Color.PINK);
-		txtUsuario.setBorder(null);
-		txtUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtUsuario.setBounds(94, 85, 144, 20);
-		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
+		lblPasswordSombra = new JLabel("Ingrese contrase\u00F1a");
+		lblPasswordSombra.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		lblPasswordSombra.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblPasswordSombra.setVisible(false);
+				passwordField.setVisible(true);
+				passwordField.requestFocus();
+			}
+		});
+		lblPasswordSombra.setForeground(new Color(211, 211, 211));
+		lblPasswordSombra.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPasswordSombra.setBounds(20, 216, 197, 18);
+		panel.add(lblPasswordSombra);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBackground(Color.PINK);
-		passwordField.setBorder(null);
-		passwordField.setBounds(104, 120, 155, 20);
-		contentPane.add(passwordField);
+		passwordField.setVisible(false);
+		passwordField.setForeground(new Color(255, 255, 255));
+		passwordField.setFont(new Font("Tahoma", Font.BOLD, 13));
+		passwordField.setBounds(20, 214, 197, 20);
+		panel.add(passwordField);
+		passwordField.setBackground(new Color(0, 139, 139));
+		passwordField.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		
+		lblPassword = new JLabel("Password: ");
+		lblPassword.setForeground(new Color(255, 255, 255));
+		lblPassword.setBounds(20, 197, 126, 14);
+		panel.add(lblPassword);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 17));
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setVisible(false);
+		txtUsuario.setForeground(new Color(255, 255, 255));
+		txtUsuario.setBounds(20, 155, 197, 20);
+		panel.add(txtUsuario);
+		txtUsuario.setFocusTraversalKeysEnabled(false);
+		txtUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+		txtUsuario.setBackground(new Color(0, 139, 139));
+		txtUsuario.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		txtUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtUsuario.setColumns(10);
+		
+		lblNewLabel = new JLabel("Usuario: ");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(20, 136, 96, 14);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+		//txtUsuario.addKeyListener(this);
+		
+		lblLogIn = new JLabel("LOGIN");
+		lblLogIn.setForeground(new Color(255, 255, 255));
+		lblLogIn.setBounds(39, 51, 126, 38);
+		panel.add(lblLogIn);
+		lblLogIn.setFont(new Font("Goudy Old Style", Font.BOLD, 34));
+		lblLogIn.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		btnIngresar = new JButton("INGRESAR");
+		btnIngresar.setForeground(new Color(255, 255, 255));
+		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnIngresar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnIngresar.setIcon(new ImageIcon(FormLogin.class.getResource("/img/_Path_.png")));
+		btnIngresar.setBounds(20, 263, 197, 28);
+		panel.add(btnIngresar);
+		btnIngresar.addActionListener(this);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(FormLogin.class.getResource("/img/Logo_Completo_usuario.png")));
+		lblNewLabel_1.setBounds(241, 0, 392, 351);
+		contentPane.add(lblNewLabel_1);
 		setLocationRelativeTo(null);
 		
 		
@@ -151,7 +212,6 @@ public class FormLogin extends JFrame implements ActionListener {
 	}
 	
 	protected void do_btnIngresar_actionPerformed(ActionEvent arg0) {
-		
 //		JTextField txtUsuario = new JTextField();
 //		txtUsuario.setBounds(200, 73, 134, 20);
 //		contentPane.add(txtUsuario);
@@ -165,7 +225,7 @@ public class FormLogin extends JFrame implements ActionListener {
 //		String user= txtUsuario.getText();
 //		String clave=String.valueOf(passwordField.getPassword());				
 		EmpleadoBussiness objEmpleadoB=new EmpleadoBussiness();		
-		CredencialesBE Cred = objEmpleadoB.ValidarCredenciales(new String("ARCADE"),new String("744"));				
+		CredencialesBE Cred = objEmpleadoB.ValidarCredenciales(new String("WASHI"),new String("321"));				
 		//new String("WASHI"),new String("321") mozo
 		//new String("ARCADE"),new String("744") admin
 		//new String("WASHI"),new String("321") cajero
@@ -185,46 +245,4 @@ public class FormLogin extends JFrame implements ActionListener {
 		
 		
 	}
-//	public void mouseClicked(MouseEvent arg0) {
-//	}
-//	public void mouseEntered(MouseEvent arg0) {
-//	}
-//	public void mouseExited(MouseEvent arg0) {
-//	}
-//	public void mousePressed(MouseEvent arg0) {
-//		if (arg0.getSource() == lblNewLabel_2) {
-//			do_lblNewLabel_2_mousePressed(arg0);
-//		}
-//		if (arg0.getSource() == lblNewLabel_1) {
-//			do_lblNewLabel_1_mousePressed(arg0);
-//		}
-//	}
-//	public void mouseReleased(MouseEvent arg0) {
-//	}
-//	
-//	protected void do_lblNewLabel_1_mousePressed(MouseEvent arg0) {
-//		passwordField.setVisible(true);
-//		lblNewLabel_1.setVisible(false);
-//		
-//	}
-//	protected void do_lblNewLabel_2_mousePressed(MouseEvent arg0) {
-//		txtUsuario.setVisible(true);
-//		lblNewLabel_2.setVisible(false);
-//	}
-//	public void keyPressed(KeyEvent arg0) {		
-//	}
-//	public void keyReleased(KeyEvent arg0) {
-//	}
-//	public void keyTyped(KeyEvent arg0) {
-//		if (arg0.getSource() == txtUsuario) {
-//			do_txtUsuario_keyTyped(arg0);
-//		}
-//	}
-//	protected void do_txtUsuario_keyTyped(KeyEvent arg0) {
-//		txtUsuario.setVisible(false);
-//		if(txtUsuario.getText().isEmpty()){
-//			txtUsuario.setVisible(true);
-//		}
-//		
-//	}
 }

@@ -70,6 +70,7 @@ public class FormAdministrador extends JFrame implements ActionListener {
 	private JTextField txtFiltroEmpleado;
 	private JButton btnActualizarTabla;
 	private JButton button;
+	private JLabel lblNewLabel_4;
 
 	public FormAdministrador(CredencialesBE cred) {
 		setResizable(false);
@@ -77,7 +78,7 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		// Asigna un titulo a la barra de titulo
 		setTitle("VENTANA ADMINISTRADOR");
 		// tama�o de la ventana
-		// setSize(400,200);
+		 setSize(400,200);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 1200, 750);
@@ -87,6 +88,13 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/Nuevo proyecto.png")));
+		lblNewLabel_4.setBackground(new Color(205, 92, 92));
+		lblNewLabel_4.setBounds(289, 92, 875, 647);
+		contentPane.add(lblNewLabel_4);
 
 		MAINpanelADMIN = new JPanel();
 		MAINpanelADMIN.setBorder(new LineBorder(new Color(0, 128, 128), 1, true));
@@ -95,10 +103,13 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		contentPane.add(MAINpanelADMIN);
 
 		lblNewLabel_1_nombreAndApe = new JLabel(cred.getNombreEmpleado() + " " + cred.getApellidoEmpleado());
-		lblNewLabel_1_nombreAndApe.setBounds(78, 201, 123, 23);
+		lblNewLabel_1_nombreAndApe.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblNewLabel_1_nombreAndApe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_nombreAndApe.setBounds(10, 188, 259, 23);
 
 		lblNewLabel_cargo = new JLabel(cred.getTipoCargo().toUpperCase());
-		lblNewLabel_cargo.setBounds(78, 235, 123, 33);
+		lblNewLabel_cargo.setFont(new Font("Century Gothic", Font.BOLD, 13));
+		lblNewLabel_cargo.setBounds(10, 222, 259, 33);
 		lblNewLabel_cargo.setHorizontalAlignment(SwingConstants.CENTER);
 		MAINpanelADMIN.setLayout(null);
 		MAINpanelADMIN.add(lblNewLabel_1_nombreAndApe);
@@ -112,16 +123,18 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		btnCerrarSesin.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCerrarSesin.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnCerrarSesin.setBackground(Color.WHITE);
-		btnCerrarSesin.setBounds(1, 609, 277, 49);
+		btnCerrarSesin.setBounds(1, 578, 277, 69);
 		MAINpanelADMIN.add(btnCerrarSesin);
 
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(78, 62, 134, 128);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(10, 11, 259, 166);
 		MAINpanelADMIN.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/user-icon.png")));
+		lblNewLabel.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/icon_Administrador.png")));
 
 		btnLISTAR_EMPLEADOS = new JButton("LISTAR EMPLEADOS");
-		btnLISTAR_EMPLEADOS.setBounds(1, 306, 277, 69);
+		btnLISTAR_EMPLEADOS.setBounds(1, 338, 277, 69);
 		MAINpanelADMIN.add(btnLISTAR_EMPLEADOS);
 		btnLISTAR_EMPLEADOS.addActionListener(this);
 		btnLISTAR_EMPLEADOS.setOpaque(false);
@@ -133,12 +146,11 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		// btnNewButton.addMouseMotionListener(this);
 		btnLISTAR_EMPLEADOS.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnLISTAR_EMPLEADOS.setBackground(UIManager.getColor("CheckBox.highlight"));
-		btnLISTAR_EMPLEADOS.setIcon(new ImageIcon(
-				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\list_task_tasklist_checklist_check_icon_145964.png"));
+		btnLISTAR_EMPLEADOS.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/user_group_icon_143484.png")));
 
 		btnRegistrarEmpleado = new JButton("REGISTRAR EMPLEADO");
 		btnRegistrarEmpleado.addActionListener(this);
-		btnRegistrarEmpleado.setBounds(1, 386, 277, 69);
+		btnRegistrarEmpleado.setBounds(1, 498, 277, 69);
 		MAINpanelADMIN.add(btnRegistrarEmpleado);
 		btnRegistrarEmpleado.setIcon(new ImageIcon(
 				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\business_application_addmale_useradd_insert_add_user_client_2312.png"));
@@ -160,7 +172,7 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		btnDescargarReporte.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDescargarReporte.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		btnDescargarReporte.setBackground(Color.WHITE);
-		btnDescargarReporte.setBounds(1, 467, 277, 69);
+		btnDescargarReporte.setBounds(1, 418, 277, 69);
 		MAINpanelADMIN.add(btnDescargarReporte);
 
 		FuntionalPanel = new JPanel();
@@ -171,14 +183,14 @@ public class FormAdministrador extends JFrame implements ActionListener {
 
 		panelwithJtable = new JPanel();
 		panelwithJtable.setVisible(false);
-
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(0, 0, 722, 647);
-		FuntionalPanel.add(lblNewLabel_1);
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setIcon(new ImageIcon(
-				"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\LOGO_NEGRO.png"));
+		
+				lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setBounds(0, 0, 722, 647);
+				FuntionalPanel.add(lblNewLabel_1);
+				lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
+				lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+				lblNewLabel_1.setIcon(new ImageIcon(
+						"D:\\UPN-CICLOS-ARCHIVOS\\V CICLO_SISTEMAS_poo-electricidad-base de datos\\PROJECT_TECPRO\\PROJECT_SOFTWARE\\SABOREA\\img\\LOGO_NEGRO.png"));
 		panelwithJtable.setBounds(0, 0, 921, 658);
 		FuntionalPanel.add(panelwithJtable);
 		panelwithJtable.setLayout(null);
@@ -190,10 +202,10 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		TABLA_EMPLEADOS = new JTable();
 		scrollPane.setViewportView(TABLA_EMPLEADOS);
 
-		lblNewLabel_3 = new JLabel("BUSCAR :");
+		/*lblNewLabel_3 = new JLabel("BUSCAR :");
 		lblNewLabel_3.setIcon(new ImageIcon(FormAdministrador.class.getResource("/img/search_locate_find_icon-icons.com_67287.png")));
 		lblNewLabel_3.setBounds(173, 33, 142, 72);
-		panelwithJtable.add(lblNewLabel_3);
+		panelwithJtable.add(lblNewLabel_3);*/
 
 		txtFiltroEmpleado = new JTextField();
 		txtFiltroEmpleado.setBounds(313, 57, 366, 25);
@@ -223,15 +235,17 @@ public class FormAdministrador extends JFrame implements ActionListener {
 		panelwithJtable.add(button);
 
 		MENUpanel = new JPanel();
-		MENUpanel.setBackground(new Color(0, 128, 128));
+		MENUpanel.setBackground(new Color(32, 178, 170));
 		MENUpanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		MENUpanel.setBounds(0, 0, 1200, 92);
 		contentPane.add(MENUpanel);
 		MENUpanel.setLayout(null);
 
-		lblNewLabel_2 = new JLabel("BIENVENIDO ");
-		lblNewLabel_2.setFont(new Font("Maiandra GD", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(374, 22, 133, 51);
+		lblNewLabel_2 = new JLabel("BIENVENIDO");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setFont(new Font("Microsoft YaHei", Font.BOLD, 23));
+		lblNewLabel_2.setBounds(10, 11, 1160, 58);
 		MENUpanel.add(lblNewLabel_2);
 		setLocationRelativeTo(null);
 	}
