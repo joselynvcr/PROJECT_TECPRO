@@ -73,7 +73,7 @@ public class RegistroPedidoProductoBussiness {
 		double totalPagar=0.0;
 		
 		//if(ObjAgregarProdutoalPedido==null){
-		Pedido p=new Pedido(-1,	-1,null,-1,null,null,	-1,	null,null, 	1,	null, false, false);
+		Pedido p=new Pedido(-1,	-1,null,-1,null,null,	-1,	null,null, 	mesa,	null, false, false);
 		
 		//busqueda desde BD
 		ArrayList<Pedido> lista=Objpedido.buscar(p, true);
@@ -197,9 +197,6 @@ public class RegistroPedidoProductoBussiness {
 				
 			}
 			
-			
-		
-			
 			//buscare la lista grande de base de datos  en el obj actualizado
 			int band=-0;
 			for(int i=0;i<details3.size();i++){
@@ -272,10 +269,10 @@ public class RegistroPedidoProductoBussiness {
 		
 	}
 	
-//	public void GetSumORRest(){
-//		
-//		
-//	}
+	
+	
+	
+	
 	
 	
 		

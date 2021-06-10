@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class VW_WARNING_ELIMINAR extends javax.swing.JDialog implements ActionListener {
+public class JDWarningEliminarRegistroOrden extends javax.swing.JDialog implements ActionListener {
 	private JButton btnOk;
 	private JButton btnCancel;
 	private VwRegistroPedidoProductoBE objeto;	
@@ -49,11 +49,11 @@ public class VW_WARNING_ELIMINAR extends javax.swing.JDialog implements ActionLi
 	 */
 	public void RefreshWindow(VwRegistroPedidoProductoBE obj){
 		
-		Tabla.seeTable(table, obj);			
+		TablaDetalleOrdenrRegistrar.seeTable(table, obj);			
 		//lblTotalPagar.setText(obj.getTotal()+ "");
 		
 	}
-	public VW_WARNING_ELIMINAR(java.awt.Frame parent, boolean modal,JTable tabla, VwRegistroPedidoProductoBE obj, GetDataJTableORDENPEDIDO ObjData) {
+	public JDWarningEliminarRegistroOrden(java.awt.Frame parent, boolean modal,JTable tabla, VwRegistroPedidoProductoBE obj, GetDataJTableORDENPEDIDO ObjData) {
 		
 		super(parent,modal);
 		table=tabla;		

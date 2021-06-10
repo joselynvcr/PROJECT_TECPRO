@@ -26,6 +26,7 @@ public class EmpleadoDAO implements IDAO{
 	
 	@Override
 	public ArrayList listar(boolean join) {
+		lista= new ArrayList<>();
 		try {
 			//vamos a definir una sentencia SQL , sentencia SQL
 			String SSQL= "SELECT * FROM empleado";		
@@ -38,10 +39,10 @@ public class EmpleadoDAO implements IDAO{
 			while(rs.next()){				
 				ObjEmpleado=new Empleado(
 						rs.getInt("empleado_Id"),
-						rs.getInt("num_DNI"),
+						rs.getString("num_DNI"),
 						rs.getString("nom_empleado"),
 						rs.getString("ape_empleado"),
-						rs.getInt("num_Telf"),
+						rs.getString("num_Telf"),
 						rs.getString("EstadoCivil"),
 						rs.getString("gender_empleado"),
 						rs.getDouble("sueldoBase_empleado"),							
@@ -54,6 +55,7 @@ public class EmpleadoDAO implements IDAO{
 						lista.add(ObjEmpleado);
 				
 			}
+			if(lista.size()<1) lista=null;
 			return lista;
 			
 		} catch (SQLException e) {
@@ -68,23 +70,23 @@ public class EmpleadoDAO implements IDAO{
 
 	@Override
 	public void insertar(Object obj) {
+		
 		try {
 			ObjEmpleado=(Empleado) obj; //() es en donde vamos a poner los campos, en realidad no necesitamos poner el ID PORQUE SE GENERA AUTOMATICAMENTE, SE CREA ASI MISMO 
 			//(? ? ?) EN VEZ DE DIGITAR CADA CAMPO, VAMOS A PONER (?) POR CADA UNO DE LOS CAMPOS QUE NECESITEMOS, PARA QUE EL PREPARESTAMENT REALICE UNA INSERCCION SEGURA
-			String SSQL="INSERT INTO empleado (empleado_Id,num_DNI,nom_empleado,ape_empleado,"
+			String SSQL="INSERT INTO empleado (num_DNI,nom_empleado,ape_empleado,"
 					+ "num_Telf,EstadoCivil,gender_empleado,sueldoBase_empleado,"
-					+ "numHijos_empleado,empleado_tipoCargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
-			ps=con.prepareStatement(SSQL);
-			ps.setInt(1, ObjEmpleado.getIdEmpleado());
-			ps.setInt(2, ObjEmpleado.getNum_DNI_empleado());
-			ps.setString(3, ObjEmpleado.getNom_Empleado());
-			ps.setString(4, ObjEmpleado.getApe_Empleado());
-			ps.setInt(5, ObjEmpleado.getNum_Telf_empleado());			
-			ps.setString(6, ObjEmpleado.getEstadoCivil_empleado());
-			ps.setString(7, ObjEmpleado.getGender_empleado());
-			ps.setDouble(8, ObjEmpleado.getSueldo_base_empleado());
-			ps.setInt(9, ObjEmpleado.getNum_hijos_empleado());
-			ps.setString(10, ObjEmpleado.getTipoCargo_empleado());
+					+ "numHijos_empleado,empleado_tipoCargo) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
+			ps=con.prepareStatement(SSQL);			
+			ps.setString(1, ObjEmpleado.getNum_DNI_empleado());
+			ps.setString(2, ObjEmpleado.getNom_Empleado());
+			ps.setString(3, ObjEmpleado.getApe_Empleado());
+			ps.setString(4, ObjEmpleado.getNum_Telf_empleado());			
+			ps.setString(5, ObjEmpleado.getEstadoCivil_empleado());
+			ps.setString(6, ObjEmpleado.getGender_empleado());
+			ps.setDouble(7, ObjEmpleado.getSueldo_base_empleado());
+			ps.setInt(8, ObjEmpleado.getNum_hijos_empleado());
+			ps.setString(9, ObjEmpleado.getTipoCargo_empleado());
 			//actualizaciòn de datos de las tablas ,devuelve el número de filas afectadas por la instrucción
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -105,10 +107,10 @@ public class EmpleadoDAO implements IDAO{
 					+ "numHijos_empleado=?,idJefe=? WHERE empleado_Id=?";
 			ps=con.prepareStatement(SSQL);
 			
-			ps.setInt(1, ObjEmpleado.getNum_DNI_empleado());
+			ps.setString(1, ObjEmpleado.getNum_DNI_empleado());
 			ps.setString(2, ObjEmpleado.getNom_Empleado());
 			ps.setString(3, ObjEmpleado.getApe_Empleado());
-			ps.setInt(4, ObjEmpleado.getNum_Telf_empleado());
+			ps.setString(4, ObjEmpleado.getNum_Telf_empleado());
 			ps.setString(5, ObjEmpleado.getTipoCargo_empleado());
 			ps.setString(6, ObjEmpleado.getEstadoCivil_empleado());
 			ps.setString(7, ObjEmpleado.getGender_empleado());
@@ -144,18 +146,19 @@ public class EmpleadoDAO implements IDAO{
 	
 
 	@Override
-	public ArrayList buscar(Object objFind, boolean objsEmpleado) {
+	public ArrayList<Empleado> buscar(Object objFind, boolean objsEmpleado) {
 		
+		lista= new ArrayList<>();
 		ObjEmpleado=(Empleado) objFind;
 		try {
 			//vamos a definir una sentencia SQL , sentencia SQL
 			String SSQL= "SELECT * FROM empleado";		
 			String condition=" ";
 			int fIdEmpleado=ObjEmpleado.getIdEmpleado();			
-			int fNum_DNI_empleado=ObjEmpleado.getNum_DNI_empleado();			
+			String fNum_DNI_empleado=ObjEmpleado.getNum_DNI_empleado();			
 			String fNom_Empleado=ObjEmpleado.getNom_Empleado();
 			String fApe_Empleado=ObjEmpleado.getApe_Empleado();
-			int fNum_Telf_empleado=ObjEmpleado.getNum_Telf_empleado();
+			String fNum_Telf_empleado=ObjEmpleado.getNum_Telf_empleado();
 			String fEstadoCivil_empleado=ObjEmpleado.getEstadoCivil_empleado();
 			String fGender_empleado=ObjEmpleado.getGender_empleado();
 			double fSueldo_base_empleado=ObjEmpleado.getSueldo_base_empleado();
@@ -165,38 +168,38 @@ public class EmpleadoDAO implements IDAO{
 			
 			String ands=null;
 			if(fIdEmpleado!=-1){
-					condition=" "+condition+"empleado_Id='"+fIdEmpleado+"'";
+					condition=" "+condition+" empleado_Id = '"+fIdEmpleado+"'";
 					ands="and";
 			}
-			if(fNum_DNI_empleado!=-1){
+			if(fNum_DNI_empleado!=null){
 				if(ands!=null){
 					condition=" "+condition+"and"+"num_DNI='"+fNum_DNI_empleado+"'";
 				}else{
-					condition=" "+condition+"num_DNI='"+fNum_DNI_empleado+"'";
+					condition=" "+condition+" num_DNI = '"+fNum_DNI_empleado+"' ";
 					ands="and";
 				}
 			}
 			if(fNom_Empleado!=null){
 				if(ands!=null){
-					condition=" " +condition+"and"+"nom_empleado='"+fNom_Empleado+"'";
+					condition=" " +condition+" and "+"nom_empleado='"+fNom_Empleado+"'";
 				}else{
-					condition=" " +condition+"nom_empleado='"+fNom_Empleado+"'";
+					condition=" " +condition+" nom_empleado='"+fNom_Empleado+"'";
 					ands="and";
 				}
 				
 			}
 			if(fApe_Empleado!=null){
 				if(ands!=null){
-					condition="  "+condition+"and"+"ape_empleado='"+fApe_Empleado+"'";
+					condition="  "+condition+" and "+" ape_empleado='"+fApe_Empleado+"'";
 				}else{
-					condition=" "+condition+"ape_empleado='"+fApe_Empleado+"'";
+					condition=" "+condition+" ape_empleado='"+fApe_Empleado+"'";
 					ands="and";
 				}
 				
 			}
-			if(fNum_Telf_empleado!=-1){
+			if(fNum_Telf_empleado!=null){
 				if(ands!=null){
-					condition="  "+condition+"and"+"num_Telf='"+fNum_Telf_empleado+"'";
+					condition="  "+condition+"and"+" num_Telf='"+fNum_Telf_empleado+"'";
 				}else{
 					condition=" "+condition+"num_Telf='"+fNum_Telf_empleado+"'";
 					ands="and";
@@ -204,7 +207,7 @@ public class EmpleadoDAO implements IDAO{
 				
 			}if(fEstadoCivil_empleado!=null){
 				if(ands!=null){
-					condition="  "+condition+"and"+"EstadoCivil='"+fEstadoCivil_empleado+"'";
+					condition="  "+condition+"and"+" EstadoCivil='"+fEstadoCivil_empleado+"'";
 				}else{
 					condition=" "+condition+"EstadoCivil='"+fEstadoCivil_empleado+"'";
 					ands="and";
@@ -220,7 +223,7 @@ public class EmpleadoDAO implements IDAO{
 				
 			}if(fSueldo_base_empleado!=-1){
 				if(ands!=null){
-					condition="  "+condition+"and"+"sueldoBase_empleado='"+fSueldo_base_empleado+"'";
+					condition="  "+condition+"and"+" sueldoBase_empleado='"+fSueldo_base_empleado+"'";
 				}else{
 					condition=" "+condition+"sueldoBase_empleado='"+fSueldo_base_empleado+"'";
 					ands="and";
@@ -228,7 +231,7 @@ public class EmpleadoDAO implements IDAO{
 				
 			}if(fNum_hijos_empleado!=-1){
 				if(ands!=null){
-					condition="  "+condition+"and"+"numHijos_empleado='"+fNum_hijos_empleado+"'";
+					condition="  "+condition+"and"+" numHijos_empleado='"+fNum_hijos_empleado+"'";
 				}else{
 					condition=" "+condition+"numHijos_empleado='"+fNum_hijos_empleado+"'";
 					ands="and";
@@ -236,7 +239,7 @@ public class EmpleadoDAO implements IDAO{
 				
 			}if(fTipoCargo_empleado!=null){
 				if(ands!=null){
-					condition="  "+condition+"and"+"empleado_tipoCargo='"+fTipoCargo_empleado+"'";
+					condition="  "+condition+"and"+" empleado_tipoCargo='"+fTipoCargo_empleado+"'";
 				}else{
 					condition=" "+condition+"empleado_tipoCargo='"+fTipoCargo_empleado+"'";
 					ands="and";
@@ -245,16 +248,16 @@ public class EmpleadoDAO implements IDAO{
 			}
 			if(fIdJefe!=-1){
 				if(ands!=null){
-					condition=" "+condition+"and"+"idJefe='"+fIdJefe+"'";
+					condition=" "+condition+"and"+" idJefe='"+fIdJefe+"'";
 				}else{
 					condition=" "+condition+"idJefe='"+fIdJefe+"'";
 				}
 				
-			}			
-			SSQL=SSQL+"where "+condition;
+			}		
 			
+			SSQL=SSQL+" where "+condition;
 			
-			
+			System.out.println(SSQL);			
 			
 			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
 			ps=con.prepareStatement(SSQL);
@@ -265,10 +268,10 @@ public class EmpleadoDAO implements IDAO{
 			while(rs.next()) {				
 					ObjEmpleado=new Empleado( 											
 							rs.getInt("empleado_Id"),
-							rs.getInt("num_DNI"),
+							rs.getString("num_DNI"),
 							rs.getString("nom_empleado"),
 							rs.getString("ape_empleado"),
-							rs.getInt("num_Telf"),
+							rs.getString("num_Telf"),
 							rs.getString("EstadoCivil"),
 							rs.getString("gender_empleado"),
 							rs.getDouble("sueldoBase_empleado"),							

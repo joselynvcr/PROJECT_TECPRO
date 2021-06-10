@@ -4,13 +4,7 @@ import java.sql.Timestamp;
 
 public class Pedido {
 		
-	@Override
-	public String toString() {
-		return "Pedido [Cod_Pedido=" + Cod_Pedido + ", codmozo=" + codmozo + ", Objmozo=" + Objmozo + ", codCajero="
-				+ codCajero + ", Objcajero=" + Objcajero + ", FechaHora=" + FechaHora + ", TotalPagar=" + TotalPagar
-				+ ", dniCliente=" + dniCliente + ", Objcliente=" + Objcliente + ", codMesa=" + codMesa + ", Objmesa="
-				+ Objmesa + ", pagado=" + pagado + ", enviado=" + enviado + "]";
-	}
+	
 
 	private int Cod_Pedido;
 	private int codmozo;
@@ -164,7 +158,13 @@ public class Pedido {
 		this.enviado = enviado;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Pedido [Cod_Pedido=" + Cod_Pedido + ", codmozo=" + codmozo + ", Objmozo=" + Objmozo + ", codCajero="
+				+ codCajero + ", Objcajero=" + Objcajero + ", FechaHora=" + FechaHora + ", TotalPagar=" + TotalPagar
+				+ ", dniCliente=" + dniCliente + ", Objcliente=" + Objcliente + ", codMesa=" + codMesa + ", Objmesa="
+				+ Objmesa + ", pagado=" + pagado + ", enviado=" + enviado + "]";
+	}
 	
 	
 

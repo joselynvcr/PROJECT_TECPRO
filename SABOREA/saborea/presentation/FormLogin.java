@@ -185,46 +185,5 @@ public class FormLogin extends JFrame implements ActionListener {
 		
 		
 	}
-//	public void mouseClicked(MouseEvent arg0) {
-//	}
-//	public void mouseEntered(MouseEvent arg0) {
-//	}
-//	public void mouseExited(MouseEvent arg0) {
-//	}
-//	public void mousePressed(MouseEvent arg0) {
-//		if (arg0.getSource() == lblNewLabel_2) {
-//			do_lblNewLabel_2_mousePressed(arg0);
-//		}
-//		if (arg0.getSource() == lblNewLabel_1) {
-//			do_lblNewLabel_1_mousePressed(arg0);
-//		}
-//	}
-//	public void mouseReleased(MouseEvent arg0) {
-//	}
-//	
-//	protected void do_lblNewLabel_1_mousePressed(MouseEvent arg0) {
-//		passwordField.setVisible(true);
-//		lblNewLabel_1.setVisible(false);
-//		
-//	}
-//	protected void do_lblNewLabel_2_mousePressed(MouseEvent arg0) {
-//		txtUsuario.setVisible(true);
-//		lblNewLabel_2.setVisible(false);
-//	}
-//	public void keyPressed(KeyEvent arg0) {		
-//	}
-//	public void keyReleased(KeyEvent arg0) {
-//	}
-//	public void keyTyped(KeyEvent arg0) {
-//		if (arg0.getSource() == txtUsuario) {
-//			do_txtUsuario_keyTyped(arg0);
-//		}
-//	}
-//	protected void do_txtUsuario_keyTyped(KeyEvent arg0) {
-//		txtUsuario.setVisible(false);
-//		if(txtUsuario.getText().isEmpty()){
-//			txtUsuario.setVisible(true);
-//		}
-//		
-//	}
+
 }

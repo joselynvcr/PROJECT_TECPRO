@@ -17,7 +17,7 @@ import saborea.model.bussiness.ProductoBussiness;
 import saborea.model.bussiness.RegistroPedidoProductoBussiness;
 import saborea.model.bussiness.DTO.CredencialesBE;
 import saborea.model.bussiness.DTO.GetDataJTableORDENPEDIDO;
-import saborea.model.bussiness.DTO.ListaProductosBE;
+import saborea.model.bussiness.DTO.VwListaProductosBE;
 import saborea.model.bussiness.DTO.VwDetallePedidoBE;
 import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
 import saborea.model.entities.Detalle_Pedido;
@@ -27,12 +27,12 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class VENTANA_MODIFICAR extends javax.swing.JDialog implements ActionListener {
+public class JDVentanaModificarCantidadOrden extends javax.swing.JDialog implements ActionListener {
 	private JButton btnCancel;
 	private JButton btnOk;
 	private JTextField txtCant_VModificar;
 	private JLabel lblIngreseLaCantidad;
-	ArrayList<ListaProductosBE> _listaProductosBE;
+	ArrayList<VwListaProductosBE> _listaProductosBE;
 	private VwRegistroPedidoProductoBE objeto;	
 	DefaultTableModel m;
 	private JTable table;
@@ -56,11 +56,11 @@ public class VENTANA_MODIFICAR extends javax.swing.JDialog implements ActionList
 	 */
 	public void RefreshWindow(VwRegistroPedidoProductoBE obj){
 		
-		Tabla.seeTable(table, obj);			
+		TablaDetalleOrdenrRegistrar.seeTable(table, obj);			
 		//lblTotalPagar.setText(obj.getTotal()+ "");
 		
 	}
-	public VENTANA_MODIFICAR( java.awt.Frame parent, boolean modal,JTable tabla, VwRegistroPedidoProductoBE obj, GetDataJTableORDENPEDIDO ObjData) {
+	public JDVentanaModificarCantidadOrden( java.awt.Frame parent, boolean modal,JTable tabla, VwRegistroPedidoProductoBE obj, GetDataJTableORDENPEDIDO ObjData) {
 		
 		super(parent,modal);
 		//_listaProductosBE=listaProductosBE;

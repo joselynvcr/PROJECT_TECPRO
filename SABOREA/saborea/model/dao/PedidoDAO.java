@@ -33,12 +33,19 @@ public class PedidoDAO implements IDAO{
 
 	@Override
 	public ArrayList<Pedido> listar(boolean join) {
-		
+		System.out.println("ENTRO A LISTAR EN ORDEN");
+		lista=new ArrayList<>();
 		try {
 			//vamos a definir una sentencia SQL , sentencia SQL
-			String SSQL= "SELECT * FROM pedido p join empleado e on e.empleado_Id=p.cempleadoc_Id"
-					+ "	join empleado e2 on e2.empleado_Id=p.mempleado_Id join cliente c"
-					+ "on c.dniCliente=p.dniCliente	join mesa m	on m.mesa_Id=p.mesa_Id ";		
+			//String SSQL="";
+			
+//			String SSQL= " SELECT * FROM pedido p join empleado e on e.empleado_Id=p.cempleadoc_Id "
+//					+ " join empleado e2 on e2.empleado_Id=p.mempleado_Id join cliente c  "
+//					+ " on c.dniCliente=p.dniCliente join mesa m on m.mesa_Id=p.mesa_Id ";	
+//			
+			String SSQL="SELECT * FROM VWPEDIDOS";
+			
+			System.out.println(SSQL);
 			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
 			ps=con.prepareStatement(SSQL);
 			//dentro de rs ya tengo todos los registros de mi tabla, necesito recorrer para cargar dentro de un objeto y posteriormente cargar cada objeto dentro de una lista
@@ -46,75 +53,79 @@ public class PedidoDAO implements IDAO{
 			//ResulSet=conjunto de resultados, contiene los resultados de una consulta SQL
 			ResultSet rs= ps.executeQuery();
 			//mientras haya un registro todavia en resultset
+			
 			while(rs.next()){	
 				
-				if (!join){					
+				if (!join){		
+					System.out.println(join);
+					System.out.println("ENTRO A LISTAR EN ORDEN 1");
 					ObjPedido=new Pedido( 	
-					rs.getInt("pedido_Id"),
-					rs.getInt("mempleado_Id"),
-					null,
-					rs.getInt("cempleado_Id"),
-					null,
-					rs.getTimestamp("FechaHora"),
-					rs.getDouble("TotalPagar"),
-					rs.getString("dniCliente"),
-					null,
-					rs.getInt("mesa_Id"),
-					null,
-					rs.getBoolean("pagado"),
-					rs.getBoolean("enviado")
+							rs.getInt("IDPEDIDO"),
+							rs.getInt("IDMOZO"),
+							null,
+							rs.getInt("IDCAJERO"),
+							null,
+							rs.getTimestamp("FECHA_HORA"),
+							rs.getDouble("TOTALPAGAR"),
+							rs.getString("DNICLIENTE"),
+							null,
+							rs.getInt("NRO_MESA"),
+							null,
+							rs.getBoolean("PAGADO"),
+							rs.getBoolean("ENVIADO")
 					
 					);
 					
 				}else{
-					new Pedido( 											
-							rs.getInt("pedido_Id"),
-							rs.getInt("mempleado_Id"),
+					System.out.println("ENTRO A LISTAR EN ORDEN 2");
+					ObjPedido=new Pedido( 											
+							rs.getInt("IDPEDIDO"),
+							rs.getInt("IDMOZO"),
 							new Empleado(
-									rs.getInt("empleado_Id"),
-									rs.getInt("num_DNI"),
-									rs.getString("nom_empleado"),
-									rs.getString("ape_empleado"),
-									rs.getInt("num_Telf"),
-									rs.getString("EstadoCivil"),
-									rs.getString("gender_empleado"),
-									rs.getDouble("sueldoBase_empleado"),							
-									rs.getInt("numHijos_empleado"),
-									rs.getString("empleado_tipoCargo"),
-									rs.getInt("idJefe"),
+									rs.getInt("ID_EMP_MOZO"),
+									rs.getString("EMP_MOZO_DNI"),
+									rs.getString("NOMBREMOZO"),
+									rs.getString("APELLIDOMOZO"),
+									rs.getString("EMP_MOZO_TELF"),
+									rs.getString("EMP_MOZO_EC"),
+									rs.getString("EMP_MOZO_GENDER"),
+									rs.getDouble("EMP_MOZO_SUELDO"),							
+									rs.getInt("EMP_MOZO_NHIJOS"),
+									rs.getString("CARGOMOZO"),
+									rs.getInt("IDJEFE_M"),
 									null
 								),
-							rs.getInt("cempleado_Id"),
+							rs.getInt("IDCAJERO"),
 							new Empleado(
-									rs.getInt("empleado_Id"),
-									rs.getInt("num_DNI"),
-									rs.getString("nom_empleado"),
-									rs.getString("ape_empleado"),
-									rs.getInt("num_Telf"),
-									rs.getString("EstadoCivil"),
-									rs.getString("gender_empleado"),
-									rs.getDouble("sueldoBase_empleado"),							
-									rs.getInt("numHijos_empleado"),
-									rs.getString("empleado_tipoCargo"),
-									rs.getInt("idJefe"),
+									rs.getInt("ID_EMP_CAJERO"),
+									rs.getString("EMP_CAJERO_DNI"),
+									rs.getString("NOMBRECAJERO"),
+									rs.getString("APELLIDOCAJERO"),
+									rs.getString("EMP_CAJERO_TELF"),
+									rs.getString("EMP_CAJERO_EC"),
+									rs.getString("EMP_CAJERO_GENDER"),
+									rs.getDouble("EMP_CAJERO_SUELDO"),							
+									rs.getInt("EMP_CAJERO_NHIJOS"),
+									rs.getString("CARGOCAJERO"),
+									rs.getInt("IDJEFE_C"),
 									null
 								),
-							rs.getTimestamp("FechaHora"),
-							rs.getDouble("TotalPagar"),
-							rs.getString("dniCliente"),
+							rs.getTimestamp("FECHA_HORA"),
+							rs.getDouble("TOTALPAGAR"),
+							rs.getString("DNICLIENTE"),
 							new Cliente(									
-									rs.getString("dniCliente"),
-									rs.getString("nom_Cliente"),
-									rs.getString("ape_Cliente")		
+									rs.getString("DNI_CLIENTE"),
+									rs.getString("NOM_CLIENTE"),
+									rs.getString("APE_CLIENTE")		
 									),
-							rs.getInt("mesa_Id"),
+							rs.getInt("NRO_MESA"),
 							new Mesa( 											
-									rs.getInt("mesa_Id"),
-									rs.getBoolean("disponibilidad"),
-									rs.getInt("Capacidad_Mesa")
+									rs.getInt("MESA_ID"),
+									rs.getBoolean("DISPONIBLE"),
+									rs.getInt("CAPACIDAD")
 									),
-							rs.getBoolean("pagado"),
-							rs.getBoolean("enviado")
+							rs.getBoolean("PAGADO"),
+							rs.getBoolean("ENVIADO")
 														
 					);
 			
@@ -123,6 +134,10 @@ public class PedidoDAO implements IDAO{
 				lista.add(ObjPedido);
 				
 			}
+			System.out.println("mozo : " +lista.get(0).getObjmozo().getNom_Empleado()+" "+lista.get(0).getObjmozo().getApe_Empleado());
+			System.out.println("caja :"+lista.get(0).getObjcajero().getNom_Empleado()+" "+lista.get(0).getObjcajero().getApe_Empleado());
+		
+			if(lista.size()<1) lista=null;			
 			return lista;
 			
 		} catch (SQLException e) {
@@ -411,10 +426,10 @@ public class PedidoDAO implements IDAO{
 							rs.getInt("IDMOZO"),
 							new Empleado(
 									rs.getInt("ID_EMP_MOZO"),
-									rs.getInt("EMP_MOZO_DNI"),
+									rs.getString("EMP_MOZO_DNI"),
 									rs.getString("NOMBREMOZO"),
 									rs.getString("APELLIDOMOZO"),
-									rs.getInt("EMP_MOZO_TELF"),
+									rs.getString("EMP_MOZO_TELF"),
 									rs.getString("EMP_MOZO_EC"),
 									rs.getString("EMP_MOZO_GENDER"),
 									rs.getDouble("EMP_MOZO_SUELDO"),							
@@ -426,10 +441,10 @@ public class PedidoDAO implements IDAO{
 							rs.getInt("IDCAJERO"),
 							new Empleado(
 									rs.getInt("ID_EMP_CAJERO"),
-									rs.getInt("EMP_CAJERO_DNI"),
+									rs.getString("EMP_CAJERO_DNI"),
 									rs.getString("NOMBRECAJERO"),
 									rs.getString("APELLIDOCAJERO"),
-									rs.getInt("EMP_CAJERO_TELF"),
+									rs.getString("EMP_CAJERO_TELF"),
 									rs.getString("EMP_CAJERO_EC"),
 									rs.getString("EMP_CAJERO_GENDER"),
 									rs.getDouble("EMP_CAJERO_SUELDO"),							

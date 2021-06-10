@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class Rendimensionar extends DefaultTableCellRenderer {
+public class RendimensionarRegistrarProducto extends DefaultTableCellRenderer {
 
 
 	

@@ -68,10 +68,10 @@ public class Detalle_PedidoDAO implements IDAO {
 									rs.getInt("pedido_Id"),
 									rs.getInt("mempleado_Id"),
 									null,
-									rs.getInt("cempleado_Id"),
+									rs.getInt("cempleadoc_Id"),
 									null,
 									rs.getTimestamp("FechaHora"),
-									rs.getDouble("TotalPagar"),
+									rs.getDouble("totalpagar_Pedido"),
 									rs.getString("dniCliente"),
 									null,
 									rs.getInt("mesa_Id"),
@@ -95,6 +95,7 @@ public class Detalle_PedidoDAO implements IDAO {
 				lista.add(ObjDetallePedido);				
 				}
 		}	
+			
 			return lista;
 			
 		} catch (SQLException e) {
@@ -190,7 +191,7 @@ public class Detalle_PedidoDAO implements IDAO {
 
 	@Override
 	public ArrayList<Detalle_Pedido> buscar(Object objFind, boolean join) {
-		
+		System.out.println("ENTRO A BUSCAR EN EL DETALLE DE ORDEN");
 		lista=new ArrayList<>();
 		ObjDetallePedido=(Detalle_Pedido) objFind;
 		
@@ -251,7 +252,7 @@ public class Detalle_PedidoDAO implements IDAO {
 				if(ands!=null){
 					condition=" "+condition+"and "+" SUBTOTAL='"+fTotal+"'";
 				}else{
-					condition=" "+condition+"SUBTOTAL='"+fTotal+"'";
+					condition=" "+condition+" SUBTOTAL='"+fTotal+"'";
 					ands="and";
 				}
 				
@@ -259,7 +260,8 @@ public class Detalle_PedidoDAO implements IDAO {
 			
 			//System.out.println("condition detalle 3: "+condition);
 			
-			SSQL=SSQL+" where "+condition;			
+			SSQL=SSQL+" where "+condition;		
+			
 			System.out.println("detalle DAO DESDE LA BD : "+SSQL);
 			//Va a preparar nuestra sentencia SSQL segura para su ejecución 
 			ps=con.prepareStatement(SSQL);					

@@ -10,7 +10,7 @@ import saborea.model.bussiness.ProductoBussiness;
 import saborea.model.bussiness.RegistroPedidoProductoBussiness;
 import saborea.model.bussiness.DTO.CredencialesBE;
 import saborea.model.bussiness.DTO.GetDataJTableORDENPEDIDO;
-import saborea.model.bussiness.DTO.ListaProductosBE;
+import saborea.model.bussiness.DTO.VwListaProductosBE;
 import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
 
 import javax.swing.JLabel;
@@ -146,7 +146,7 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 	
 	public void RefreshWindow(VwRegistroPedidoProductoBE obj){
 		
-		Tabla.seeTable(TABLAORDENPEDIDO, obj);			
+		TablaDetalleOrdenrRegistrar.seeTable(TABLAORDENPEDIDO, obj);			
 		lblTotalPagar.setText(obj.getTotal()+ "");
 		
 	}
@@ -254,13 +254,13 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 		
 		//obj=null;		
 		if(obj==null){//registro nuevo 
-			Tabla.seeTable(TABLAORDENPEDIDO, obj);
+			TablaDetalleOrdenrRegistrar.seeTable(TABLAORDENPEDIDO, obj);
 			lblTotalPagar.setText("0.00");
 			
 			
 		}else if(obj.isEnable()){//todos los permisos
 						
-			Tabla.seeTable(TABLAORDENPEDIDO, obj);			
+			TablaDetalleOrdenrRegistrar.seeTable(TABLAORDENPEDIDO, obj);			
 			lblTotalPagar.setText(""+ obj.getTotal());
 			
 			txtClienteDNI_pedido.setText(""+obj.getDniCliente());			
@@ -283,7 +283,7 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 			
 		}else {//si el empleado no atiende esa mesa
 			
-			Tabla.seeTable(TABLAORDENPEDIDO, obj);			
+			TablaDetalleOrdenrRegistrar.seeTable(TABLAORDENPEDIDO, obj);			
 			
 			lblTotalPagar.setText(""+ obj.getTotal());
 			lblTotalPagar.setEnabled(false);
@@ -335,10 +335,10 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 		
 		ProductoBussiness objprod= new ProductoBussiness();
 		
-		ArrayList<ListaProductosBE> listaProductosBE=objprod.ListaProductos();
+		ArrayList<VwListaProductosBE> listaProductosBE=objprod.ListaProductos();
 		
 		
-		JDialogAgregarProducto JdialogHijo= new JDialogAgregarProducto(this,true,listaProductosBE,TABLAORDENPEDIDO,objeto);
+		JDAgregarProducto JdialogHijo= new JDAgregarProducto(this,true,listaProductosBE,TABLAORDENPEDIDO,objeto);
 		
 		JdialogHijo.setVisible(true);
 		
@@ -484,7 +484,7 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 						System.out.println("id : "+id);
 						System.out.println("cantidadSeleccionada :"+cantidadSeleccionada);
 						
-						VENTANA_MODIFICAR JDIALOG_CANT= new VENTANA_MODIFICAR(this,true, TABLAORDENPEDIDO,objeto,ObjData);
+						JDVentanaModificarCantidadOrden JDIALOG_CANT= new JDVentanaModificarCantidadOrden(this,true, TABLAORDENPEDIDO,objeto,ObjData);
 						
 						JDIALOG_CANT.setVisible(true);						
 						//lblTotalPagar.setText(objeto.getTotal()+ "");
@@ -514,7 +514,7 @@ public class FormRegistrarPedido extends JFrame implements ActionListener, Mouse
 									
 									);		
 						
-							VW_WARNING_ELIMINAR JDIALOG_ELIMINAR= new VW_WARNING_ELIMINAR(this,true,
+							JDWarningEliminarRegistroOrden JDIALOG_ELIMINAR= new JDWarningEliminarRegistroOrden(this,true,
 									TABLAORDENPEDIDO,objeto,ObjData									
 									);
 							

@@ -2,10 +2,10 @@ package saborea.model.entities;
 
 public class Detalle_Pedido {
 	
-	private int CodPedido;
+	private int CodPedido;//
 	private Pedido ObjPedido;	
 	private int CantidadProductos;
-	private int CodProducto;
+	private int CodProducto;//
 	private Producto Objproducto;
 	private double precio;
 	private double total;

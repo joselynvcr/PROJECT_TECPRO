@@ -2,23 +2,22 @@ package saborea.model.bussiness.DTO;
 
 import saborea.model.entities.Empleado;
 
-public class ListaEmpleadosBE {
+public class VwListaEmpleadosBE {
 
 	
 	private int idEmpleado;
-	private int num_DNI_empleado;
+	private String num_DNI_empleado;
 	private String nom_Empleado;
 	private String ape_Empleado;
-	private int num_Telf_empleado;	
+	private String num_Telf_empleado;	
 	private String estadoCivil_empleado;
 	private String gender_empleado;
 	private double sueldo_base_empleado;
 	private int num_hijos_empleado;
 	private String tipoCargo_empleado;
 	private int idJefe;
-	
-	public ListaEmpleadosBE(int idEmpleado, int num_DNI_empleado, String nom_Empleado, String ape_Empleado,
-			int num_Telf_empleado, String estadoCivil_empleado, String gender_empleado, double sueldo_base_empleado,
+	public VwListaEmpleadosBE(int idEmpleado, String num_DNI_empleado, String nom_Empleado, String ape_Empleado,
+			String num_Telf_empleado, String estadoCivil_empleado, String gender_empleado, double sueldo_base_empleado,
 			int num_hijos_empleado, String tipoCargo_empleado, int idJefe) {
 		this.idEmpleado = idEmpleado;
 		this.num_DNI_empleado = num_DNI_empleado;
@@ -38,10 +37,10 @@ public class ListaEmpleadosBE {
 	public void setIdEmpleado(int idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
-	public int getNum_DNI_empleado() {
+	public String getNum_DNI_empleado() {
 		return num_DNI_empleado;
 	}
-	public void setNum_DNI_empleado(int num_DNI_empleado) {
+	public void setNum_DNI_empleado(String num_DNI_empleado) {
 		this.num_DNI_empleado = num_DNI_empleado;
 	}
 	public String getNom_Empleado() {
@@ -56,10 +55,10 @@ public class ListaEmpleadosBE {
 	public void setApe_Empleado(String ape_Empleado) {
 		this.ape_Empleado = ape_Empleado;
 	}
-	public int getNum_Telf_empleado() {
+	public String getNum_Telf_empleado() {
 		return num_Telf_empleado;
 	}
-	public void setNum_Telf_empleado(int num_Telf_empleado) {
+	public void setNum_Telf_empleado(String num_Telf_empleado) {
 		this.num_Telf_empleado = num_Telf_empleado;
 	}
 	public String getEstadoCivil_empleado() {
@@ -98,6 +97,7 @@ public class ListaEmpleadosBE {
 	public void setIdJefe(int idJefe) {
 		this.idJefe = idJefe;
 	}
+	
 	
 	
 	

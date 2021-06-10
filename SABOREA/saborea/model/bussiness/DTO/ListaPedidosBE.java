@@ -9,21 +9,21 @@ import saborea.model.entities.Detalle_Pedido;
 public class ListaPedidosBE {
 	
 	private int Idpedido;
-	private String nomApeCajero;	
-	private String nomApeMozo;	
+	private String nomApeMozo;
+	private String nomApeCajero;		
 	private Timestamp fechaHora;
 	private String dni_Cliente;
 	private String nomApeCliente;
 	private int nroMesa;
 	private Boolean pagado;
 	private double TotalPagar;
-	private ArrayList<Detalle_Pedido> listaDetalle;
-	
-	public ListaPedidosBE(int idpedido, String nomApeCajero, String nomApeMozo, Timestamp fechaHora, String dni_Cliente,
-			String nomApeCliente, int nroMesa, Boolean pagado, double totalPagar, ArrayList<Detalle_Pedido> listaDetalle) {
+	private ArrayList<VwDetallePedidoBE> listaDetalle;
+	public ListaPedidosBE(int idpedido, String nomApeMozo, String nomApeCajero, Timestamp fechaHora, String dni_Cliente,
+			String nomApeCliente, int nroMesa, Boolean pagado, double totalPagar,
+			ArrayList<VwDetallePedidoBE> listaDetalle) {
 		Idpedido = idpedido;
-		this.nomApeCajero = nomApeCajero;
 		this.nomApeMozo = nomApeMozo;
+		this.nomApeCajero = nomApeCajero;
 		this.fechaHora = fechaHora;
 		this.dni_Cliente = dni_Cliente;
 		this.nomApeCliente = nomApeCliente;
@@ -32,24 +32,23 @@ public class ListaPedidosBE {
 		TotalPagar = totalPagar;
 		this.listaDetalle = listaDetalle;
 	}
-	
 	public int getIdpedido() {
 		return Idpedido;
 	}
 	public void setIdpedido(int idpedido) {
 		Idpedido = idpedido;
 	}
-	public String getNomApeCajero() {
-		return nomApeCajero;
-	}
-	public void setNomApeCajero(String nomApeCajero) {
-		this.nomApeCajero = nomApeCajero;
-	}
 	public String getNomApeMozo() {
 		return nomApeMozo;
 	}
 	public void setNomApeMozo(String nomApeMozo) {
 		this.nomApeMozo = nomApeMozo;
+	}
+	public String getNomApeCajero() {
+		return nomApeCajero;
+	}
+	public void setNomApeCajero(String nomApeCajero) {
+		this.nomApeCajero = nomApeCajero;
 	}
 	public Timestamp getFechaHora() {
 		return fechaHora;
@@ -87,12 +86,13 @@ public class ListaPedidosBE {
 	public void setTotalPagar(double totalPagar) {
 		TotalPagar = totalPagar;
 	}
-	public ArrayList<Detalle_Pedido> getlistaDetalle() {
+	public ArrayList<VwDetallePedidoBE> getListaDetalle() {
 		return listaDetalle;
 	}
-	public void setLista(ArrayList<Detalle_Pedido> listaDetalle) {
+	public void setListaDetalle(ArrayList<VwDetallePedidoBE> listaDetalle) {
 		this.listaDetalle = listaDetalle;
 	}
+	
 	
 	
 

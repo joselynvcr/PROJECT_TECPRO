@@ -2,17 +2,22 @@ package saborea.model.bussiness; //CAPA DE NEGOCIOS, TODA LA LÒGICA DE NEGOCIO V
 
 import java.util.ArrayList;
 import saborea.model.bussiness.DTO.CredencialesBE;
-import saborea.model.bussiness.DTO.ListaEmpleadosBE;
+import saborea.model.bussiness.DTO.RegistroEmpleadoBE;
+import saborea.model.bussiness.DTO.VwListaEmpleadosBE;
+import saborea.model.dao.EmpleadoDAO;
 import saborea.model.dao.LoginDAO;
+import saborea.model.entities.Empleado;
 import saborea.model.entities.login;
 
 public class EmpleadoBussiness {
 	//CREO UN OBJ TIPO LOGINDAO
 	private LoginDAO objLogin;
+	private EmpleadoDAO objEmpleado;
 	
 	//CONSTRUCTOR
 	public EmpleadoBussiness(){
-		objLogin=new LoginDAO();		
+		objLogin=new LoginDAO();
+		objEmpleado= new EmpleadoDAO();
 	}
 	//CREO UN MÈTODO QUE RETORNA UN ARRAYLIST TIPO CREDENCIALESBE 
 	public ArrayList<CredencialesBE> ListarEmpleadosActivos(){
@@ -60,13 +65,13 @@ public class EmpleadoBussiness {
 		
 	}
 	
-	public ArrayList<ListaEmpleadosBE> ListarEmpleados(){
+	public ArrayList<VwListaEmpleadosBE> ListarEmpleados(){
 		
 		 ArrayList<login> lista=objLogin.listar(true);
 		
-		 ArrayList<ListaEmpleadosBE> listaBE=new ArrayList<ListaEmpleadosBE>();
+		 ArrayList<VwListaEmpleadosBE> listaBE=new ArrayList<VwListaEmpleadosBE>();
 		for(int i=0;i<lista.size();i++){
-			listaBE.add(new ListaEmpleadosBE(
+			listaBE.add(new VwListaEmpleadosBE(
 					lista.get(i).getEmpleado_Id(),
 					lista.get(i).getObjempleado().getNum_DNI_empleado(),
 					lista.get(i).getObjempleado().getNom_Empleado(),
@@ -82,6 +87,78 @@ public class EmpleadoBussiness {
 					); 
 		}
 		return listaBE;
+	}
+	
+	public void RegistrarEmpleado(RegistroEmpleadoBE objE) {		
+		//Empleado ObjEmpleado= new Empleado(0, null, null, null, 0, null, null, 0, 0, null, 0, null);
+		
+		Empleado ObjEmpleado= new Empleado(
+				-1, objE.getE_num_DNI(),
+				objE.getE_nom_Empleado(), 
+				objE.getE_ape_Empleado(),
+				objE.getE_num_Telf(), 
+				objE.getE_estadoCivil(),
+				objE.getE_gender(),
+				objE.getE_sueldo(),
+				objE.getE_num_hijos(),
+				objE.getE_tipoCargo(),				
+				-1,				
+				null
+				);
+		Empleado ObjEmpleado2= new Empleado(
+				-1,
+				objE.getE_num_DNI(),
+				null, 
+				null,
+				null, 
+				null,
+				null,
+				-1,
+				-1,
+				null,								
+				-1,				
+				null
+				);
+		//ObjEmpleado=(Empleado) objE;
+		objEmpleado.insertar(ObjEmpleado);	
+		ArrayList<Empleado> ArrObjEmpleado=objEmpleado.buscar(ObjEmpleado2, false);
+		
+		login objLog= new login(ArrObjEmpleado.get(0).getIdEmpleado(),
+				objE.getUsername(), objE.getPassword(), true, null);
+		
+		objLogin.insertar(objLog);	
+		
+	}
+	
+	//Buscar dni
+	public boolean ValidarDNI (String dniAbuscar) {
+		
+		Empleado ObjEmpleado2= new Empleado(
+				-1,
+				dniAbuscar,
+				null, 
+				null,
+				null, 
+				null,
+				null,
+				-1,
+				-1,
+				null,								
+				-1,				
+				null
+				);
+		
+		ArrayList<Empleado> ArrObjEmpleado=	objEmpleado.buscar(ObjEmpleado2, false);
+		
+		if(ArrObjEmpleado!=null) {
+			//si existe un registro con el dni buscado en BD
+			return false;
+		}else {
+			//no existe un registro con el dni buscado en BD
+			return true;
+		}
+			
+		
 	}
 	
 	

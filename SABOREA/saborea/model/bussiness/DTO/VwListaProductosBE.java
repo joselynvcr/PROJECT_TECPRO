@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import saborea.model.entities.Producto;
 
-public class ListaProductosBE {
+public class VwListaProductosBE {
 	
 	private int Id;
 	private String nombre;	
@@ -13,7 +13,7 @@ public class ListaProductosBE {
 	private String category;
 	
 	
-	public ListaProductosBE(int id, String nombre, double precio, int stock, String category) {
+	public VwListaProductosBE(int id, String nombre, double precio, int stock, String category) {
 		Id = id;
 		this.nombre = nombre;
 		this.precio = precio;

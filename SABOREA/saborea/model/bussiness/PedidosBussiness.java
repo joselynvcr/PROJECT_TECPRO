@@ -26,93 +26,77 @@ public class PedidosBussiness {
 	}
 	
 	
-	public double GenerarTotalPagar(int codPedido){		
-		
-		Detalle_Pedido AuxDetallePedido= new Detalle_Pedido( codPedido, null, -1, -1, null, -1, -1);
-				
-		ArrayList<Detalle_Pedido> listaDetalle=ObjDetalle.buscar(AuxDetallePedido, false);
-		
-		return -1;
-	}
-//	
-//	public ArrayList<ListaPedidosBE> listaPedidos(){
+//	public double GenerarTotalPagar(int codPedido){		
 //		
-//		ArrayList<Pedido> lista=ObjPedido.listar(true);
+//		Detalle_Pedido AuxDetallePedido= new Detalle_Pedido( codPedido, null, -1, -1, null, -1, -1);
+//				
+//		ArrayList<Detalle_Pedido> listaDetalle=ObjDetalle.buscar(AuxDetallePedido, true);
 //		
-//		ArrayList<ListaPedidosBE> listaBE= new ArrayList<>();
-//		Detalle_Pedido AuxDetallePedido= new Detalle_Pedido(-1, lista, null, -1, -1, null, -1, -1);
-//		ArrayList<Detalle_Pedido> listaDetalle=ObjDetalle.buscar(AuxDetallePedido, false);
-//		
-//		for(int i=0;i<lista.size();i++){
-//			listaBE.add(new ListaPedidosBE(
-//					lista.get(i).getCod_Pedido(),
-//					lista.get(i).getObjcajero().getNom_Empleado()+" "+lista.get(i).getObjcajero().getApe_Empleado(),
-//					lista.get(i).getObjmozo().getNom_Empleado()+" "+lista.get(i).getObjmozo().getApe_Empleado(),
-//					lista.get(i).getFechaHora(), 					 
-//					lista.get(i).getObjcliente().getNom_cliente()+" " + lista.get(i).getObjcliente().getApe_cliente(), 
-//					lista.get(i).getObjmesa().getNro_mesa(), 
-//					lista.get(i).getPagado(), 
-//					lista.get(i).getTotalPagar(),					
-//					null
-//					
-//					
-//					)
-//					
-//					);
-//		}
-//		
-//		return null;
+//		return -1;
 //	}
-//	
-	
-	public RegistroPedidoBE  SavePedidotoBD( VwRegistroPedidoProductoBE Obj) {		
+	public ArrayList<VwDetallePedidoBE> listaDetalle (int codPedido){
 		
-		/*
-	private int codmozo;	
-	private int codCajero;		
-	private String dniCliente;	
-	private int codMesa;	
-	private ArrayList<DetallePedidoBE> listaDetalle;*/
+		Detalle_Pedido AuxDetallePedido= new Detalle_Pedido(codPedido, null, -1, -1, null, -1, -1);
 		
-		/*private int PedidoId;
-	private String nombreMozo;
-	private String apellidoMozo;
-	private int codmozo;	
-	private String dniCliente;	
-	private int codMesa;	
-	private ArrayList<VwDetallePedidoBE> listaDetalle;
-	private boolean enable;
-	private double total;*/
+		ArrayList<Detalle_Pedido> _listaDetalle=ObjDetalle.buscar(AuxDetallePedido, true);
 		
-//		DetallePedidoBE DetallePed= new DetallePedidoBE(codProducto, cantidad);
-//															//codProducto, nombreProducto, cantidad, precio, subtotal
-//		VwDetallePedidoBE DetallePedi= new VwDetallePedidoBE(Obj.getListaDetalle().get(0), nombreProducto, cantidad, precio, subtotal);
-//		
-//		
-//		
-//	
-//		RegistroPedidoBE adicionar= new RegistroPedidoBE(
-//				
-//				Obj.getCodmozo(), 
-//				Obj.getCodmozo(), 
-//				Obj.getDniCliente(),
-//				Obj.getCodMesa(),
-//				
-//				
-//				
-//				
-//		);
-//				
-//				
-//			
-//		
+		ArrayList<VwDetallePedidoBE> listaDetalle_= new ArrayList<>();//
+		
+		for(int i=0;i<_listaDetalle.size();i++) {
 			
+			listaDetalle_.add(new VwDetallePedidoBE(
+					_listaDetalle.get(i).getCodProducto(), 
+					_listaDetalle.get(i).getObjproducto().getNom_producto(),
+					_listaDetalle.get(i).getCantidadProductos(),
+					_listaDetalle.get(i).getPrecio(),					
+					_listaDetalle.get(i).getTotal()//subtotal					
+						
+						)
+					);
+		}
 		
 		
+		return listaDetalle_;
 		
-		
-		return null;		
 	}
+	
+	public ArrayList<ListaPedidosBE> listaPedidos() {
+		
+		ArrayList<Pedido> lista=ObjPedido.listar(true);	
+		
+		ArrayList<ListaPedidosBE> listaBE= new ArrayList<>();
+		
+		ArrayList<VwDetallePedidoBE> listaDetalle_= new ArrayList<>();		
+		
+		
+		for(int i=0;i<lista.size();i++){
+			
+			listaDetalle_=listaDetalle(lista.get(i).getCod_Pedido());
+			System.out.println("mozo : " +lista.get(i).getObjmozo().getNom_Empleado()+" "+lista.get(i).getObjmozo().getApe_Empleado());
+			System.out.println("caja :"+lista.get(i).getObjcajero().getNom_Empleado()+" "+lista.get(i).getObjcajero().getApe_Empleado());
+			
+			listaBE.add(new ListaPedidosBE(
+					lista.get(i).getCod_Pedido(),
+					lista.get(i).getObjmozo().getNom_Empleado()+" "+lista.get(i).getObjmozo().getApe_Empleado(),
+					lista.get(i).getObjcajero().getNom_Empleado()+" "+lista.get(i).getObjcajero().getApe_Empleado(),					
+					lista.get(i).getFechaHora(),
+					lista.get(i).getDniCliente(),
+					lista.get(i).getObjcliente().getNom_cliente()+" " + lista.get(i).getObjcliente().getApe_cliente(), 
+					lista.get(i).getObjmesa().getNro_mesa(), 
+					lista.get(i).getPagado(), 
+					lista.get(i).getTotalPagar(),					
+					listaDetalle_					
+					
+					)					
+				);
+			
+		}
+		
+		return listaBE;
+	}
+	
+	
+	
 	
 	
 	

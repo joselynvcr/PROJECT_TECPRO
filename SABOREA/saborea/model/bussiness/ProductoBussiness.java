@@ -2,7 +2,7 @@ package saborea.model.bussiness;
 
 import java.util.ArrayList;
 
-import saborea.model.bussiness.DTO.ListaProductosBE;
+import saborea.model.bussiness.DTO.VwListaProductosBE;
 import saborea.model.dao.ProductoDAO;
 import saborea.model.entities.Producto;
 
@@ -17,15 +17,15 @@ public class ProductoBussiness {
 	
 	// ArrayList<Producto> listaProd=new ArrayList<>();
 	
-	public ArrayList<ListaProductosBE> ListaProductos(){
+	public ArrayList<VwListaProductosBE> ListaProductos(){
 		
 		
 		ArrayList<Producto> lista=ObjProducto.listar(true);
 		
-		ArrayList<ListaProductosBE> listaBE= new ArrayList<>();
+		ArrayList<VwListaProductosBE> listaBE= new ArrayList<>();
 		
 		for(int i=0;i<lista.size();i++){
-			listaBE.add(new ListaProductosBE(
+			listaBE.add(new VwListaProductosBE(
 					lista.get(i).getCod_produto(), 
 					lista.get(i).getNom_producto(),
 					lista.get(i).getPrecio_producto(),
@@ -40,36 +40,18 @@ public class ProductoBussiness {
 		
 	}
 	
-//	public void MostrarListaProductos() {
-//		
-//		ArrayList<ListaProductosBE> listaaux=ListaProductos();
-//		
-//		for(int i=0;i<listaaux.size();i++){	
-//			
-//			listaaux.get(i).getCod_produto(), 
-//			listaaux.get(i).getNom_producto(),
-//			listaaux.get(i).getPrecio_producto(),
-//			listaaux.get(i).getStock_producto(), 
-//			listaaux.get(i).getDesc_producto()
-//				)
-//					
-//			);
-//			
-//		}
-//		
-//		
-//	}	
 	
-	public ArrayList<ListaProductosBE> FiltroProductosPorCategory( Producto ObjFind){
+	
+	public ArrayList<VwListaProductosBE> FiltroProductosPorCategory( Producto ObjFind){
 		
 		ArrayList<Producto> lista=ObjProducto.buscar(ObjFind, false);
 		
-		ArrayList<ListaProductosBE> listaBE= new ArrayList<>();
+		ArrayList<VwListaProductosBE> listaBE= new ArrayList<>();
 		
 		if(lista==null)	return null;
 		
 		for(int i=0;i<lista.size();i++){
-			listaBE.add(new ListaProductosBE(
+			listaBE.add(new VwListaProductosBE(
 					lista.get(i).getCod_produto(), 
 					lista.get(i).getNom_producto(),
 					lista.get(i).getPrecio_producto(),

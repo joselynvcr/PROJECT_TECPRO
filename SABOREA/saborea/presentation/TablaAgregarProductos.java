@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import saborea.model.bussiness.DTO.ListaProductosBE;
+import saborea.model.bussiness.DTO.VwListaProductosBE;
 import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
 
 public final class TablaAgregarProductos {
 	
-public static DefaultTableModel seeTable(JTable tabla, ArrayList<ListaProductosBE> listaProductos,TableRowSorter<DefaultTableModel> sorter){
+public static DefaultTableModel seeTable(JTable tabla, ArrayList<VwListaProductosBE> listaProductos,TableRowSorter<DefaultTableModel> sorter){
 		
 		System.out.println("listaProductos"+ listaProductos.size());
 		tabla.setDefaultRenderer(Object.class, new RenderAgregarProdutos());

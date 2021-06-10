@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 import saborea.model.bussiness.ProductoBussiness;
 
-import saborea.model.bussiness.DTO.ListaProductosBE;
+import saborea.model.bussiness.DTO.VwListaProductosBE;
 import saborea.model.bussiness.DTO.VwDetallePedidoBE;
 import saborea.model.bussiness.DTO.VwRegistroPedidoProductoBE;
 import saborea.model.entities.Producto;
@@ -46,7 +46,7 @@ import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
 
 
-public class JDialogAgregarProducto extends javax.swing.JDialog implements ActionListener, KeyListener, ItemListener, FocusListener, WindowFocusListener {
+public class JDAgregarProducto extends javax.swing.JDialog implements ActionListener, KeyListener, ItemListener, FocusListener, WindowFocusListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JScrollPane scrollPane;
@@ -56,7 +56,7 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 	private JButton btnAgregar;
 	private JTextField txtCant;
 	private JLabel lblCantidad;
-	ArrayList<ListaProductosBE> _listaProductosBE;
+	ArrayList<VwListaProductosBE> _listaProductosBE;
 	private VwRegistroPedidoProductoBE objeto;	
 	DefaultTableModel m =new DefaultTableModel();
 	DefaultTableModel model =new DefaultTableModel();
@@ -142,7 +142,7 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 //			TABLAAGREGARPRODUCTOS.setRowSorter(sorter);
 //		
 //	}
-	public JDialogAgregarProducto(java.awt.Frame parent, boolean modal,ArrayList<ListaProductosBE> listaProductosBE,JTable tabla, VwRegistroPedidoProductoBE obj) {
+	public JDAgregarProducto(java.awt.Frame parent, boolean modal,ArrayList<VwListaProductosBE> listaProductosBE,JTable tabla, VwRegistroPedidoProductoBE obj) {
 		super(parent,modal);
 		addWindowFocusListener(this);
 			
@@ -150,7 +150,7 @@ public class JDialogAgregarProducto extends javax.swing.JDialog implements Actio
 		table=tabla;		
 		objeto=obj;
 	
-		 setTitle("VENTANA AGREGAR PRODUCTOS");
+		setTitle("VENTANA AGREGAR PRODUCTOS");
 		setBounds(100, 100, 883, 675);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
